@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="NewSisXeroxPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>NewSisXerox.Entity.Formpgto</class>
+    <class>NewSisXerox.Entity.Unidade</class>
+    <class>NewSisXerox.Entity.Usuario</class>
+    <class>NewSisXerox.Entity.Empresa</class>
+    <class>NewSisXerox.Entity.Contas</class>
+    <class>NewSisXerox.Entity.Condpgto</class>
+    <class>NewSisXerox.Entity.Produto</class>
+    <class>NewSisXerox.Entity.Curso</class>
+    <class>NewSisXerox.Entity.Aluno</class>
+    <class>NewSisXerox.Entity.Condparcela</class>
+    <class>NewSisXerox.Entity.Recarga</class>
+    <class>NewSisXerox.Entity.Marca</class>
+    <class>NewSisXerox.Entity.Venda</class>
+    <class>NewSisXerox.Entity.Estado</class>
+    <class>NewSisXerox.Entity.Instituicao</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/newxerox"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>

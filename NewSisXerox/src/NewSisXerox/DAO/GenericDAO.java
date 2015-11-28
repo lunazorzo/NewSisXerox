@@ -28,7 +28,7 @@ public class GenericDAO {
             map.put("hibernate.connection.username", "postgres");
             map.put("hibernate.connection.driver_class", "org.postgresql.Driver");
             map.put("hibernate.connection.password", "root");
-            map.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/xerox");
+            map.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/newxerox");
 //            map.put("hibernate.dialect", "");
 
             map.put("hibernate.connection.lc_ctype", "LATIN1");
@@ -36,7 +36,7 @@ public class GenericDAO {
             map.put("hibernate.cache.provider_class", "org.hibernate.cache.NoCacheProvider");
             //map.put("hibernate.hbm2ddl.auto", "update");
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("SisXeroxPU", map);
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewSisXeroxPU", map);
             em = emf.createEntityManager();
             em.setFlushMode(FlushModeType.AUTO);
 

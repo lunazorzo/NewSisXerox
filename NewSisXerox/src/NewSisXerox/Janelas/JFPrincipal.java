@@ -5,17 +5,41 @@
  */
 package NewSisXerox.Janelas;
 
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import NewSisXerox.Classes.ClasseImagem;
+
 /**
  *
  * @author Allan
  */
 public class JFPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFPrincipal
-     */
+    
+    JIFEmpresa empresa;
+    
     public JFPrincipal() {
+        try {
+//            Pega o padrao do windows
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//            UIManager.setLookAndFeel("org.jvnet.substance.SubstanceLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
+        URL url = this.getClass().getResource("/NewSisXerox/Imagens/Icone-64.png");
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo);
+
+        //deixando na cheia
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -27,10 +51,11 @@ public class JFPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Desktop = new javax.swing.JDesktopPane();
+        Desktop = new ClasseImagem("/imagens/Brazil_Flag.jpg");
         jMenuBar1 = new javax.swing.JMenuBar();
-        jmCadastros = new javax.swing.JMenu();
-        jmConfiguracoes = new javax.swing.JMenu();
+        Cadastros = new javax.swing.JMenu();
+        cadEmpresa = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,18 +63,27 @@ public class JFPrincipal extends javax.swing.JFrame {
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 279, Short.MAX_VALUE)
         );
 
-        jmCadastros.setText("Cadastros");
-        jMenuBar1.add(jmCadastros);
+        Cadastros.setText("Cadastros");
 
-        jmConfiguracoes.setText("Configurações");
-        jMenuBar1.add(jmConfiguracoes);
+        cadEmpresa.setText("Empresa");
+        cadEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadEmpresaActionPerformed(evt);
+            }
+        });
+        Cadastros.add(cadEmpresa);
+
+        jMenuBar1.add(Cadastros);
+
+        jMenu2.setText("Utilitários");
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -57,9 +91,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Desktop)
-                .addContainerGap())
+            .addComponent(Desktop)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,6 +100,29 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cadEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadEmpresaActionPerformed
+          try {
+            if (evt.getSource() == cadEmpresa) {
+                if (empresa == null) {
+                    empresa = new JIFEmpresa();
+                    Desktop.add(empresa);
+                    empresa.setVisible(true);
+                    empresa.setPosicao();//Seta centralizado
+                }
+                Desktop.moveToFront(empresa);
+            }
+            if (empresa.isClosed()) {
+                empresa = new JIFEmpresa();
+                Desktop.add(empresa);
+                empresa.setVisible(true);
+                empresa.setPosicao();//Seta centralizado
+                Desktop.moveToFront(empresa);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir tela de Configurações" + "/n" + e.getMessage());
+        }
+    }//GEN-LAST:event_cadEmpresaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,19 +150,19 @@ public class JFPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFPrincipal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFPrincipal().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Cadastros;
     private javax.swing.JDesktopPane Desktop;
+    private javax.swing.JMenuItem cadEmpresa;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jmCadastros;
-    private javax.swing.JMenu jmConfiguracoes;
     // End of variables declaration//GEN-END:variables
 }
