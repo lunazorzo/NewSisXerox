@@ -5,7 +5,7 @@ import NewSisXerox.Classes.UpperCaseField;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Empresa;
 import NewSisXerox.Entity.Estado;
-import NewSisXerox.Tabelas.TabEmpresa;
+import NewSisXerox.Tabelas.tabEmpresa;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -26,12 +26,12 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
      * Creates new form JIFEmpresa
      */
     private Empresa empresa;
-    private TabEmpresa tabempresa;
+    private tabEmpresa tabempresa;
 
     public JIFEmpresa() {
         initComponents();
         carregaCombo();
-        tabempresa = new TabEmpresa();
+        tabempresa = new tabEmpresa();
         jtEmpresa.setModel(tabempresa);
 
     }
@@ -147,35 +147,58 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Cadastro Empresa");
-        setPreferredSize(new java.awt.Dimension(399, 250));
+        setPreferredSize(new java.awt.Dimension(399, 230));
+        getContentPane().setLayout(null);
 
         Fantasia.setText("Fantasia:");
+        getContentPane().add(Fantasia);
+        Fantasia.setBounds(10, 17, 47, 18);
 
         Endereco.setText("Endereço:");
+        getContentPane().add(Endereco);
+        Endereco.setBounds(10, 41, 49, 18);
 
         Bairro.setText("Bairro:");
+        getContentPane().add(Bairro);
+        Bairro.setBounds(10, 65, 32, 18);
 
         CEP.setText("CEP:");
+        getContentPane().add(CEP);
+        CEP.setBounds(260, 64, 24, 20);
 
         Email.setText("E-mail:");
+        getContentPane().add(Email);
+        Email.setBounds(10, 115, 32, 18);
 
         Telefone.setText("Telefone:");
+        getContentPane().add(Telefone);
+        Telefone.setBounds(10, 139, 46, 23);
 
         try {
             jtfTelefone1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        getContentPane().add(jtfTelefone1);
+        jtfTelefone1.setBounds(61, 142, 80, 20);
+        getContentPane().add(jtfEmail);
+        jtfEmail.setBounds(61, 113, 312, 20);
 
         try {
             jtfCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        getContentPane().add(jtfCEP);
+        jtfCEP.setBounds(303, 63, 70, 20);
 
         jLabel7.setText("Estado:");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(258, 92, 37, 14);
 
         jcEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UF" }));
+        getContentPane().add(jcEstado);
+        jcEstado.setBounds(299, 89, 72, 20);
 
         jbGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/Salvar - 16.png"))); // NOI18N
         jbGravar.setText("Gravar");
@@ -184,117 +207,58 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                 jbGravarActionPerformed(evt);
             }
         });
+        getContentPane().add(jbGravar);
+        jbGravar.setBounds(290, 160, 85, 25);
+        getContentPane().add(jtfBairro);
+        jtfBairro.setBounds(61, 63, 190, 20);
+        getContentPane().add(jtfEndereco);
+        jtfEndereco.setBounds(61, 39, 312, 20);
 
         jtfEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfEmpresaKeyPressed(evt);
             }
         });
+        getContentPane().add(jtfEmpresa);
+        jtfEmpresa.setBounds(61, 15, 312, 20);
 
         Bairro1.setText("Cidade:");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Telefone)
-                    .addComponent(Email)
-                    .addComponent(Bairro1)
-                    .addComponent(Bairro)
-                    .addComponent(Endereco)
-                    .addComponent(Fantasia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CEP)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfCEP))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtfTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jtfEndereco)
-                    .addComponent(jtfEmpresa)
-                    .addComponent(jtfEmail))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Fantasia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jtfEmpresa)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Endereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jtfEndereco)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Bairro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jtfBairro))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(CEP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jtfCEP)))
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jcEstado))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Bairro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfCidade)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jtfEmail)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Telefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jtfTelefone1)))
-                .addGap(4, 4, 4)
-                .addComponent(jbGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
-        );
+        getContentPane().add(Bairro1);
+        Bairro1.setBounds(10, 92, 37, 14);
+        getContentPane().add(jtfCidade);
+        jtfCidade.setBounds(61, 89, 193, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbSelecionarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarEmpresaActionPerformed
+        try {
+            //pegando a opção selecionada na grade
+            empresa = (Empresa) tabempresa.getDadoAt(jtEmpresa.getSelectedRow());
+            if (empresa != null) {
+                jtfEmpresa.setText(empresa.getNmEmpresa());
+                jtfEndereco.setText(empresa.getEndereco());
+                jtfBairro.setText(empresa.getBairro());
+                jtfCEP.setText(empresa.getCep());
+                jtfCidade.setText(empresa.getCidade());
+                jcEstado.setSelectedItem(empresa.getCdEstado());
+                jtfTelefone1.setText(empresa.getNumTelefone());
+                jtfEmail.setText(empresa.getEmail());
+                BuscaEmpresa.dispose();
+            }
+        } catch (Throwable t) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Empresa!" + "\n" + t.getMessage());
+            limparDados();
+        }
+    }//GEN-LAST:event_jbSelecionarEmpresaActionPerformed
+
+    private void jtfEmpresaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfEmpresaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            carregaTabela();
+            BuscaEmpresa.show();
+            BuscaEmpresa.setLocationRelativeTo(this);//seta a posição da tela 
+        }
+    }//GEN-LAST:event_jtfEmpresaKeyPressed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
         if (Validador.vldStringMinMax(jtfEmpresa.getText(), 3, 50) == false) {
@@ -359,35 +323,6 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro ao Gravar Empresa!" + "/n" + e.getMessage());
         }
     }//GEN-LAST:event_jbGravarActionPerformed
-
-    private void jbSelecionarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarEmpresaActionPerformed
-        try {
-            //pegando a opção selecionada na grade
-            empresa = (Empresa) tabempresa.getDadoAt(jtEmpresa.getSelectedRow());
-            if (empresa != null) {
-                jtfEmpresa.setText(empresa.getNmEmpresa());
-                jtfEndereco.setText(empresa.getEndereco());
-                jtfBairro.setText(empresa.getBairro());
-                jtfCEP.setText(empresa.getCep());
-                jtfCidade.setText(empresa.getCidade());
-                jcEstado.setSelectedItem(empresa.getCdEstado());
-                jtfTelefone1.setText(empresa.getNumTelefone());
-                jtfEmail.setText(empresa.getEmail());
-                BuscaEmpresa.dispose();
-            }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Empresa!" + "\n" + t.getMessage());
-            limparDados();
-        }
-    }//GEN-LAST:event_jbSelecionarEmpresaActionPerformed
-
-    private void jtfEmpresaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfEmpresaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            carregaTabela();
-            BuscaEmpresa.show();
-            BuscaEmpresa.setLocationRelativeTo(this);//seta a posição da tela 
-        }
-    }//GEN-LAST:event_jtfEmpresaKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

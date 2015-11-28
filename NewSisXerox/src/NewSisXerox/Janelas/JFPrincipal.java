@@ -24,6 +24,7 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     
     JIFEmpresa empresa;
+    JIFInstituicao instituicao;
     
     public JFPrincipal() {
         try {
@@ -51,10 +52,11 @@ public class JFPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Desktop = new ClasseImagem("/imagens/Brazil_Flag.jpg");
+        Desktop = new ClasseImagem("/NewSisXerox/Imagens/Brazil_Flag.jpg");
         jMenuBar1 = new javax.swing.JMenuBar();
         Cadastros = new javax.swing.JMenu();
         cadEmpresa = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,6 +81,14 @@ public class JFPrincipal extends javax.swing.JFrame {
             }
         });
         Cadastros.add(cadEmpresa);
+
+        jMenuItem1.setText("Curso/Instituição");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Cadastros.add(jMenuItem1);
 
         jMenuBar1.add(Cadastros);
 
@@ -124,6 +134,29 @@ public class JFPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadEmpresaActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+         try {
+            if (evt.getSource() == jMenuItem1) {
+                if (instituicao == null) {
+                    instituicao = new JIFInstituicao();
+                    Desktop.add(instituicao);
+                    instituicao.setVisible(true);
+                    instituicao.setPosicao();//Seta centralizado
+                }
+                Desktop.moveToFront(instituicao);
+            }
+            if (instituicao.isClosed()) {
+                instituicao = new JIFInstituicao();
+                Desktop.add(instituicao);
+                instituicao.setVisible(true);
+                instituicao.setPosicao();//Seta centralizado
+                Desktop.moveToFront(instituicao);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir tela da Instituição" + "/n" + e.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -164,5 +197,6 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem cadEmpresa;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

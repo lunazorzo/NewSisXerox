@@ -41,7 +41,7 @@ public class Instituicao implements Serializable {
     private Integer cdInstituicao;
     @Basic(optional = false)
     @Column(name = "nm_instituicao")
-    private int nmInstituicao;
+    private String nmInstituicao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdInstituicao")
     private Collection<Curso> cursoCollection;
 
@@ -52,7 +52,7 @@ public class Instituicao implements Serializable {
         this.cdInstituicao = cdInstituicao;
     }
 
-    public Instituicao(Integer cdInstituicao, int nmInstituicao) {
+    public Instituicao(Integer cdInstituicao, String nmInstituicao) {
         this.cdInstituicao = cdInstituicao;
         this.nmInstituicao = nmInstituicao;
     }
@@ -65,11 +65,11 @@ public class Instituicao implements Serializable {
         this.cdInstituicao = cdInstituicao;
     }
 
-    public int getNmInstituicao() {
+    public String getNmInstituicao() {
         return nmInstituicao;
     }
 
-    public void setNmInstituicao(int nmInstituicao) {
+    public void setNmInstituicao(String nmInstituicao) {
         this.nmInstituicao = nmInstituicao;
     }
 
@@ -104,7 +104,7 @@ public class Instituicao implements Serializable {
 
     @Override
     public String toString() {
-        return "NewSisXerox.Entity.Instituicao[ cdInstituicao=" + cdInstituicao + " ]";
+        return nmInstituicao;
     }
     
 }

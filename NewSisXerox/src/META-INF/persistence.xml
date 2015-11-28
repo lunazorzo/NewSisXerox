@@ -17,6 +17,18 @@
     <class>NewSisXerox.Entity.Venda</class>
     <class>NewSisXerox.Entity.Estado</class>
     <class>NewSisXerox.Entity.Instituicao</class>
+    <class>NewSisXerox.Entity.Contas_1</class>
+    <class>NewSisXerox.Entity.Recarga_1</class>
+    <class>NewSisXerox.Entity.Formpgto_1</class>
+    <class>NewSisXerox.Entity.Venda_1</class>
+    <class>NewSisXerox.Entity.Usuario_1</class>
+    <class>NewSisXerox.Entity.Produto_1</class>
+    <class>NewSisXerox.Entity.Aluno_1</class>
+    <class>NewSisXerox.Entity.Condpgto_1</class>
+    <class>NewSisXerox.Entity.Marca_1</class>
+    <class>NewSisXerox.Entity.Condparcela_1</class>
+    <class>NewSisXerox.Entity.Unidade_1</class>
+    <class>NewSisXerox.Entity.Curso_1</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/newxerox"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
