@@ -17,12 +17,28 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadEmpresaActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="jmCursoInstituicao">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Curso/Institui&#xe7;&#xe3;o"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmCursoInstituicaoActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmUnidadeMedida">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Unidade de Medida"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmUnidadeMedidaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmMarcaModelo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Marca/Modelo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmMarcaModeloActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
