@@ -26,6 +26,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFInstituicao instituicao;
     JIFUnidade unidade;
     JIFMarcaModelo marca;
+    JIFUsuario usuario;
 
     public JFPrincipal() {
         try {
@@ -56,7 +57,8 @@ public class JFPrincipal extends javax.swing.JFrame {
         Desktop = new ClasseImagem("/NewSisXerox/Imagens/Brazil_Flag.jpg");
         jMenuBar1 = new javax.swing.JMenuBar();
         Cadastros = new javax.swing.JMenu();
-        cadEmpresa = new javax.swing.JMenuItem();
+        jmEmpresa = new javax.swing.JMenuItem();
+        jmUsuarios = new javax.swing.JMenuItem();
         jmCursoInstituicao = new javax.swing.JMenuItem();
         jmUnidadeMedida = new javax.swing.JMenuItem();
         jmMarcaModelo = new javax.swing.JMenuItem();
@@ -77,13 +79,21 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         Cadastros.setText("Cadastros");
 
-        cadEmpresa.setText("Empresa");
-        cadEmpresa.addActionListener(new java.awt.event.ActionListener() {
+        jmEmpresa.setText("Empresa");
+        jmEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadEmpresaActionPerformed(evt);
+                jmEmpresaActionPerformed(evt);
             }
         });
-        Cadastros.add(cadEmpresa);
+        Cadastros.add(jmEmpresa);
+
+        jmUsuarios.setText("Usuários");
+        jmUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmUsuariosActionPerformed(evt);
+            }
+        });
+        Cadastros.add(jmUsuarios);
 
         jmCursoInstituicao.setText("Curso/Instituição");
         jmCursoInstituicao.addActionListener(new java.awt.event.ActionListener() {
@@ -130,9 +140,9 @@ public class JFPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cadEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadEmpresaActionPerformed
+    private void jmEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEmpresaActionPerformed
         try {
-            if (evt.getSource() == cadEmpresa) {
+            if (evt.getSource() == jmEmpresa) {
                 if (empresa == null) {
                     empresa = new JIFEmpresa();
                     Desktop.add(empresa);
@@ -151,7 +161,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Não foi possível abrir tela de Configurações" + "\n" + e.getMessage());
         }
-    }//GEN-LAST:event_cadEmpresaActionPerformed
+    }//GEN-LAST:event_jmEmpresaActionPerformed
 
     private void jmCursoInstituicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCursoInstituicaoActionPerformed
         try {
@@ -218,18 +228,42 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(marca);
             }
         } catch (Exception e) {
-         //   JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Marca/Modelo" + "\n" + e.getMessage());
+            //   JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Marca/Modelo" + "\n" + e.getMessage());
         }
-//        JIFMarcaModelo a = null;
+
+    }//GEN-LAST:event_jmMarcaModeloActionPerformed
+
+    private void jmUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmUsuariosActionPerformed
+        try {
+            if (evt.getSource() == jmUsuarios) {
+                if (usuario == null) {
+                    usuario = new JIFUsuario();
+                    Desktop.add(usuario);
+                    usuario.setVisible(true);
+                    usuario.setPosicao();//Seta centralizado
+                }
+                Desktop.moveToFront(usuario);
+            }
+            if (usuario.isClosed()) {
+                usuario = new JIFUsuario();
+                Desktop.add(usuario);
+                usuario.setVisible(true);
+                usuario.setPosicao();//Seta centralizado
+                Desktop.moveToFront(usuario);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Usuários" + "\n" + e.getMessage());
+        }
+//        JIFUsuario a = null;
 //        try {
-//            a = new JIFMarcaModelo();
+//            a = new JIFUsuario();
 //        } catch (Exception e) {
 //            JOptionPane.showMessageDialog(this, "Não foi possível abrir Cadastro Aluno" + "/n" + e.getMessage());
 //        }
 //        Desktop.add(a);
 //        a.setPosicao();
 //        a.setVisible(true);
-    }//GEN-LAST:event_jmMarcaModeloActionPerformed
+    }//GEN-LAST:event_jmUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,11 +302,12 @@ public class JFPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Cadastros;
     private javax.swing.JDesktopPane Desktop;
-    private javax.swing.JMenuItem cadEmpresa;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jmCursoInstituicao;
+    private javax.swing.JMenuItem jmEmpresa;
     private javax.swing.JMenuItem jmMarcaModelo;
     private javax.swing.JMenuItem jmUnidadeMedida;
+    private javax.swing.JMenuItem jmUsuarios;
     // End of variables declaration//GEN-END:variables
 }
