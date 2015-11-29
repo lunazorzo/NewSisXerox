@@ -195,12 +195,12 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(unidade);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Unidade Medida/Marca" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Unidade Medida" + "\n" + e.getMessage());
         }
     }//GEN-LAST:event_jmUnidadeMedidaActionPerformed
 
     private void jmMarcaModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMarcaModeloActionPerformed
-          try {
+        try {
             if (evt.getSource() == jmMarcaModelo) {
                 if (marca == null) {
                     marca = new JIFMarcaModelo();
@@ -218,8 +218,17 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(marca);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Unidade Medida/Marca" + "\n" + e.getMessage());
+         //   JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Marca/Modelo" + "\n" + e.getMessage());
         }
+//        JIFMarcaModelo a = null;
+//        try {
+//            a = new JIFMarcaModelo();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Não foi possível abrir Cadastro Aluno" + "/n" + e.getMessage());
+//        }
+//        Desktop.add(a);
+//        a.setPosicao();
+//        a.setVisible(true);
     }//GEN-LAST:event_jmMarcaModeloActionPerformed
 
     /**

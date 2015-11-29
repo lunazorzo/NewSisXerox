@@ -3,6 +3,7 @@ package NewSisXerox.Janelas;
 import NewSisXerox.Paines.JPCurso;
 import NewSisXerox.Paines.JPInstituicao;
 import NewSisXerox.Paines.JPMarca;
+import NewSisXerox.Paines.JPModelo;
 import NewSisXerox.Paines.JPUnidade;
 import java.awt.Dimension;
 
@@ -21,11 +22,14 @@ public class JIFMarcaModelo extends javax.swing.JInternalFrame {
      * Creates new form JIFInstituicao
      */
     public JPMarca jpmarca;
+    public JPModelo jpmodelo;
 
     public JIFMarcaModelo() {
         initComponents();
         jpmarca = new JPMarca();//add na frame
         jTabbedPane1.addTab("Marca", jpmarca);// adcionando no painel
+        jpmodelo = new JPModelo();//add na frame
+        jTabbedPane1.addTab("Modelo", jpmodelo);// adcionando no painel
     }
 
     public void setPosicao() {

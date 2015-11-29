@@ -33,6 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Marca.findByCdMarca", query = "SELECT m FROM Marca m WHERE m.cdMarca = :cdMarca"),
     @NamedQuery(name = "Marca.findByNmMarca", query = "SELECT m FROM Marca m WHERE m.nmMarca = :nmMarca")})
 public class Marca implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdMarca")
+    private Collection<Modelo> modeloCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -104,7 +106,16 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return "NewSisXerox.Entity.Marca[ cdMarca=" + cdMarca + " ]";
+        return nmMarca;
+    }
+
+    @XmlTransient
+    public Collection<Modelo> getModeloCollection() {
+        return modeloCollection;
+    }
+
+    public void setModeloCollection(Collection<Modelo> modeloCollection) {
+        this.modeloCollection = modeloCollection;
     }
     
 }
