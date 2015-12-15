@@ -5,7 +5,7 @@
  <project-data-sources>
   <data-source id="DS0">
    <property key="Connection Type" value="PostgreSQL" />
-   <property key="Logical" value="(Banco de dados alvo)" />
+   <property key="Logical" value="Modelo de Dados" />
    <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/newxerox" />
    <property key="UID" value="postgres" />
    <property key="PWD" value="root" />
@@ -37,7 +37,7 @@
     <column id="COL6" populated="true" UUID="646b5667-9d4e-4b31-8299-189867b6096b" autoIncrement="false" autoIncrementSequenceName="aluno_rg_aluno_seq" defaultValue="" name="rg_aluno" nullable="0" physicalName="rg_aluno" precision="12" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL7" populated="true" UUID="aea749a2-721b-4d5f-9da4-a55b5840d141" autoIncrement="false" autoIncrementSequenceName="aluno_ra_aluno_seq" defaultValue="" name="ra_aluno" nullable="0" physicalName="ra_aluno" precision="20" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="2" userDefinedTypeUUID="115245ce-612c-4d6a-b559-6dd903dd959a" >
+    <column id="COL7" populated="true" UUID="aea749a2-721b-4d5f-9da4-a55b5840d141" autoIncrement="false" autoIncrementSequenceName="aluno_ra_aluno_seq" defaultValue="" name="ra_aluno" nullable="0" physicalName="ra_aluno" precision="20" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     <column id="COL8" populated="true" UUID="ac80d5fd-dd76-4293-a492-61c81335247b" autoIncrement="false" autoIncrementSequenceName="curso_cd_curso_seq" defaultValue="" name="cd_curso" nullable="0" physicalName="cd_curso" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
@@ -60,7 +60,7 @@
     <column id="COL12" populated="true" UUID="5671c0a5-d7f0-4922-bde4-973f7c31b0fa" autoIncrement="true" autoIncrementSequenceName="curso_cd_curso_seq_1" defaultValue="" name="cd_curso" nullable="0" physicalName="cd_curso" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL13" populated="true" UUID="a068d8c0-8aad-4c8f-8848-13e537f07ddc" autoIncrement="false" autoIncrementSequenceName="curso_nm_curso_seq" defaultValue="" name="nm_curso" nullable="0" physicalName="nm_curso" precision="20" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL13" populated="true" UUID="a068d8c0-8aad-4c8f-8848-13e537f07ddc" autoIncrement="false" autoIncrementSequenceName="curso_nm_curso_seq" defaultValue="" name="nm_curso" nullable="0" physicalName="nm_curso" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     <column id="COL14" populated="true" UUID="9607bd35-1c16-43fd-b5c8-385d5458d2e3" autoIncrement="false" autoIncrementSequenceName="instituicao_cd_instituicao_seq" defaultValue="" name="cd_instituicao" nullable="0" physicalName="cd_instituicao" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
@@ -456,13 +456,13 @@
   <table id="TAB122" populated="true" UUID="1a342800-4828-47c1-880b-7078094198e0" name="modelo" objectType="TABLE" physicalName="modelo" >
    <remarks></remarks>
    <folder id="FOLTAB1221" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL123" populated="true" UUID="cf5b8af7-eed6-449d-87b8-364b8ca6a348" autoIncrement="true" autoIncrementSequenceName="modelo_cd_modelo_seq" defaultValue="" name="cd_modelo" nullable="0" physicalName="cd_modelo" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL123" populated="true" UUID="cf5b8af7-eed6-449d-87b8-364b8ca6a348" autoIncrement="true" autoIncrementSequenceName="modelo_cd_modelo_seq_1" defaultValue="" name="cd_modelo" nullable="0" physicalName="cd_modelo" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL124" populated="true" UUID="d7cc2913-0ad8-452b-946d-0ede9b5a4c94" autoIncrement="false" autoIncrementSequenceName="modelo_nm_modelo_seq" defaultValue="" name="nm_modelo" nullable="0" physicalName="nm_modelo" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL125" populated="true" UUID="e432e656-ac98-4317-857a-b2a4725174e0" autoIncrement="false" autoIncrementSequenceName="marca_cd_marca_seq_1" defaultValue="" name="cd_marca" nullable="0" physicalName="cd_marca" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL125" populated="true" UUID="e432e656-ac98-4317-857a-b2a4725174e0" autoIncrement="false" autoIncrementSequenceName="marca_cd_marca_seq_1_1" defaultValue="" name="cd_marca" nullable="0" physicalName="cd_marca" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>

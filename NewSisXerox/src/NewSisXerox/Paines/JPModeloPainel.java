@@ -54,7 +54,7 @@ public class JPModeloPainel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jtModeloPainel);
 
-        jbSelecionarModeloPainel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SisXerox/Imagens/selecionar - 16.png"))); // NOI18N
+        jbSelecionarModeloPainel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbSelecionarModeloPainel.setText("Selecionar");
 
         javax.swing.GroupLayout BuscaModeloPaineLayout = new javax.swing.GroupLayout(BuscaModeloPaine.getContentPane());
@@ -73,7 +73,7 @@ public class JPModeloPainel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSelecionarModeloPainel)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         setLayout(null);

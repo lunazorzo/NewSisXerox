@@ -117,7 +117,7 @@ public class Estado implements Serializable {
 
     @Override
     public String toString() {
-        return "NewSisXerox.Entity.Estado[ cdEstado=" + cdEstado + " ]";
+        return sglEstado;
     }
     
 }

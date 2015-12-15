@@ -22,7 +22,7 @@ public class GenericDAO {
             /*File flPro = new File(System.getProperty("user.dir") + File.separatorChar + "banco.properties");
              System.out.println(flPro.getAbsolutePath());
              if (!flPro.exists()) {
-             JOptionPane.showMessageDialog(null, "Falta configura��o com o Banco.");
+             JOptionPane.showMessageDialog(null, "Falta configuração com o Banco.");
              System.exit(0);
              }*/
             map.put("hibernate.connection.username", "postgres");
@@ -140,6 +140,7 @@ public class GenericDAO {
             }
         }
     }
+    protected EntityManager entityManager;
 
     public Object persist(Object obj) {
         startTransaction();
@@ -195,7 +196,6 @@ public class GenericDAO {
         } catch (NoResultException no) {
             return null;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -205,10 +205,20 @@ public class GenericDAO {
     }
 
     public void clear() {
+        em.flush();
         em.clear();
     }
 
     public EntityManager getEm() {
         return em;
+    }
+
+    public final void flush() {
+        try {
+            em.flush();
+        } catch (Exception ex) {
+            System.out.println("Erro flush: " + ex.getMessage());
+        }
+
     }
 }

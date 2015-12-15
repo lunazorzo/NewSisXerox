@@ -80,6 +80,7 @@ public class JPInstituicao extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jtInstituicao);
 
+        jbSelecionarInstituicao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbSelecionarInstituicao.setText("Selecionar");
         jbSelecionarInstituicao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +104,7 @@ public class JPInstituicao extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSelecionarInstituicao)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jlInstituicao.setText("Instiuição:");

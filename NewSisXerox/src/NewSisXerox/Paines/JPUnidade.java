@@ -9,9 +9,7 @@ import NewSisXerox.Classes.Validador;
 import NewSisXerox.Classes.UpperCaseField;
 import NewSisXerox.DAO.GenericDAO;
 import javax.swing.JOptionPane;
-import NewSisXerox.Entity.Instituicao;
 import NewSisXerox.Entity.Unidade;
-import NewSisXerox.Tabelas.tabInstituicao;
 import NewSisXerox.Tabelas.tabUnidade;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -82,6 +80,7 @@ public class JPUnidade extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jtBusca);
 
+        jbSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbSelecionar.setText("Selecionar");
         jbSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +104,7 @@ public class JPUnidade extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSelecionar)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         setPreferredSize(new java.awt.Dimension(377, 81));
@@ -159,17 +158,18 @@ public class JPUnidade extends javax.swing.JPanel {
             jtfUnidade.requestFocus();
             return;
         }
+       
         try {
+            
             if (unidade == null) {
                 unidade = new Unidade();
             }
             unidade.setNmUnidade(jtfUnidade.getText());
             GenericDAO.getInstance().startTransaction();
-            GenericDAO.getInstance().persist(unidade);
+                GenericDAO.getInstance().persist(unidade);
             GenericDAO.getInstance().commit();
             JOptionPane.showMessageDialog(null, "Unidade de Medida " + jtfUnidade.getText() + " gravada com Sucesso!");
             limparDados();
-
         } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
             JOptionPane.showMessageDialog(null, "Unidade de Medida já existente!" + ex.getMessage());

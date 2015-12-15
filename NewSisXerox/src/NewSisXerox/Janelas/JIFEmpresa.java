@@ -119,6 +119,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtEmpresa);
 
+        jbSelecionarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbSelecionarEmpresa.setText("Selecionar");
         jbSelecionarEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +143,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSelecionarEmpresa)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         setClosable(true);

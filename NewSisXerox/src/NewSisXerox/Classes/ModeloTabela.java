@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 public abstract class ModeloTabela implements TableModel {
@@ -59,4 +60,5 @@ public abstract class ModeloTabela implements TableModel {
         }
         return null;
     }
+   
 }

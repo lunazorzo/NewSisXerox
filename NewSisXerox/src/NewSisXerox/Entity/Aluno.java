@@ -7,11 +7,8 @@ package NewSisXerox.Entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,12 +18,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -66,14 +61,10 @@ public class Aluno implements Serializable {
     private String rgAluno;
     @Basic(optional = false)
     @Column(name = "ra_aluno")
-    private BigInteger raAluno;
+    private String raAluno;
     @JoinColumn(name = "cd_curso", referencedColumnName = "cd_curso")
     @ManyToOne(optional = false)
     private Curso cdCurso;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdAluno")
-    private Collection<Venda> vendaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdAluno")
-    private Collection<Recarga> recargaCollection;
 
     public Aluno() {
     }
@@ -82,7 +73,7 @@ public class Aluno implements Serializable {
         this.cdAluno = cdAluno;
     }
 
-    public Aluno(Integer cdAluno, String nmAluno, Date dtCadastro, BigDecimal vlSaldo, String rgAluno, BigInteger raAluno) {
+    public Aluno(Integer cdAluno, String nmAluno, Date dtCadastro, BigDecimal vlSaldo, String rgAluno, String raAluno) {
         this.cdAluno = cdAluno;
         this.nmAluno = nmAluno;
         this.dtCadastro = dtCadastro;
@@ -131,11 +122,11 @@ public class Aluno implements Serializable {
         this.rgAluno = rgAluno;
     }
 
-    public BigInteger getRaAluno() {
+    public String getRaAluno() {
         return raAluno;
     }
 
-    public void setRaAluno(BigInteger raAluno) {
+    public void setRaAluno(String raAluno) {
         this.raAluno = raAluno;
     }
 
@@ -145,24 +136,6 @@ public class Aluno implements Serializable {
 
     public void setCdCurso(Curso cdCurso) {
         this.cdCurso = cdCurso;
-    }
-
-    @XmlTransient
-    public Collection<Venda> getVendaCollection() {
-        return vendaCollection;
-    }
-
-    public void setVendaCollection(Collection<Venda> vendaCollection) {
-        this.vendaCollection = vendaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Recarga> getRecargaCollection() {
-        return recargaCollection;
-    }
-
-    public void setRecargaCollection(Collection<Recarga> recargaCollection) {
-        this.recargaCollection = recargaCollection;
     }
 
     @Override
@@ -187,7 +160,7 @@ public class Aluno implements Serializable {
 
     @Override
     public String toString() {
-        return "NewSisXerox.Entity.Aluno[ cdAluno=" + cdAluno + " ]";
+        return nmAluno;
     }
     
 }

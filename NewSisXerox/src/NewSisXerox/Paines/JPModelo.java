@@ -8,12 +8,9 @@ package NewSisXerox.Paines;
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.Classes.UpperCaseField;
 import NewSisXerox.DAO.GenericDAO;
-import NewSisXerox.Entity.Curso;
 import javax.swing.JOptionPane;
-import NewSisXerox.Entity.Instituicao;
 import NewSisXerox.Entity.Marca;
 import NewSisXerox.Entity.Modelo;
-import NewSisXerox.Tabelas.tabCurso;
 import NewSisXerox.Tabelas.tabModelo;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -34,7 +31,7 @@ public class JPModelo extends javax.swing.JPanel {
         initComponents();
         carregaCombo();
         tabmodelo = new tabModelo();
-        jtCurso.setModel(tabmodelo);
+        jtModelo.setModel(tabmodelo);
     }
 
     /**
@@ -66,7 +63,7 @@ public class JPModelo extends javax.swing.JPanel {
             List l = GenericDAO.getInstance().getList(Modelo.class,
                     "FROM Modelo nmModelo");  // consulta no banco
             tabmodelo.setDados(l);
-            jtCurso.updateUI();
+            jtModelo.updateUI();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar Modelo!" + "\n" + e.getMessage());
         }
@@ -76,9 +73,9 @@ public class JPModelo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BuscaCurso = new javax.swing.JDialog();
+        Busca = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtCurso = new javax.swing.JTable();
+        jtModelo = new javax.swing.JTable();
         jbSelecionarCurso = new javax.swing.JButton();
         jlmodelo = new javax.swing.JLabel();
         jtfModelo = new UpperCaseField();
@@ -86,10 +83,10 @@ public class JPModelo extends javax.swing.JPanel {
         jMarca = new javax.swing.JLabel();
         jcModelo = new javax.swing.JComboBox();
 
-        BuscaCurso.setTitle("Busca Curso");
-        BuscaCurso.setMinimumSize(new java.awt.Dimension(500, 335));
+        Busca.setTitle("Busca");
+        Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
-        jtCurso.setModel(new javax.swing.table.DefaultTableModel(
+        jtModelo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -100,8 +97,9 @@ public class JPModelo extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtCurso);
+        jScrollPane1.setViewportView(jtModelo);
 
+        jbSelecionarCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbSelecionarCurso.setText("Selecionar");
         jbSelecionarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,23 +107,23 @@ public class JPModelo extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout BuscaCursoLayout = new javax.swing.GroupLayout(BuscaCurso.getContentPane());
-        BuscaCurso.getContentPane().setLayout(BuscaCursoLayout);
-        BuscaCursoLayout.setHorizontalGroup(
-            BuscaCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout BuscaLayout = new javax.swing.GroupLayout(Busca.getContentPane());
+        Busca.getContentPane().setLayout(BuscaLayout);
+        BuscaLayout.setHorizontalGroup(
+            BuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaCursoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbSelecionarCurso)
                 .addContainerGap())
         );
-        BuscaCursoLayout.setVerticalGroup(
-            BuscaCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BuscaCursoLayout.createSequentialGroup()
+        BuscaLayout.setVerticalGroup(
+            BuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BuscaLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSelecionarCurso)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jlmodelo.setText("Marca:");
@@ -220,11 +218,11 @@ public class JPModelo extends javax.swing.JPanel {
     private void jbSelecionarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarCursoActionPerformed
         try {
             //pegando a opção selecionada na grade
-            modelo = (Modelo) tabmodelo.getDadoAt(jtCurso.getSelectedRow());
+            modelo = (Modelo) tabmodelo.getDadoAt(jtModelo.getSelectedRow());
             if (modelo != null) {
                 jtfModelo.setText(modelo.getNmModelo());
-                jcModelo.setSelectedItem(modelo.getCdModelo());
-                BuscaCurso.dispose();
+                jcModelo.setSelectedItem(modelo.getCdMarca());
+                Busca.dispose();
             }
         } catch (Throwable t) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar a Curso/Instituição!" + "\n" + t.getMessage());
@@ -235,21 +233,21 @@ public class JPModelo extends javax.swing.JPanel {
     private void jtfModeloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfModeloKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             carregaTabela();
-            BuscaCurso.show();
-            BuscaCurso.setLocationRelativeTo(this);//seta a posição da tela 
+            Busca.show();
+            Busca.setLocationRelativeTo(this);//seta a posição da tela 
         }
     }//GEN-LAST:event_jtfModeloKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog BuscaCurso;
+    private javax.swing.JDialog Busca;
     private javax.swing.JLabel jMarca;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbGravar;
     private javax.swing.JButton jbSelecionarCurso;
     private javax.swing.JComboBox jcModelo;
     private javax.swing.JLabel jlmodelo;
-    private javax.swing.JTable jtCurso;
+    private javax.swing.JTable jtModelo;
     private javax.swing.JTextField jtfModelo;
     // End of variables declaration//GEN-END:variables
 }

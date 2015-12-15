@@ -117,7 +117,7 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return "NewSisXerox.Entity.Curso[ cdCurso=" + cdCurso + " ]";
+        return nmCurso;
     }
     
 }

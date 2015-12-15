@@ -11,7 +11,6 @@ import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Usuario;
 import NewSisXerox.Tabelas.tabUsuario;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -91,6 +90,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtBusca);
 
+        jbSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbSelecionar.setText("Selecionar");
         jbSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSelecionar)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         setClosable(true);
