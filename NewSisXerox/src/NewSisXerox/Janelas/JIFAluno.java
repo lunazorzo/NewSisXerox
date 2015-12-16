@@ -166,6 +166,7 @@ public class JIFAluno extends javax.swing.JInternalFrame {
             }
         });
 
+        jtfSaldo.setEnabled(false);
         jtfSaldo.setPreferredSize(new java.awt.Dimension(59, 20));
 
         jdData.setEnabled(false);
@@ -309,7 +310,7 @@ public class JIFAluno extends javax.swing.JInternalFrame {
                 jtfRA.setText(aluno.getRaAluno());
                 jtfRG.setText(aluno.getRgAluno());
                 jcCurso.setSelectedItem(aluno.getCdCurso());
-                jtfSaldo.setText(aluno.toString());
+                jtfSaldo.setText(aluno.getVlSaldo().toString());
                 jdData.setDate(aluno.getDtCadastro());
                 Busca.dispose();
             }

@@ -28,6 +28,8 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFMarcaModelo marca;
     JIFUsuario usuario;
     JIFAluno aluno;
+    JIFRecarga recarga;
+    JIFFormaTipoPagamento pgto;
 
     public JFPrincipal() {
         try {
@@ -64,7 +66,9 @@ public class JFPrincipal extends javax.swing.JFrame {
         jmCursoInstituicao = new javax.swing.JMenuItem();
         jmUnidadeMedida = new javax.swing.JMenuItem();
         jmMarcaModelo = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jmRecarga = new javax.swing.JMenuItem();
+        Utilitarios = new javax.swing.JMenu();
+        jmFormTPPgto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle Xerox");
@@ -130,10 +134,27 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
         Cadastros.add(jmMarcaModelo);
 
+        jmRecarga.setText("Recarga");
+        jmRecarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRecargaActionPerformed(evt);
+            }
+        });
+        Cadastros.add(jmRecarga);
+
         jMenuBar1.add(Cadastros);
 
-        jMenu2.setText("Utilitários");
-        jMenuBar1.add(jMenu2);
+        Utilitarios.setText("Utilitários");
+
+        jmFormTPPgto.setText("Forma / Tipo Pgto");
+        jmFormTPPgto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormTPPgtoActionPerformed(evt);
+            }
+        });
+        Utilitarios.add(jmFormTPPgto);
+
+        jMenuBar1.add(Utilitarios);
 
         setJMenuBar(jMenuBar1);
 
@@ -239,7 +260,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(marca);
             }
         } catch (Exception e) {
-            //   JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Marca/Modelo" + "\n" + e.getMessage());
+               JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Marca/Modelo" + "\n" + e.getMessage());
         }
 
     }//GEN-LAST:event_jmMarcaModeloActionPerformed
@@ -299,6 +320,52 @@ public class JFPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmAlunoActionPerformed
 
+    private void jmRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRecargaActionPerformed
+        try {
+            if (evt.getSource() == jmRecarga) {
+                if (recarga == null) {
+                    recarga = new JIFRecarga();
+                    Desktop.add(recarga);
+                    recarga.setVisible(true);
+                    recarga.setPosicao();//Seta centralizado
+                }
+                Desktop.moveToFront(recarga);
+            }
+            if (recarga.isClosed()) {
+                recarga = new JIFRecarga();
+                Desktop.add(recarga);
+                recarga.setVisible(true);
+                recarga.setPosicao();//Seta centralizado
+                Desktop.moveToFront(recarga);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Recarga" + "\n" + e.getMessage());
+        }
+    }//GEN-LAST:event_jmRecargaActionPerformed
+
+    private void jmFormTPPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormTPPgtoActionPerformed
+          try {
+            if (evt.getSource() == jmFormTPPgto) {
+                if (pgto == null) {
+                    pgto = new JIFFormaTipoPagamento();
+                    Desktop.add(pgto);
+                    pgto.setVisible(true);
+                    pgto.setPosicao();//Seta centralizado
+                }
+                Desktop.moveToFront(recarga);
+            }
+            if (pgto.isClosed()) {
+                pgto = new JIFFormaTipoPagamento();
+                Desktop.add(pgto);
+                pgto.setVisible(true);
+                pgto.setPosicao();//Seta centralizado
+                Desktop.moveToFront(pgto);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela da Forma / Tipo Pagamento" + "\n" + e.getMessage());
+        }
+    }//GEN-LAST:event_jmFormTPPgtoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -342,12 +409,14 @@ public class JFPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Cadastros;
     private javax.swing.JDesktopPane Desktop;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu Utilitarios;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jmAluno;
     private javax.swing.JMenuItem jmCursoInstituicao;
     private javax.swing.JMenuItem jmEmpresa;
+    private javax.swing.JMenuItem jmFormTPPgto;
     private javax.swing.JMenuItem jmMarcaModelo;
+    private javax.swing.JMenuItem jmRecarga;
     private javax.swing.JMenuItem jmUnidadeMedida;
     private javax.swing.JMenuItem jmUsuarios;
     // End of variables declaration//GEN-END:variables

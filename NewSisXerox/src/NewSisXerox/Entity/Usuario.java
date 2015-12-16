@@ -130,7 +130,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "NewSisXerox.Entity.Usuario[ cdUsuario=" + cdUsuario + " ]";
+        return usuario;
     }
     
 }

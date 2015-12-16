@@ -115,9 +115,10 @@ public class GenericDAO {
     }
 
     public void commit() {
-        startTransaction();
+       // startTransaction();
         if (tx != null && tx.isActive()) {
             try {
+                em.flush();
                 tx.commit();
             } catch (Exception cex) {
                 try {
@@ -145,6 +146,7 @@ public class GenericDAO {
     public Object persist(Object obj) {
         startTransaction();
         try {
+            flush();
             Object novo = em.merge(obj);
             obj = novo;
         } catch (Exception ex) {

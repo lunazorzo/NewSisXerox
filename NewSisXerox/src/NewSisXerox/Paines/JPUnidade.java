@@ -158,15 +158,16 @@ public class JPUnidade extends javax.swing.JPanel {
             jtfUnidade.requestFocus();
             return;
         }
-       
+
         try {
-            
+
             if (unidade == null) {
                 unidade = new Unidade();
             }
             unidade.setNmUnidade(jtfUnidade.getText());
             GenericDAO.getInstance().startTransaction();
-                GenericDAO.getInstance().persist(unidade);
+            GenericDAO.getInstance().persist(unidade);
+            GenericDAO.getInstance().flush();
             GenericDAO.getInstance().commit();
             JOptionPane.showMessageDialog(null, "Unidade de Medida " + jtfUnidade.getText() + " gravada com Sucesso!");
             limparDados();
