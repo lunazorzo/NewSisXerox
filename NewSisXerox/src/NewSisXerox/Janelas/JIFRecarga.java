@@ -339,6 +339,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
                 BigDecimal bigResult = casasDecimais(2, valor1.add(valor2, MathContext.DECIMAL32));
                 jtfSaldoFinal.setText(String.valueOf(bigResult).replace(".", ","));
                 recarga.setVlRecarga(bigResult);
+                recarga.setCdFormpgto((Formpgto) jcFgtoPagamento.getSelectedItem());
                 recarga.setCdUsuario((Usuario) jcUsuario.getSelectedItem());
                 GenericDAO.getInstance().startTransaction();
                 GenericDAO.getInstance().persist(recarga);

@@ -53,6 +53,9 @@ public class Recarga implements Serializable {
     @JoinColumn(name = "cd_aluno", referencedColumnName = "cd_aluno")
     @ManyToOne(optional = false)
     private Aluno cdAluno;
+    @JoinColumn(name = "cd_formpgto", referencedColumnName = "cd_formpgto")
+    @ManyToOne(optional = false)
+    private Formpgto cdFormpgto;
     @JoinColumn(name = "cd_usuario", referencedColumnName = "cd_usuario")
     @ManyToOne(optional = false)
     private Usuario cdUsuario;
@@ -100,6 +103,14 @@ public class Recarga implements Serializable {
 
     public void setCdAluno(Aluno cdAluno) {
         this.cdAluno = cdAluno;
+    }
+
+    public Formpgto getCdFormpgto() {
+        return cdFormpgto;
+    }
+
+    public void setCdFormpgto(Formpgto cdFormpgto) {
+        this.cdFormpgto = cdFormpgto;
     }
 
     public Usuario getCdUsuario() {

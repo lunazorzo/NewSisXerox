@@ -7,8 +7,10 @@ package NewSisXerox.Entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,10 +20,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +43,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Aluno.findByRgAluno", query = "SELECT a FROM Aluno a WHERE a.rgAluno = :rgAluno"),
     @NamedQuery(name = "Aluno.findByRaAluno", query = "SELECT a FROM Aluno a WHERE a.raAluno = :raAluno")})
 public class Aluno implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdAluno")
+    private Collection<Recarga> recargaCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -161,6 +167,15 @@ public class Aluno implements Serializable {
     @Override
     public String toString() {
         return nmAluno;
+    }
+
+    @XmlTransient
+    public Collection<Recarga> getRecargaCollection() {
+        return recargaCollection;
+    }
+
+    public void setRecargaCollection(Collection<Recarga> recargaCollection) {
+        this.recargaCollection = recargaCollection;
     }
     
 }

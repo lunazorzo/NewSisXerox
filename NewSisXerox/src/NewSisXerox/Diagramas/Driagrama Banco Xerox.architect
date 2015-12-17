@@ -60,7 +60,7 @@
     <column id="COL12" populated="true" UUID="5671c0a5-d7f0-4922-bde4-973f7c31b0fa" autoIncrement="true" autoIncrementSequenceName="curso_cd_curso_seq_1" defaultValue="" name="cd_curso" nullable="0" physicalName="cd_curso" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL13" populated="true" UUID="a068d8c0-8aad-4c8f-8848-13e537f07ddc" autoIncrement="false" autoIncrementSequenceName="curso_nm_curso_seq" defaultValue="" name="nm_curso" nullable="0" physicalName="nm_curso" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL13" populated="true" UUID="a068d8c0-8aad-4c8f-8848-13e537f07ddc" autoIncrement="false" autoIncrementSequenceName="curso_nm_curso_seq" defaultValue="" name="nm_curso" nullable="0" physicalName="nm_curso" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     <column id="COL14" populated="true" UUID="9607bd35-1c16-43fd-b5c8-385d5458d2e3" autoIncrement="false" autoIncrementSequenceName="instituicao_cd_instituicao_seq" defaultValue="" name="cd_instituicao" nullable="0" physicalName="cd_instituicao" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
@@ -83,7 +83,7 @@
     <column id="COL18" populated="true" UUID="757bde7d-ba86-4e01-943c-26d14754da9c" autoIncrement="true" autoIncrementSequenceName="instituicao_cd_instituicao_seq_1" defaultValue="" name="cd_instituicao" nullable="0" physicalName="cd_instituicao" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL19" populated="true" UUID="08299a0f-d8ec-44b1-a6d7-d2afb80c03d5" autoIncrement="false" autoIncrementSequenceName="instituicao_nm_instituicao_seq" defaultValue="" name="nm_instituicao" nullable="0" physicalName="nm_instituicao" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL19" populated="true" UUID="08299a0f-d8ec-44b1-a6d7-d2afb80c03d5" autoIncrement="false" autoIncrementSequenceName="instituicao_nm_instituicao_seq" defaultValue="" name="nm_instituicao" nullable="0" physicalName="nm_instituicao" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -407,7 +407,7 @@
   <table id="TAB109" populated="true" UUID="8e290e51-eaf4-4c54-8b35-027fa05deeed" name="formpgto" objectType="TABLE" physicalName="formpgto" >
    <remarks>Forma de pagamento</remarks>
    <folder id="FOLTAB1091" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL110" populated="true" UUID="635b3a2a-60b9-4636-85f9-e8a692eb455b" autoIncrement="true" autoIncrementSequenceName="formpgto_cd_formpgto_seq_1" defaultValue="" name="cd_formpgto" nullable="0" physicalName="cd_formpgto" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL110" populated="true" UUID="635b3a2a-60b9-4636-85f9-e8a692eb455b" autoIncrement="true" autoIncrementSequenceName="formpgto_cd_formpgto_seq_1_1" defaultValue="" name="cd_formpgto" nullable="0" physicalName="cd_formpgto" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL111" populated="true" UUID="433341f9-cf40-4b16-922c-3d21f907dea5" autoIncrement="false" autoIncrementSequenceName="formpgto_nm_formpgto_seq" defaultValue="" name="nm_formpgto" nullable="0" physicalName="nm_formpgto" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -533,7 +533,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.414213562373095" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
@@ -542,7 +542,7 @@
   <table-pane table-ref="TAB17" x="30" y="180" bgColor="0xc8dccc" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB22" x="29" y="259" bgColor="0xbfd6ff" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB34" x="32" y="453" bgColor="0xbfd6ff" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB40" x="217" y="182" bgColor="0xc7d0df" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB40" x="212" y="173" bgColor="0xc7d0df" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB49" x="215" y="330" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB56" x="400" y="337" bgColor="0xc8b7ea" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB68" x="202" y="511" bgColor="0xc8b7ea" fgColor="0x000000" rounded="false" dashed="false"/>

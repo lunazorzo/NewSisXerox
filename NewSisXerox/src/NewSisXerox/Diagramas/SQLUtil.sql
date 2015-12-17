@@ -1,3 +1,4 @@
+--Estado
 INSERT INTO "estado" ("cd_estado", "sgl_estado", "nm_estado") VALUES (01, 'AC', 'Acre');
 INSERT INTO "estado" ("cd_estado", "sgl_estado", "nm_estado") VALUES (02, 'AL', 'Alagoas');
 INSERT INTO "estado" ("cd_estado", "sgl_estado", "nm_estado") VALUES (03, 'AP', 'Amapá');
@@ -25,3 +26,15 @@ INSERT INTO "estado" ("cd_estado", "sgl_estado", "nm_estado") VALUES (24, 'SC', 
 INSERT INTO "estado" ("cd_estado", "sgl_estado", "nm_estado") VALUES (25, 'SP', 'São Paulo');
 INSERT INTO "estado" ("cd_estado", "sgl_estado", "nm_estado") VALUES (26, 'SE', 'Sergipe');
 INSERT INTO "estado" ("cd_estado", "sgl_estado", "nm_estado") VALUES (27, 'TO', 'Tocantins');
+
+-- Instituição
+INSERT INTO "instituicao" ("nm_instituicao") VALUES ('FASUL');
+
+--CURSO
+INSERT INTO "curso" ("nm_curso","cd_instituicao") VALUES ('Sistema de Informação',1);
+
+--Usuário
+INSERT INTO "usuario" ("usuario","senha","fg_ativo") VALUES ('ADMIN','123', '1');
+
+--FormaPgto
+INSERT INTO "formpgto" ("nm_formpgto") VALUES ('DINHEIRO');

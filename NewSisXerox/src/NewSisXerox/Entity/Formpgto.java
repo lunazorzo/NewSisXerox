@@ -33,6 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Formpgto.findByCdFormpgto", query = "SELECT f FROM Formpgto f WHERE f.cdFormpgto = :cdFormpgto"),
     @NamedQuery(name = "Formpgto.findByNmFormpgto", query = "SELECT f FROM Formpgto f WHERE f.nmFormpgto = :nmFormpgto")})
 public class Formpgto implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdFormpgto")
+    private Collection<Recarga> recargaCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,6 +107,15 @@ public class Formpgto implements Serializable {
     @Override
     public String toString() {
         return nmFormpgto;
+    }
+
+    @XmlTransient
+    public Collection<Recarga> getRecargaCollection() {
+        return recargaCollection;
+    }
+
+    public void setRecargaCollection(Collection<Recarga> recargaCollection) {
+        this.recargaCollection = recargaCollection;
     }
     
 }
