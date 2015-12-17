@@ -8,6 +8,7 @@ package NewSisXerox.Janelas;
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Aluno;
+import NewSisXerox.Entity.Formpgto;
 import NewSisXerox.Entity.Recarga;
 import NewSisXerox.Entity.Usuario;
 import NewSisXerox.Tabelas.tabRecarga;
@@ -36,6 +37,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
     public JIFRecarga() {
         initComponents();
         carregaComboUsuario();
+        carregaComboFormaPgto();
         tabrecarga = new tabRecarga();
         jtBusca.setModel(tabrecarga);
         jdDTRecarga.setDate(new java.util.Date());//carrega a data atual
@@ -52,6 +54,8 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
         jtfRecarga.setText("");
         jtfSaldoAtual.setText("");
         jtfSaldoFinal.setText("");
+        jcFgtoPagamento.setSelectedItem(null);
+        jcUsuario.setSelectedItem(null);
     }
 
     public void carregaTabela() {
@@ -75,7 +79,21 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
                 jcUsuario.addItem(a);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar Curso!" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao carregar Usuários!" + "\n" + e.getMessage());
+        }
+    }
+
+    public void carregaComboFormaPgto() {
+        jcFgtoPagamento.removeAllItems();//removendo tds os itens da combo
+        jcFgtoPagamento.addItem(null);
+        try {
+            List<Formpgto> lstist = GenericDAO.getInstance().getList(Formpgto.class,
+                    "FROM Formpgto c order by c.nmFormpgto");
+            for (Formpgto a : lstist) {
+                jcFgtoPagamento.addItem(a);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar as Formas de Pagamento!" + "\n" + e.getMessage());
         }
     }
 
@@ -114,7 +132,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
         jlSaldoFinal = new javax.swing.JLabel();
         jtfSaldoFinal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jtFgtoPagamento = new javax.swing.JComboBox();
+        jcFgtoPagamento = new javax.swing.JComboBox();
         jbGravarRecarga = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jcUsuario = new javax.swing.JComboBox();
@@ -188,7 +206,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Fgto Pagamento:");
 
-        jtFgtoPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcFgtoPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jbGravarRecarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/Salvar - 16.png"))); // NOI18N
         jbGravarRecarga.setText("Gravar");
@@ -234,7 +252,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(7, 7, 7)
-                                .addComponent(jtFgtoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jcFgtoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -280,7 +298,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel2))
-                    .addComponent(jtFgtoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcFgtoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -300,9 +318,9 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
             jtfRecarga.requestFocus();
             return;
         }
-        if (jtFgtoPagamento.getSelectedItem() == null) {
+        if (jcFgtoPagamento.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Selecione o tipo !", "Erro", 0);
-            jtFgtoPagamento.requestFocus();
+            jcFgtoPagamento.requestFocus();
             return;
         }
         if (jcUsuario.getSelectedItem() == null) {
@@ -365,6 +383,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbGravarRecarga;
     private javax.swing.JButton jbSelecionar;
+    private javax.swing.JComboBox jcFgtoPagamento;
     private javax.swing.JComboBox jcUsuario;
     private com.toedter.calendar.JDateChooser jdDTRecarga;
     private javax.swing.JLabel jlDTRecarga;
@@ -372,7 +391,6 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlSaldoAtual;
     private javax.swing.JLabel jlSaldoFinal;
     private javax.swing.JTable jtBusca;
-    private javax.swing.JComboBox jtFgtoPagamento;
     private javax.swing.JTextField jtfAluno;
     private javax.swing.JTextField jtfRecarga;
     private javax.swing.JTextField jtfSaldoAtual;
