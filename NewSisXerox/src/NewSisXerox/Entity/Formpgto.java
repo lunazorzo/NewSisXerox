@@ -104,7 +104,7 @@ public class Formpgto implements Serializable {
 
     @Override
     public String toString() {
-        return "NewSisXerox.Entity.Formpgto[ cdFormpgto=" + cdFormpgto + " ]";
+        return nmFormpgto;
     }
     
 }

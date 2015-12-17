@@ -29,7 +29,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFUsuario usuario;
     JIFAluno aluno;
     JIFRecarga recarga;
-    JIFFormaTipoPagamento pgto;
+    JIFFormaTipoPagto pgto;
 
     public JFPrincipal() {
         try {
@@ -260,7 +260,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(marca);
             }
         } catch (Exception e) {
-               JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Marca/Modelo" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Marca/Modelo" + "\n" + e.getMessage());
         }
 
     }//GEN-LAST:event_jmMarcaModeloActionPerformed
@@ -344,18 +344,18 @@ public class JFPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmRecargaActionPerformed
 
     private void jmFormTPPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormTPPgtoActionPerformed
-          try {
+        try {
             if (evt.getSource() == jmFormTPPgto) {
                 if (pgto == null) {
-                    pgto = new JIFFormaTipoPagamento();
+                    pgto = new JIFFormaTipoPagto();
                     Desktop.add(pgto);
                     pgto.setVisible(true);
                     pgto.setPosicao();//Seta centralizado
                 }
-                Desktop.moveToFront(recarga);
+                Desktop.moveToFront(pgto);
             }
             if (pgto.isClosed()) {
-                pgto = new JIFFormaTipoPagamento();
+                pgto = new JIFFormaTipoPagto();
                 Desktop.add(pgto);
                 pgto.setVisible(true);
                 pgto.setPosicao();//Seta centralizado

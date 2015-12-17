@@ -5,24 +5,24 @@
  */
 package NewSisXerox.Janelas;
 
-import NewSisXerox.Paines.JPFormaPagamento;
-import NewSisXerox.Paines.JPUnidade;
+import NewSisXerox.Paines.JPFormaPgto;
 import java.awt.Dimension;
 
 /**
  *
  * @author Allan
  */
-public class JIFFormaTipoPagamento extends javax.swing.JInternalFrame {
+public class JIFFormaTipoPagto extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form JIFFormaTipoPagamento
+     * Creates new form JIFFormaTipoPagto
      */
-    public JPFormaPagamento jpTPPgto;
-    public JIFFormaTipoPagamento() {
+    public JPFormaPgto jtpgto;
+
+    public JIFFormaTipoPagto() {
         initComponents();
-//        jpTPPgto = new JPFormaPagamento();//add na frame
-//        jTabbedPane1.addTab("Forma de Pagamento", jpTPPgto);// adcionando no painel
+        jtpgto = new JPFormaPgto();//add na frame
+        jTabbedPane1.addTab("Forma de Pagamento", jtpgto);// adcionando no painel
     }
 
     public void setPosicao() {
@@ -40,6 +40,8 @@ public class JIFFormaTipoPagamento extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+
+        setClosable(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
