@@ -40,7 +40,7 @@ public class JFPrincipal extends javax.swing.JFrame {
             Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
-        URL url = this.getClass().getResource("/NewSisXerox/Imagens/Icone-64.png");
+        URL url = this.getClass().getResource("/NewSisXerox/Imagens/console.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(imagemTitulo);
 
@@ -70,8 +70,13 @@ public class JFPrincipal extends javax.swing.JFrame {
         Utilitarios = new javax.swing.JMenu();
         jmFormTPPgto = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Controle Xerox");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
         Desktop.setLayout(DesktopLayout);
@@ -365,6 +370,17 @@ public class JFPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Não foi possível abrir janela da Forma / Tipo Pagamento" + "\n" + e.getMessage());
         }
     }//GEN-LAST:event_jmFormTPPgtoActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+         Object[] botoes = {"Sim", "Não"};//tipo de formato dos botões
+        //quando abrir a janela de sair é a msg que vai ser mostrada
+        int resposta = JOptionPane.showOptionDialog(null, "Confirma Encerramento do Sistama?", "ATENÇÃO",
+                JOptionPane.YES_NO_OPTION,//Tipo usado para confirmar o questionamento
+                JOptionPane.QUESTION_MESSAGE, null, botoes, botoes[0]); //questionamento da msg
+        if (resposta == JOptionPane.YES_OPTION) {//valor de retorno de método de classe
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
