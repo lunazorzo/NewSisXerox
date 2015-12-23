@@ -29,7 +29,7 @@ public class JPInstituicao extends javax.swing.JPanel {
     public JPInstituicao() {
         initComponents();
         tabInstituicao = new tabInstituicao();
-        jtInstituicao.setModel(tabInstituicao);
+        jtBusca.setModel(tabInstituicao);
     }
 
     /**
@@ -46,7 +46,7 @@ public class JPInstituicao extends javax.swing.JPanel {
             List l = GenericDAO.getInstance().getList(Instituicao.class,
                     "FROM Instituicao nmInstituicao");  // consulta no banco
             tabInstituicao.setDados(l);
-            jtInstituicao.updateUI();
+            jtBusca.updateUI();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela Instituição!" + e.getMessage());
         }
@@ -56,18 +56,18 @@ public class JPInstituicao extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BuscaInstituicao = new javax.swing.JDialog();
+        Busca = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtInstituicao = new javax.swing.JTable();
-        jbSelecionarInstituicao = new javax.swing.JButton();
+        jtBusca = new javax.swing.JTable();
+        jbSelecionar = new javax.swing.JButton();
         jlInstituicao = new javax.swing.JLabel();
         jtfInstituicao = new UpperCaseField();
         jbGravar = new javax.swing.JButton();
 
-        BuscaInstituicao.setTitle("Busca Instituição");
-        BuscaInstituicao.setMinimumSize(new java.awt.Dimension(500, 335));
+        Busca.setTitle("Busca");
+        Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
-        jtInstituicao.setModel(new javax.swing.table.DefaultTableModel(
+        jtBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,32 +78,32 @@ public class JPInstituicao extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtInstituicao);
+        jScrollPane1.setViewportView(jtBusca);
 
-        jbSelecionarInstituicao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
-        jbSelecionarInstituicao.setText("Selecionar");
-        jbSelecionarInstituicao.addActionListener(new java.awt.event.ActionListener() {
+        jbSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
+        jbSelecionar.setText("Selecionar");
+        jbSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSelecionarInstituicaoActionPerformed(evt);
+                jbSelecionarActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout BuscaInstituicaoLayout = new javax.swing.GroupLayout(BuscaInstituicao.getContentPane());
-        BuscaInstituicao.getContentPane().setLayout(BuscaInstituicaoLayout);
-        BuscaInstituicaoLayout.setHorizontalGroup(
-            BuscaInstituicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout BuscaLayout = new javax.swing.GroupLayout(Busca.getContentPane());
+        Busca.getContentPane().setLayout(BuscaLayout);
+        BuscaLayout.setHorizontalGroup(
+            BuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaInstituicaoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbSelecionarInstituicao)
+                .addComponent(jbSelecionar)
                 .addContainerGap())
         );
-        BuscaInstituicaoLayout.setVerticalGroup(
-            BuscaInstituicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BuscaInstituicaoLayout.createSequentialGroup()
+        BuscaLayout.setVerticalGroup(
+            BuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BuscaLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSelecionarInstituicao)
+                .addComponent(jbSelecionar)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -178,33 +178,33 @@ public class JPInstituicao extends javax.swing.JPanel {
     private void jtfInstituicaoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfInstituicaoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             carregaTabela();
-            BuscaInstituicao.show();
-            BuscaInstituicao.setLocationRelativeTo(this);//seta a posição da tela 
+            Busca.show();
+            Busca.setLocationRelativeTo(this);//seta a posição da tela 
         }
     }//GEN-LAST:event_jtfInstituicaoKeyPressed
 
-    private void jbSelecionarInstituicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarInstituicaoActionPerformed
+    private void jbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarActionPerformed
         try {
             //pegando a opção selecionada na grade
-            ins = (Instituicao) tabInstituicao.getDadoAt(jtInstituicao.getSelectedRow());
+            ins = (Instituicao) tabInstituicao.getDadoAt(jtBusca.getSelectedRow());
             if (ins != null) {
                 jtfInstituicao.setText(ins.getNmInstituicao());
-                BuscaInstituicao.dispose();
+                Busca.dispose();
             }
         } catch (Throwable t) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar a Instituição!" + "\n" + t.getMessage());
             limparDados();
         }
-    }//GEN-LAST:event_jbSelecionarInstituicaoActionPerformed
+    }//GEN-LAST:event_jbSelecionarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog BuscaInstituicao;
+    private javax.swing.JDialog Busca;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbGravar;
-    private javax.swing.JButton jbSelecionarInstituicao;
+    private javax.swing.JButton jbSelecionar;
     private javax.swing.JLabel jlInstituicao;
-    private javax.swing.JTable jtInstituicao;
+    private javax.swing.JTable jtBusca;
     private javax.swing.JTextField jtfInstituicao;
     // End of variables declaration//GEN-END:variables
 }

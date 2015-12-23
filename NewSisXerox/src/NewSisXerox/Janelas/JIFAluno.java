@@ -94,7 +94,7 @@ public class JIFAluno extends javax.swing.JInternalFrame {
         jdData = new com.toedter.calendar.JDateChooser();
         jlData = new javax.swing.JLabel();
 
-        Busca.setTitle("Busca Instituição");
+        Busca.setTitle("Busca");
         Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
         jtBusca.setModel(new javax.swing.table.DefaultTableModel(

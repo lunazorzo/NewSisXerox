@@ -38,3 +38,12 @@ INSERT INTO "usuario" ("usuario","senha","fg_ativo") VALUES ('ADMIN','123', '1')
 
 --FormaPgto
 INSERT INTO "formpgto" ("nm_formpgto") VALUES ('DINHEIRO');
+
+--marca
+INSERT INTO "marca" ("nm_marca") VALUES ('GERAL');
+
+--Modelo
+INSERT INTO "modelo" ("nm_modelo", "cd_marca") VALUES ('GERAL',1);
+
+--Unidade
+INSERT INTO "unidade" ("nm_unidade") VALUES ('Unidade');

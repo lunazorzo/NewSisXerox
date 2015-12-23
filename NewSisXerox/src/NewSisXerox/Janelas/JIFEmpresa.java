@@ -32,7 +32,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
         initComponents();
         carregaCombo();
         tabempresa = new tabEmpresa();
-        jtEmpresa.setModel(tabempresa);
+        jtBusca.setModel(tabempresa);
 
     }
 
@@ -60,7 +60,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
             List l = GenericDAO.getInstance().getList(Empresa.class,
                     "SELECT i FROM Empresa i order by i.nmEmpresa");  // consulta no banco
             tabempresa.setDados(l);
-            jtEmpresa.updateUI();
+            jtBusca.updateUI();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar a grade Empresa!" + e.getMessage());
         }
@@ -81,10 +81,10 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BuscaEmpresa = new javax.swing.JDialog();
+        Busca = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtEmpresa = new javax.swing.JTable();
-        jbSelecionarEmpresa = new javax.swing.JButton();
+        jtBusca = new javax.swing.JTable();
+        jbSelecionar = new javax.swing.JButton();
         Fantasia = new javax.swing.JLabel();
         Endereco = new javax.swing.JLabel();
         Bairro = new javax.swing.JLabel();
@@ -103,10 +103,10 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
         Bairro1 = new javax.swing.JLabel();
         jtfCidade = new UpperCaseField();
 
-        BuscaEmpresa.setTitle("Busca Instituição");
-        BuscaEmpresa.setMinimumSize(new java.awt.Dimension(500, 335));
+        Busca.setTitle("Busca");
+        Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
-        jtEmpresa.setModel(new javax.swing.table.DefaultTableModel(
+        jtBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -117,32 +117,32 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtEmpresa);
+        jScrollPane1.setViewportView(jtBusca);
 
-        jbSelecionarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
-        jbSelecionarEmpresa.setText("Selecionar");
-        jbSelecionarEmpresa.addActionListener(new java.awt.event.ActionListener() {
+        jbSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
+        jbSelecionar.setText("Selecionar");
+        jbSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSelecionarEmpresaActionPerformed(evt);
+                jbSelecionarActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout BuscaEmpresaLayout = new javax.swing.GroupLayout(BuscaEmpresa.getContentPane());
-        BuscaEmpresa.getContentPane().setLayout(BuscaEmpresaLayout);
-        BuscaEmpresaLayout.setHorizontalGroup(
-            BuscaEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout BuscaLayout = new javax.swing.GroupLayout(Busca.getContentPane());
+        Busca.getContentPane().setLayout(BuscaLayout);
+        BuscaLayout.setHorizontalGroup(
+            BuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaEmpresaLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbSelecionarEmpresa)
+                .addComponent(jbSelecionar)
                 .addContainerGap())
         );
-        BuscaEmpresaLayout.setVerticalGroup(
-            BuscaEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BuscaEmpresaLayout.createSequentialGroup()
+        BuscaLayout.setVerticalGroup(
+            BuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BuscaLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSelecionarEmpresa)
+                .addComponent(jbSelecionar)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -232,10 +232,10 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbSelecionarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarEmpresaActionPerformed
+    private void jbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarActionPerformed
         try {
             //pegando a opção selecionada na grade
-            empresa = (Empresa) tabempresa.getDadoAt(jtEmpresa.getSelectedRow());
+            empresa = (Empresa) tabempresa.getDadoAt(jtBusca.getSelectedRow());
             if (empresa != null) {
                 jtfEmpresa.setText(empresa.getNmEmpresa());
                 jtfEndereco.setText(empresa.getEndereco());
@@ -245,19 +245,19 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                 jcEstado.setSelectedItem(empresa.getCdEstado());
                 jtfTelefone1.setText(empresa.getNumTelefone());
                 jtfEmail.setText(empresa.getEmail());
-                BuscaEmpresa.dispose();
+                Busca.dispose();
             }
         } catch (Throwable t) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar a Empresa!" + "\n" + t.getMessage());
             limparDados();
         }
-    }//GEN-LAST:event_jbSelecionarEmpresaActionPerformed
+    }//GEN-LAST:event_jbSelecionarActionPerformed
 
     private void jtfEmpresaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfEmpresaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             carregaTabela();
-            BuscaEmpresa.show();
-            BuscaEmpresa.setLocationRelativeTo(this);//seta a posição da tela 
+            Busca.show();
+            Busca.setLocationRelativeTo(this);//seta a posição da tela 
         }
     }//GEN-LAST:event_jtfEmpresaKeyPressed
 
@@ -329,7 +329,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bairro;
     private javax.swing.JLabel Bairro1;
-    private javax.swing.JDialog BuscaEmpresa;
+    private javax.swing.JDialog Busca;
     private javax.swing.JLabel CEP;
     private javax.swing.JLabel Email;
     private javax.swing.JLabel Endereco;
@@ -338,9 +338,9 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbGravar;
-    private javax.swing.JButton jbSelecionarEmpresa;
+    private javax.swing.JButton jbSelecionar;
     private javax.swing.JComboBox jcEstado;
-    private javax.swing.JTable jtEmpresa;
+    private javax.swing.JTable jtBusca;
     private javax.swing.JTextField jtfBairro;
     private javax.swing.JFormattedTextField jtfCEP;
     private javax.swing.JTextField jtfCidade;

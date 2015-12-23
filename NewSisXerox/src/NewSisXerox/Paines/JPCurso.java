@@ -31,7 +31,7 @@ public class JPCurso extends javax.swing.JPanel {
         initComponents();
         carregaCombo();
         tabCurso = new tabCurso();
-        jtCurso.setModel(tabCurso);
+        jtBusca.setModel(tabCurso);
     }
 
     public void limparDados() {
@@ -58,7 +58,7 @@ public class JPCurso extends javax.swing.JPanel {
             List l = GenericDAO.getInstance().getList(Curso.class,
                     "FROM Curso nmCurso");  // consulta no banco
             tabCurso.setDados(l);
-            jtCurso.updateUI();
+            jtBusca.updateUI();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar tabela de Cursos!" + "\n" + e.getMessage());
         }
@@ -70,8 +70,8 @@ public class JPCurso extends javax.swing.JPanel {
 
         Busca = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtCurso = new javax.swing.JTable();
-        jbSelecionarCurso = new javax.swing.JButton();
+        jtBusca = new javax.swing.JTable();
+        jbSelecionar = new javax.swing.JButton();
         jlCurso = new javax.swing.JLabel();
         jtfCurso = new UpperCaseField();
         jbGravar = new javax.swing.JButton();
@@ -81,7 +81,7 @@ public class JPCurso extends javax.swing.JPanel {
         Busca.setTitle("Busca");
         Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
-        jtCurso.setModel(new javax.swing.table.DefaultTableModel(
+        jtBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -92,13 +92,13 @@ public class JPCurso extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtCurso);
+        jScrollPane1.setViewportView(jtBusca);
 
-        jbSelecionarCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
-        jbSelecionarCurso.setText("Selecionar");
-        jbSelecionarCurso.addActionListener(new java.awt.event.ActionListener() {
+        jbSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
+        jbSelecionar.setText("Selecionar");
+        jbSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSelecionarCursoActionPerformed(evt);
+                jbSelecionarActionPerformed(evt);
             }
         });
 
@@ -109,7 +109,7 @@ public class JPCurso extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbSelecionarCurso)
+                .addComponent(jbSelecionar)
                 .addContainerGap())
         );
         BuscaLayout.setVerticalGroup(
@@ -117,7 +117,7 @@ public class JPCurso extends javax.swing.JPanel {
             .addGroup(BuscaLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSelecionarCurso)
+                .addComponent(jbSelecionar)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -207,10 +207,10 @@ public class JPCurso extends javax.swing.JPanel {
         jtfCurso.requestFocus();
     }//GEN-LAST:event_jbGravarActionPerformed
 
-    private void jbSelecionarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarCursoActionPerformed
+    private void jbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarActionPerformed
         try {
             //pegando a opção selecionada na grade
-            curso = (Curso) tabCurso.getDadoAt(jtCurso.getSelectedRow());
+            curso = (Curso) tabCurso.getDadoAt(jtBusca.getSelectedRow());
             if (curso != null) {
                 jtfCurso.setText(curso.getNmCurso());
                 jcInstituicao.setSelectedItem(curso.getCdInstituicao());
@@ -220,7 +220,7 @@ public class JPCurso extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar a Curso/Instituição!" + "\n" + t.getMessage());
             limparDados();
         }
-    }//GEN-LAST:event_jbSelecionarCursoActionPerformed
+    }//GEN-LAST:event_jbSelecionarActionPerformed
 
     private void jtfCursoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCursoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -235,11 +235,11 @@ public class JPCurso extends javax.swing.JPanel {
     private javax.swing.JDialog Busca;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbGravar;
-    private javax.swing.JButton jbSelecionarCurso;
+    private javax.swing.JButton jbSelecionar;
     private javax.swing.JComboBox jcInstituicao;
     private javax.swing.JLabel jlCurso;
     private javax.swing.JLabel jlInstituicao;
-    private javax.swing.JTable jtCurso;
+    private javax.swing.JTable jtBusca;
     private javax.swing.JTextField jtfCurso;
     // End of variables declaration//GEN-END:variables
 }

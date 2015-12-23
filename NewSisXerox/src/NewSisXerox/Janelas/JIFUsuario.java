@@ -74,7 +74,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         jbGravar = new javax.swing.JButton();
         ativo = new javax.swing.JCheckBox();
 
-        Busca.setTitle("Busca Marca");
+        Busca.setTitle("Busca");
         Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
         jtBusca.setModel(new javax.swing.table.DefaultTableModel(

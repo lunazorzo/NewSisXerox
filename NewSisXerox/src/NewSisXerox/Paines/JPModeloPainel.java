@@ -30,18 +30,18 @@ public class JPModeloPainel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BuscaModeloPaine = new javax.swing.JDialog();
+        Busca = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtModeloPainel = new javax.swing.JTable();
-        jbSelecionarModeloPainel = new javax.swing.JButton();
+        jtBusca = new javax.swing.JTable();
+        jbSelecionar = new javax.swing.JButton();
         jlModeloPaine = new javax.swing.JLabel();
         jtfModeloPaine = new UpperCaseField();
         jbGravarModeloPaine = new javax.swing.JButton();
 
-        BuscaModeloPaine.setTitle("Busca");
-        BuscaModeloPaine.setMinimumSize(new java.awt.Dimension(500, 335));
+        Busca.setTitle("Busca");
+        Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
-        jtModeloPainel.setModel(new javax.swing.table.DefaultTableModel(
+        jtBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -52,27 +52,27 @@ public class JPModeloPainel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtModeloPainel);
+        jScrollPane1.setViewportView(jtBusca);
 
-        jbSelecionarModeloPainel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
-        jbSelecionarModeloPainel.setText("Selecionar");
+        jbSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
+        jbSelecionar.setText("Selecionar");
 
-        javax.swing.GroupLayout BuscaModeloPaineLayout = new javax.swing.GroupLayout(BuscaModeloPaine.getContentPane());
-        BuscaModeloPaine.getContentPane().setLayout(BuscaModeloPaineLayout);
-        BuscaModeloPaineLayout.setHorizontalGroup(
-            BuscaModeloPaineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout BuscaLayout = new javax.swing.GroupLayout(Busca.getContentPane());
+        Busca.getContentPane().setLayout(BuscaLayout);
+        BuscaLayout.setHorizontalGroup(
+            BuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaModeloPaineLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbSelecionarModeloPainel)
+                .addComponent(jbSelecionar)
                 .addContainerGap())
         );
-        BuscaModeloPaineLayout.setVerticalGroup(
-            BuscaModeloPaineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BuscaModeloPaineLayout.createSequentialGroup()
+        BuscaLayout.setVerticalGroup(
+            BuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BuscaLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSelecionarModeloPainel)
+                .addComponent(jbSelecionar)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -98,19 +98,19 @@ public class JPModeloPainel extends javax.swing.JPanel {
 
     private void jtfModeloPaineKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfModeloPaineKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            BuscaModeloPaine.show();
-            BuscaModeloPaine.setLocationRelativeTo(this);//seta a posição da tela 
+            Busca.show();
+            Busca.setLocationRelativeTo(this);//seta a posição da tela 
         }
     }//GEN-LAST:event_jtfModeloPaineKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog BuscaModeloPaine;
+    private javax.swing.JDialog Busca;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbGravarModeloPaine;
-    private javax.swing.JButton jbSelecionarModeloPainel;
+    private javax.swing.JButton jbSelecionar;
     private javax.swing.JLabel jlModeloPaine;
-    private javax.swing.JTable jtModeloPainel;
+    private javax.swing.JTable jtBusca;
     private javax.swing.JTextField jtfModeloPaine;
     // End of variables declaration//GEN-END:variables
 }

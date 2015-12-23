@@ -137,7 +137,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jcUsuario = new javax.swing.JComboBox();
 
-        Busca.setTitle("Busca Aluno");
+        Busca.setTitle("Busca");
         Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
         jtBusca.setModel(new javax.swing.table.DefaultTableModel(
