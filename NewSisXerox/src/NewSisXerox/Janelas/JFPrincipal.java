@@ -15,6 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import NewSisXerox.Classes.ClasseImagem;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.Timer;
 
 /**
  *
@@ -40,12 +47,9 @@ public class JFPrincipal extends javax.swing.JFrame {
             Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
-        URL url = this.getClass().getResource("/NewSisXerox/Imagens/console.png");
+        URL url = this.getClass().getResource("/NewSisXerox/Imagens/Icone-64.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(imagemTitulo);
-
-        //deixando na cheia
-        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -58,6 +62,14 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         Desktop = new ClasseImagem("/NewSisXerox/Imagens/Brazil_Flag.jpg");
+        jToolBar1 = new javax.swing.JToolBar();
+        jSeparator0 = new javax.swing.JToolBar.Separator();
+        Usuário = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        Dia = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        Hora = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
         jMenuBar1 = new javax.swing.JMenuBar();
         Cadastros = new javax.swing.JMenu();
         jmEmpresa = new javax.swing.JMenuItem();
@@ -76,17 +88,51 @@ public class JFPrincipal extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
+
+        jToolBar1.setBorder(null);
+        jToolBar1.setFloatable(false);
+        jToolBar1.setBorderPainted(false);
+        jToolBar1.setEnabled(false);
+        jToolBar1.setOpaque(false);
+        jToolBar1.setRequestFocusEnabled(false);
+        jToolBar1.setVerifyInputWhenFocusTarget(false);
+        jToolBar1.add(jSeparator0);
+
+        Usuário.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Usuário.setForeground(java.awt.Color.white);
+        Usuário.setText("Usuário");
+        jToolBar1.add(Usuário);
+        jToolBar1.add(jSeparator1);
+
+        Dia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Dia.setForeground(java.awt.Color.white);
+        Dia.setText("Dia");
+        jToolBar1.add(Dia);
+        jToolBar1.add(jSeparator2);
+
+        Hora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Hora.setForeground(java.awt.Color.white);
+        Hora.setText("Hora");
+        jToolBar1.add(Hora);
+        jToolBar1.add(jSeparator3);
+
+        Desktop.setLayer(jToolBar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DesktopLayout.createSequentialGroup()
+                .addGap(0, 254, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         Cadastros.setText("Cadastros");
@@ -372,7 +418,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmFormTPPgtoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-         Object[] botoes = {"Sim", "Não"};//tipo de formato dos botões
+        Object[] botoes = {"Sim", "Não"};//tipo de formato dos botões
         //quando abrir a janela de sair é a msg que vai ser mostrada
         int resposta = JOptionPane.showOptionDialog(null, "Confirma Encerramento do Sistama?", "ATENÇÃO",
                 JOptionPane.YES_NO_OPTION,//Tipo usado para confirmar o questionamento
@@ -381,6 +427,29 @@ public class JFPrincipal extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setExtendedState(MAXIMIZED_BOTH);
+        Timer timer = new Timer(1000, new hora());
+        timer.start();
+        Dia.setText(MostraData());
+    }//GEN-LAST:event_formWindowOpened
+    public String MostraData() {
+        Date data = new Date();
+        SimpleDateFormat dformatador = new SimpleDateFormat("dd/MM/yyyy");
+        String sData = dformatador.format(data);
+        return sData;
+    }
+//https://www.youtube.com/watch?v=55CgbuWnmNc
+
+    class hora implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Calendar now = Calendar.getInstance();
+            Hora.setText(String.format("%1$tH:%1$tM:%1$tS", now));
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -425,8 +494,16 @@ public class JFPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Cadastros;
     private javax.swing.JDesktopPane Desktop;
+    private javax.swing.JLabel Dia;
+    private javax.swing.JLabel Hora;
+    private javax.swing.JLabel Usuário;
     private javax.swing.JMenu Utilitarios;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JToolBar.Separator jSeparator0;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem jmAluno;
     private javax.swing.JMenuItem jmCursoInstituicao;
     private javax.swing.JMenuItem jmEmpresa;
