@@ -48,6 +48,7 @@ public class JIFAluno extends javax.swing.JInternalFrame {
                     "FROM Aluno i order by i.nmAluno");  // consulta no banco
             tabaluno.setDados(l);
             jtBusca.updateUI();
+            jtBusca.setAutoCreateRowSorter(true);//quando clicado no campo da tabela o mesmo será ordenado
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Alunos!" + e.getMessage());
         }
@@ -293,7 +294,9 @@ public class JIFAluno extends javax.swing.JInternalFrame {
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(aluno);
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Aluno " + jtfRA.getText() + " cadastrado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Aluno: " + jtfAluno.getText() + "\n" 
+                                              + "RA: "+ jtfRA.getText() + "\n" 
+                                              + "Cadastrado com Sucesso!");
             limparDados();
         } catch (Exception e) {
             GenericDAO.getInstance().rollback();

@@ -61,7 +61,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
     public void carregaTabela() {
         try {
             List l = GenericDAO.getInstance().getList(Aluno.class,
-                    "FROM Aluno i order by i.raAluno");  // consulta no banco
+                    "FROM Aluno i order by i.raAluno");  // consulta no banco           
             tabrecarga.setDados(l);
             jtBusca.updateUI();
         } catch (Exception e) {
@@ -192,6 +192,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
 
         jlSaldoAtual.setText("Saldo Atua R$l:");
 
+        jtfSaldoAtual.setEditable(false);
         jtfSaldoAtual.setOpaque(false);
 
         jlDTRecarga.setText("Data Recarga:");
@@ -228,18 +229,6 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlSaldoAtual)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfSaldoAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlDTRecarga)
-                        .addGap(4, 4, 4)
-                        .addComponent(jdDTRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlRecarga)
-                        .addGap(30, 30, 30)
-                        .addComponent(jtfRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jlSaldoFinal)
                         .addGap(19, 19, 19)
                         .addComponent(jtfSaldoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -257,7 +246,21 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jtfAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jbGravarRecarga)))
+                        .addComponent(jbGravarRecarga))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlSaldoAtual)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfSaldoAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlDTRecarga))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlRecarga)
+                                .addGap(30, 30, 30)
+                                .addComponent(jtfRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(4, 4, 4)
+                        .addComponent(jdDTRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
@@ -287,7 +290,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
                         .addGap(3, 3, 3)
                         .addComponent(jlRecarga))
                     .addComponent(jtfRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -314,17 +317,17 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
 
     private void jbGravarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarRecargaActionPerformed
         if (Validador.vldStringMinMax(jtfRecarga.getText(), 1, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o valor da recarga!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Informe o valor da recarga!");
             jtfRecarga.requestFocus();
             return;
         }
         if (jcFgtoPagamento.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione o tipo !", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Selecione o tipo !");
             jcFgtoPagamento.requestFocus();
             return;
         }
         if (jcUsuario.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione o usuário!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Selecione o usuário!");
             jcUsuario.requestFocus();
             return;
         }
@@ -344,7 +347,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
                 GenericDAO.getInstance().startTransaction();
                 GenericDAO.getInstance().persist(recarga);
                 GenericDAO.getInstance().commit();
-                JOptionPane.showMessageDialog(null, "A regarga de " + jtfSaldoFinal.getText() + " para o aluno(a) " + jtfAluno.getText() + ", foi realizada com Sucesso!");
+                JOptionPane.showMessageDialog(null, "A recarga de " + jtfSaldoFinal.getText() + " para o aluno(a) " + jtfAluno.getText() + ", foi realizada com Sucesso!");
                 limparDados();
             }
         } catch (NumberFormatException | HeadlessException e) {
