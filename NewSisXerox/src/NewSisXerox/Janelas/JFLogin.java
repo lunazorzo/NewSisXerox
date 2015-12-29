@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import NewSisXerox.Classes.UpperCaseField;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
@@ -143,15 +143,15 @@ public class JFLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     public void logar() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Class.forName("org.postgresql.Driver");
+
         String url = "jdbc:postgresql://localhost:5432/newxerox";
         String usuario = "postgres";
         String senha = "xtz7qr87";
-        
+        Class.forName("org.postgresql.Driver");
         Connection con;
         con = DriverManager.getConnection(url, usuario, senha);
         System.out.println("Conexão realizada com sucesso.");
-        String SQL = "SELECT usuario, usuario FROM Usuario WHERE usuario = ? and senha = ?";
+        String SQL = "SELECT *FROM Usuario WHERE usuario = ? and senha = ?";
         try {
 
             pst = con.prepareStatement(SQL);
@@ -170,7 +170,7 @@ public class JFLogin extends javax.swing.JFrame {
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException | HeadlessException e) {
         }
     }
     private void jbAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAcessarActionPerformed
@@ -186,13 +186,7 @@ public class JFLogin extends javax.swing.JFrame {
         }
         try {
             logar();
-        } catch (SQLException ex) {
-            Logger.getLogger(JFLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JFLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(JFLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(JFLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbAcessarActionPerformed

@@ -12,6 +12,7 @@ import NewSisXerox.Entity.Formpgto;
 import NewSisXerox.Entity.Recarga;
 import NewSisXerox.Entity.Usuario;
 import NewSisXerox.Tabelas.tabRecarga;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
@@ -19,6 +20,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -316,19 +319,30 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarRecargaActionPerformed
-        if (Validador.vldStringMinMax(jtfRecarga.getText(), 1, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o valor da recarga!");
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-64.png")));
+        if (Validador.vldStringMinMax(jtfAluno.getText(), 1, 50) == false) {
+            //http://www.guj.com.br/t/icone-em-joptionpane/54164/3          
+            JOptionPane.showMessageDialog(this, "Informe o aluno para efetuar a recarga!","Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            jtfAluno.requestFocus();
+            return;
+        }
+        if (Validador.vldStringMinMax(jtfRecarga.getText(), 1, 50) == false) {            
+            JOptionPane.showMessageDialog(this, "Informe o valor da recarga!","Alerta", JOptionPane.PLAIN_MESSAGE, figura);
             jtfRecarga.requestFocus();
+            //http://respostas.guj.com.br/12273-mudar-cor-jtextfield-quando-ganhar-foco
+            jtfRecarga.setBackground(Color.YELLOW);
             return;
         }
         if (jcFgtoPagamento.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione o tipo !");
+            JOptionPane.showMessageDialog(this, "Selecione o tipo !","Alerta", JOptionPane.PLAIN_MESSAGE, figura);
             jcFgtoPagamento.requestFocus();
             return;
         }
         if (jcUsuario.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione o usuário!");
+            JOptionPane.showMessageDialog(this, "Selecione o usuário!","Alerta", JOptionPane.PLAIN_MESSAGE, figura);
             jcUsuario.requestFocus();
+            jcUsuario.setBackground(Color.YELLOW);
+            
             return;
         }
         try {

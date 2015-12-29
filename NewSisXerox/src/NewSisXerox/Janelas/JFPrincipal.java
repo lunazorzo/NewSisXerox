@@ -5,7 +5,6 @@
  */
 package NewSisXerox.Janelas;
 
-import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -37,6 +36,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFAluno aluno;
     JIFRecarga recarga;
     JIFFormaTipoPagto pgto;
+    JIFVenda venda;
 
     public JFPrincipal() {
         try {
@@ -71,15 +71,16 @@ public class JFPrincipal extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jMenuBar1 = new javax.swing.JMenuBar();
         Cadastros = new javax.swing.JMenu();
-        jmEmpresa = new javax.swing.JMenuItem();
         jmAluno = new javax.swing.JMenuItem();
-        jmUsuarios = new javax.swing.JMenuItem();
         jmCursoInstituicao = new javax.swing.JMenuItem();
-        jmUnidadeMedida = new javax.swing.JMenuItem();
-        jmMarcaModelo = new javax.swing.JMenuItem();
-        jmRecarga = new javax.swing.JMenuItem();
-        Utilitarios = new javax.swing.JMenu();
+        jmEmpresa = new javax.swing.JMenuItem();
         jmFormTPPgto = new javax.swing.JMenuItem();
+        jmMarcaModelo = new javax.swing.JMenuItem();
+        jmUsuarios = new javax.swing.JMenuItem();
+        jmUnidadeMedida = new javax.swing.JMenuItem();
+        Utilitarios = new javax.swing.JMenu();
+        jmRecarga = new javax.swing.JMenuItem();
+        jmVenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Controle Xerox");
@@ -95,6 +96,8 @@ public class JFPrincipal extends javax.swing.JFrame {
         jToolBar1.setBorder(null);
         jToolBar1.setFloatable(false);
         jToolBar1.setBorderPainted(false);
+        jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jToolBar1.setDoubleBuffered(true);
         jToolBar1.setEnabled(false);
         jToolBar1.setOpaque(false);
         jToolBar1.setRequestFocusEnabled(false);
@@ -125,24 +128,19 @@ public class JFPrincipal extends javax.swing.JFrame {
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(DesktopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(292, Short.MAX_VALUE))
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DesktopLayout.createSequentialGroup()
-                .addGap(0, 254, Short.MAX_VALUE)
+                .addGap(0, 340, Short.MAX_VALUE)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         Cadastros.setText("Cadastros");
-
-        jmEmpresa.setText("Empresa");
-        jmEmpresa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmEmpresaActionPerformed(evt);
-            }
-        });
-        Cadastros.add(jmEmpresa);
 
         jmAluno.setText("Aluno");
         jmAluno.addActionListener(new java.awt.event.ActionListener() {
@@ -152,14 +150,6 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
         Cadastros.add(jmAluno);
 
-        jmUsuarios.setText("Usuários");
-        jmUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmUsuariosActionPerformed(evt);
-            }
-        });
-        Cadastros.add(jmUsuarios);
-
         jmCursoInstituicao.setText("Curso/Instituição");
         jmCursoInstituicao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,13 +158,21 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
         Cadastros.add(jmCursoInstituicao);
 
-        jmUnidadeMedida.setText("Unidade de Medida");
-        jmUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
+        jmEmpresa.setText("Empresa");
+        jmEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmUnidadeMedidaActionPerformed(evt);
+                jmEmpresaActionPerformed(evt);
             }
         });
-        Cadastros.add(jmUnidadeMedida);
+        Cadastros.add(jmEmpresa);
+
+        jmFormTPPgto.setText("Forma / Tipo Pgto");
+        jmFormTPPgto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormTPPgtoActionPerformed(evt);
+            }
+        });
+        Cadastros.add(jmFormTPPgto);
 
         jmMarcaModelo.setText("Marca/Modelo");
         jmMarcaModelo.addActionListener(new java.awt.event.ActionListener() {
@@ -184,25 +182,41 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
         Cadastros.add(jmMarcaModelo);
 
+        jmUsuarios.setText("Usuários");
+        jmUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmUsuariosActionPerformed(evt);
+            }
+        });
+        Cadastros.add(jmUsuarios);
+
+        jmUnidadeMedida.setText("Unidade de Medida");
+        jmUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmUnidadeMedidaActionPerformed(evt);
+            }
+        });
+        Cadastros.add(jmUnidadeMedida);
+
+        jMenuBar1.add(Cadastros);
+
+        Utilitarios.setText("Utilitários");
+
         jmRecarga.setText("Recarga");
         jmRecarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmRecargaActionPerformed(evt);
             }
         });
-        Cadastros.add(jmRecarga);
+        Utilitarios.add(jmRecarga);
 
-        jMenuBar1.add(Cadastros);
-
-        Utilitarios.setText("Utilitários");
-
-        jmFormTPPgto.setText("Forma / Tipo Pgto");
-        jmFormTPPgto.addActionListener(new java.awt.event.ActionListener() {
+        jmVenda.setText("Venda");
+        jmVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmFormTPPgtoActionPerformed(evt);
+                jmVendaActionPerformed(evt);
             }
         });
-        Utilitarios.add(jmFormTPPgto);
+        Utilitarios.add(jmVenda);
 
         jMenuBar1.add(Utilitarios);
 
@@ -370,29 +384,6 @@ public class JFPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmAlunoActionPerformed
 
-    private void jmRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRecargaActionPerformed
-        try {
-            if (evt.getSource() == jmRecarga) {
-                if (recarga == null) {
-                    recarga = new JIFRecarga();
-                    Desktop.add(recarga);
-                    recarga.setVisible(true);
-                    recarga.setPosicao();//Seta centralizado
-                }
-                Desktop.moveToFront(recarga);
-            }
-            if (recarga.isClosed()) {
-                recarga = new JIFRecarga();
-                Desktop.add(recarga);
-                recarga.setVisible(true);
-                recarga.setPosicao();//Seta centralizado
-                Desktop.moveToFront(recarga);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Recarga" + "\n" + e.getMessage());
-        }
-    }//GEN-LAST:event_jmRecargaActionPerformed
-
     private void jmFormTPPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormTPPgtoActionPerformed
         try {
             if (evt.getSource() == jmFormTPPgto) {
@@ -433,6 +424,52 @@ public class JFPrincipal extends javax.swing.JFrame {
         timer.start();
         Dia.setText(MostraData());
     }//GEN-LAST:event_formWindowOpened
+
+    private void jmRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRecargaActionPerformed
+        try {
+            if (evt.getSource() == jmRecarga) {
+                if (recarga == null) {
+                    recarga = new JIFRecarga();
+                    Desktop.add(recarga);
+                    recarga.setVisible(true);
+                    recarga.setPosicao();//Seta centralizado
+                }
+                Desktop.moveToFront(recarga);
+            }
+            if (recarga.isClosed()) {
+                recarga = new JIFRecarga();
+                Desktop.add(recarga);
+                recarga.setVisible(true);
+                recarga.setPosicao();//Seta centralizado
+                Desktop.moveToFront(recarga);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Recarga" + "\n" + e.getMessage());
+        }
+    }//GEN-LAST:event_jmRecargaActionPerformed
+
+    private void jmVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmVendaActionPerformed
+        try {
+            if (evt.getSource() == jmVenda) {
+                if (venda == null) {
+                    venda = new JIFVenda();
+                    Desktop.add(venda);
+                    venda.setVisible(true);
+                    venda.setPosicao();//Seta centralizado
+                }
+                Desktop.moveToFront(venda);
+            }
+            if (venda.isClosed()) {
+                venda = new JIFVenda();
+                Desktop.add(venda);
+                venda.setVisible(true);
+                venda.setPosicao();//Seta centralizado
+                Desktop.moveToFront(venda);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Venda" + "\n" + e.getMessage());
+        }
+    }//GEN-LAST:event_jmVendaActionPerformed
     public String MostraData() {
         Date data = new Date();
         SimpleDateFormat dformatador = new SimpleDateFormat("dd/MM/yyyy");
@@ -511,5 +548,6 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmRecarga;
     private javax.swing.JMenuItem jmUnidadeMedida;
     private javax.swing.JMenuItem jmUsuarios;
+    private javax.swing.JMenuItem jmVenda;
     // End of variables declaration//GEN-END:variables
 }
