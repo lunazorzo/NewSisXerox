@@ -67,7 +67,7 @@ public class Aluno implements Serializable {
     @Column(name = "rg_aluno")
     private String rgAluno;
     @Basic(optional = false)
-    @Column(name = "ra_aluno")
+    @Column(name = "ra_aluno",unique=true)
     private String raAluno;
     @JoinColumn(name = "cd_curso", referencedColumnName = "cd_curso")
     @ManyToOne(optional = false)

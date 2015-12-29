@@ -1,5 +1,6 @@
 package NewSisXerox.DAO;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.FlushModeType;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 public class GenericDAO {
 
@@ -19,12 +21,13 @@ public class GenericDAO {
     public GenericDAO() {
         try {
             HashMap<String, String> map = new HashMap<String, String>();
-            /*File flPro = new File(System.getProperty("user.dir") + File.separatorChar + "banco.properties");
-             System.out.println(flPro.getAbsolutePath());
-             if (!flPro.exists()) {
-             JOptionPane.showMessageDialog(null, "Falta configuração com o Banco.");
-             System.exit(0);
-             }*/
+            /* 
+            File flPro = new File(System.getProperty("user.dir") + File.separatorChar + "banco.properties");
+            System.out.println(flPro.getAbsolutePath());
+            if (!flPro.exists()) {
+                JOptionPane.showMessageDialog(null, "Falta configuração com o Banco.");
+                System.exit(0);
+             */
             map.put("hibernate.connection.username", "postgres");
             map.put("hibernate.connection.driver_class", "org.postgresql.Driver");
             map.put("hibernate.connection.password", "root");
@@ -115,7 +118,7 @@ public class GenericDAO {
     }
 
     public void commit() {
-       // startTransaction();
+        // startTransaction();
         if (tx != null && tx.isActive()) {
             try {
                 em.flush();
@@ -221,6 +224,6 @@ public class GenericDAO {
         } catch (Exception ex) {
             System.out.println("Erro flush: " + ex.getMessage());
         }
-
     }
+
 }

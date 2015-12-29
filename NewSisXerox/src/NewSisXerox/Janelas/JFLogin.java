@@ -15,6 +15,12 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import NewSisXerox.Classes.UpperCaseField;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -22,11 +28,9 @@ import NewSisXerox.Classes.UpperCaseField;
  */
 public class JFLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFLogin
-     */
-    public String url;
-    public final String BASE_OFICIAL = "jdbc:postgresql://localhost:5432/newxerox";
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
 
     public JFLogin() {
         try {
@@ -138,6 +142,37 @@ public class JFLogin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jbCancelarActionPerformed
 
+    public void logar() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Class.forName("org.postgresql.Driver");
+        String url = "jdbc:postgresql://localhost:5432/newxerox";
+        String usuario = "postgres";
+        String senha = "xtz7qr87";
+        
+        Connection con;
+        con = DriverManager.getConnection(url, usuario, senha);
+        System.out.println("Conexão realizada com sucesso.");
+        String SQL = "SELECT usuario, usuario FROM Usuario WHERE usuario = ? and senha = ?";
+        try {
+
+            pst = con.prepareStatement(SQL);
+            pst.setString(1, jtfUsuario.getText());
+            pst.setString(2, jpSenha.getText());
+            rs = pst.executeQuery();
+            System.err.println(SQL);
+            //if (jtfUsuario.getText().equals("ADMIN") && jpSenha.getText().equals("123")) {
+            if (rs.next()) {
+                System.err.println(rs);
+                JFPrincipal p = new JFPrincipal(); //instancia da tela principal
+                p.show(); //abre a tela principal
+                this.dispose(); //fecha a tela de login
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário e senha inválidos!");
+
+            }
+
+        } catch (Exception e) {
+        }
+    }
     private void jbAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAcessarActionPerformed
         if (Validador.vldStringMinMax(jtfUsuario.getText(), 3, 15) == false) {
             JOptionPane.showMessageDialog(this, "Informe o usuário!");
@@ -149,26 +184,17 @@ public class JFLogin extends javax.swing.JFrame {
             jpSenha.requestFocus();
             return;
         }
-
         try {
-            String meuHQL = "FROM Usuario WHERE usuario" +jtfUsuario;
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Alunos!" + e.getMessage());
+            logar();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JFLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(JFLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(JFLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        String meuHQL = "Select cat from Cat as cat        inner join cat.mate as mate left outer join cat.kittens as kitten WHERE mate.age = '30' AND kitten.age > '10'";
-
-
-////        
-////        if (jtfUsuario.getText().equals("ADMIN") && jpSenha.getText().equals("123")) {
-////            // JOptionPane.showMessageDialog(null, "Seja Bem vindo ao sistema!");
-////            JFPrincipal p = new JFPrincipal(); //instancia da tela principal
-////            p.show(); //abre a tela principal
-////            this.dispose(); //fecha a tela de login
-////        } else {
-////            JOptionPane.showMessageDialog(null, "Usuário e senha inválidos!");
-////        }
     }//GEN-LAST:event_jbAcessarActionPerformed
 
     /**
