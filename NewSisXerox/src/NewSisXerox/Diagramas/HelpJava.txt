@@ -1,0 +1,6 @@
+--Ajuda Java
+//Mudando o background e a borda dos campos
+http://javafree.uol.com.br/topic-858028-RESOLVIDO-Mudanca-de-cor-ao-entrar-sair-de-JTextField.html
+http://www.guj.com.br/t/resolvido-alterar-cor-do-foco-dos-componentes/92976/3
+Paleta de Cores 
+https://github.com/griffon/griffon-swing-plugin/blob/master/src/main/griffon/swing/Colors.java

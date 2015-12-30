@@ -42,9 +42,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         try {
 //            Pega o padrao do windows
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //UIManager.put( "WindowsFocus", new Color(  140, 42, 42  ) );
         initComponents();
         URL url = this.getClass().getResource("/NewSisXerox/Imagens/Icone-64.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);

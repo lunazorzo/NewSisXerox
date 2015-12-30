@@ -154,7 +154,7 @@ public class JPUnidade extends javax.swing.JPanel {
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
         if (Validador.vldStringMinMax(jtfUnidade.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome Instituição!");
+            JOptionPane.showMessageDialog(this, "Informe a descriçãod a Unidade de Medida!");
             jtfUnidade.requestFocus();
             return;
         }

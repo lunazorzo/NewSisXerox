@@ -15,6 +15,8 @@ import NewSisXerox.Tabelas.tabRecarga;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -22,7 +24,10 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 /**
  *
@@ -156,6 +161,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtBusca);
 
+        jbSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbSelecionar.setText("Selecionar");
         jbSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +185,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSelecionar)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         setClosable(true);
@@ -206,7 +212,7 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
 
         jlSaldoFinal.setText("Saldo Final R$:");
 
-        jtfSaldoFinal.setOpaque(false);
+        jtfSaldoFinal.setEditable(false);
 
         jLabel2.setText("Fgto Pagamento:");
 
@@ -317,32 +323,57 @@ public class JIFRecarga extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+class textFocusListener implements FocusListener {
 
+        public void focusGained(FocusEvent e) {
+            jtfRecarga.setBackground(Color.red);
+            jcFgtoPagamento.setBackground(Color.red);
+            jcFgtoPagamento.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 99, 71)));
+        }
+
+        public void focusLost(FocusEvent e) {
+            jtfRecarga.setBackground(Color.white);
+            jcFgtoPagamento.setBackground(Color.white);
+            jcFgtoPagamento.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(248, 248, 255)));
+        }
+
+        public void focusGained(Border e) {
+            jcFgtoPagamento.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 99, 71)));
+        }
+
+        public void focusLost(Border e) {
+            jcFgtoPagamento.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(248, 248, 255)));
+        }
+    }
     private void jbGravarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarRecargaActionPerformed
+
         Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-64.png")));
         if (Validador.vldStringMinMax(jtfAluno.getText(), 1, 50) == false) {
             //http://www.guj.com.br/t/icone-em-joptionpane/54164/3          
-            JOptionPane.showMessageDialog(this, "Informe o aluno para efetuar a recarga!","Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o aluno para efetuar a recarga!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
             jtfAluno.requestFocus();
+            jtfAluno.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 99, 71)));
             return;
         }
-        if (Validador.vldStringMinMax(jtfRecarga.getText(), 1, 50) == false) {            
-            JOptionPane.showMessageDialog(this, "Informe o valor da recarga!","Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+        if (Validador.vldStringMinMax(jtfRecarga.getText(), 1, 50) == false) {
+            JOptionPane.showMessageDialog(this, "Informe o valor da recarga!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
             jtfRecarga.requestFocus();
+            jtfRecarga.addFocusListener(new textFocusListener());//inicia a opção de alteração do foco do jtfrecarga
+
             //http://respostas.guj.com.br/12273-mudar-cor-jtextfield-quando-ganhar-foco
-            jtfRecarga.setBackground(Color.YELLOW);
+            //jtfRecarga.setBackground(Color.YELLOW);
             return;
         }
         if (jcFgtoPagamento.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione o tipo !","Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Selecione o tipo !", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
             jcFgtoPagamento.requestFocus();
+
             return;
         }
         if (jcUsuario.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione o usuário!","Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Selecione o usuário!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
             jcUsuario.requestFocus();
-            jcUsuario.setBackground(Color.YELLOW);
-            
+
             return;
         }
         try {
