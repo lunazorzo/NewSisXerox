@@ -4,3 +4,8 @@ http://javafree.uol.com.br/topic-858028-RESOLVIDO-Mudanca-de-cor-ao-entrar-sair-
 http://www.guj.com.br/t/resolvido-alterar-cor-do-foco-dos-componentes/92976/3
 Paleta de Cores 
 https://github.com/griffon/griffon-swing-plugin/blob/master/src/main/griffon/swing/Colors.java
+
+Look and Feel - Substance
+https://contrespace.wordpress.com/2011/01/01/cambia-el-skin-de-tu-aplicacion-java/
+http://www.hardware.com.br/comunidade/look-duvidas/1023264/
+http://insubstantial.github.io/insubstantial/substance/release-info/3.3/release-info.html

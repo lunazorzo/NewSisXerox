@@ -41,12 +41,21 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     public JFPrincipal() {
         try {
-//            Pega o padrao do windows
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            //UIManager.setLookAndFeel("org.jvnet.substance.SubstanceLookAndFeel");
+//Dark            
+            //UIManager.setLookAndFeel("org.jvnet.substance.skin.SubstanceRavenGraphiteLookAndFeel");
+            UIManager.setLookAndFeel("org.jvnet.substance.watermark.SubstanceStripeWatermark");
+        } catch (Exception e) {
+            System.out.println("Substance Raven Graphite failed to initialize");
+            e.printStackTrace();
         }
+//        try {
+////            Pega o padrao do windows
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//            
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+//            Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         initComponents();
         URL url = this.getClass().getResource("/NewSisXerox/Imagens/Icone-64.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
