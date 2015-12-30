@@ -22,27 +22,26 @@ public class GenericDAO {
         try {
             HashMap<String, String> map = new HashMap<String, String>();
             /*
-            File flPro = new File(System.getProperty("user.dir") + File.separatorChar + "banco.properties");
-            System.out.println(flPro.getAbsolutePath());
-            if (!flPro.exists()) {
-                JOptionPane.showMessageDialog(null, "Falta configuração com o Banco.");
-                System.exit(0);
-            */
+             File flPro = new File(System.getProperty("user.dir") + File.separatorChar + "banco.properties");
+             System.out.println(flPro.getAbsolutePath());
+             if (!flPro.exists()) {
+             JOptionPane.showMessageDialog(null, "Falta configuração com o Banco.");
+             System.exit(0);
+             */
             map.put("hibernate.connection.username", "postgres");
             map.put("hibernate.connection.driver_class", "org.postgresql.Driver");
-            map.put("hibernate.connection.password", "root");
+            map.put("hibernate.connection.password", "xtz7qr87");
             map.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/newxerox");
-//            map.put("hibernate.dialect", "");
+            //            map.put("hibernate.dialect", "");
             map.put("hibernate.connection.lc_ctype", "LATIN1");
-//            map.put("hibernateshow_sql", "true");
+            //            map.put("hibernateshow_sql", "true");
             map.put("hibernate.cache.provider_class", "org.hibernate.cache.NoCacheProvider");
-//            map.put("hibernate.hbm2ddl.auto", "update");
+            //            map.put("hibernate.hbm2ddl.auto", "update");
 
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("NewSisXeroxPU", map);
             em = emf.createEntityManager();
             em.setFlushMode(FlushModeType.AUTO);
-            }
-         catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
