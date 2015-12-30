@@ -9,3 +9,15 @@ Look and Feel - Substance
 https://contrespace.wordpress.com/2011/01/01/cambia-el-skin-de-tu-aplicacion-java/
 http://www.hardware.com.br/comunidade/look-duvidas/1023264/
 http://insubstantial.github.io/insubstantial/substance/release-info/3.3/release-info.html
+
+//        try {
+//            //UIManager.setLookAndFeel("org.jvnet.substance.SubstanceLookAndFeel");
+////Dark            
+//            // UIManager.setLookAndFeel("org.jvnet.substance.skin.SubstanceRavenGraphiteLookAndFeel");
+//            UIManager.setLookAndFeel("org.jvnet.substance.SubstanceLookAndFeel");
+//        } catch (Exception e) {
+//            System.out.println("Substance Raven Graphite failed to initialize");
+//            e.printStackTrace();
+//        }
+//Deixa as mensagens com o tanho e a fonte setada
+UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 12));

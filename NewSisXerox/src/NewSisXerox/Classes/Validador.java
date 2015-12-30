@@ -5,6 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.text.PlainDocument;
 
 /**
@@ -144,7 +146,6 @@ public class Validador extends PlainDocument {
     }
 
     //Verifica se a Frame já está aberta
-
     public static Boolean verificaFrame(JDesktopPane jDesktopPane, JInternalFrame frame) {
         Boolean valor = false;
         JInternalFrame[] results;
@@ -163,6 +164,7 @@ public class Validador extends PlainDocument {
     //// Valida E-mail           ////
     ////                        ////
     ///////////////////////////////
+
     public static boolean isEmailValid(String email) {
         if ((email == null) || (email.trim().length() == 0)) {
             return false;
@@ -173,7 +175,7 @@ public class Validador extends PlainDocument {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-    
+
     ///////////////////////////////////
     ////                          ////
     //// Valor por Extenso       ////
@@ -310,6 +312,5 @@ public class Validador extends PlainDocument {
             }
         }
         return (s);
-    }
+    }   
 }
-

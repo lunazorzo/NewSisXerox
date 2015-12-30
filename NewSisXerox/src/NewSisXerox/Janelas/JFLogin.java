@@ -142,7 +142,7 @@ public class JFLogin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jbCancelarActionPerformed
 
-    public void logar() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void logar() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 
         String url = "jdbc:postgresql://localhost:5432/newxerox";
         String usuario = "postgres";
@@ -186,7 +186,7 @@ public class JFLogin extends javax.swing.JFrame {
         }
         try {
             logar();
-        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(JFLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbAcessarActionPerformed

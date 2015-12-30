@@ -8,20 +8,20 @@ package NewSisXerox.Janelas;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import NewSisXerox.Classes.ClasseImagem;
-import java.awt.Color;
+import java.awt.Font;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -38,24 +38,18 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFRecarga recarga;
     JIFFormaTipoPagto pgto;
     JIFVenda venda;
+    JIFProduto produto;
 
-    public JFPrincipal() {
+    public JFPrincipal() throws UnsupportedLookAndFeelException {
+        //Tamanho da fonte das mensagens
+        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 12));
         try {
-            //UIManager.setLookAndFeel("org.jvnet.substance.SubstanceLookAndFeel");
-//Dark            
-            //UIManager.setLookAndFeel("org.jvnet.substance.skin.SubstanceRavenGraphiteLookAndFeel");
-            UIManager.setLookAndFeel("org.jvnet.substance.watermark.SubstanceStripeWatermark");
-        } catch (Exception e) {
-            System.out.println("Substance Raven Graphite failed to initialize");
-            e.printStackTrace();
+//            Pega o padrao do windows
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        try {
-////            Pega o padrao do windows
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//            
-//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-//            Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         initComponents();
         URL url = this.getClass().getResource("/NewSisXerox/Imagens/Icone-64.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
@@ -73,7 +67,7 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         Desktop = new ClasseImagem("/NewSisXerox/Imagens/Brazil_Flag.jpg");
         jToolBar1 = new javax.swing.JToolBar();
-        jSeparator0 = new javax.swing.JToolBar.Separator();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
         Usuário = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         Dia = new javax.swing.JLabel();
@@ -87,13 +81,14 @@ public class JFPrincipal extends javax.swing.JFrame {
         jmEmpresa = new javax.swing.JMenuItem();
         jmFormTPPgto = new javax.swing.JMenuItem();
         jmMarcaModelo = new javax.swing.JMenuItem();
+        jmProduto = new javax.swing.JMenuItem();
         jmUsuarios = new javax.swing.JMenuItem();
         jmUnidadeMedida = new javax.swing.JMenuItem();
         Utilitarios = new javax.swing.JMenu();
         jmRecarga = new javax.swing.JMenuItem();
         jmVenda = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle Xerox");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -107,13 +102,9 @@ public class JFPrincipal extends javax.swing.JFrame {
         jToolBar1.setBorder(null);
         jToolBar1.setFloatable(false);
         jToolBar1.setBorderPainted(false);
-        jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jToolBar1.setDoubleBuffered(true);
         jToolBar1.setEnabled(false);
         jToolBar1.setOpaque(false);
-        jToolBar1.setRequestFocusEnabled(false);
-        jToolBar1.setVerifyInputWhenFocusTarget(false);
-        jToolBar1.add(jSeparator0);
+        jToolBar1.add(jSeparator4);
 
         Usuário.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Usuário.setForeground(java.awt.Color.white);
@@ -140,15 +131,15 @@ public class JFPrincipal extends javax.swing.JFrame {
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DesktopLayout.createSequentialGroup()
-                .addGap(0, 340, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(329, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         Cadastros.setText("Cadastros");
@@ -192,6 +183,14 @@ public class JFPrincipal extends javax.swing.JFrame {
             }
         });
         Cadastros.add(jmMarcaModelo);
+
+        jmProduto.setText("Produto");
+        jmProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmProdutoActionPerformed(evt);
+            }
+        });
+        Cadastros.add(jmProduto);
 
         jmUsuarios.setText("Usuários");
         jmUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -325,7 +324,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                     marca.setVisible(true);
                     marca.setPosicao();//Seta centralizado
                 }
-                Desktop.moveToFront(unidade);
+                Desktop.moveToFront(marca);
             }
             if (marca.isClosed()) {
                 marca = new JIFMarcaModelo();
@@ -481,6 +480,29 @@ public class JFPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Venda" + "\n" + e.getMessage());
         }
     }//GEN-LAST:event_jmVendaActionPerformed
+
+    private void jmProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProdutoActionPerformed
+        try {
+            if (evt.getSource() == jmProduto) {
+                if (produto == null) {
+                    produto = new JIFProduto();
+                    Desktop.add(produto);
+                    produto.setVisible(true);
+                    produto.setPosicao();//Seta centralizado
+                }
+                Desktop.moveToFront(produto);
+            }
+            if (produto.isClosed()) {
+                produto = new JIFProduto();
+                Desktop.add(produto);
+                produto.setVisible(true);
+                produto.setPosicao();//Seta centralizado
+                Desktop.moveToFront(produto);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Venda" + "\n" + e.getMessage());
+        }
+    }//GEN-LAST:event_jmProdutoActionPerformed
     public String MostraData() {
         Date data = new Date();
         SimpleDateFormat dformatador = new SimpleDateFormat("dd/MM/yyyy");
@@ -534,7 +556,11 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new JFPrincipal().setVisible(true);
+            try {
+                new JFPrincipal().setVisible(true);
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
 
@@ -546,16 +572,17 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel Usuário;
     private javax.swing.JMenu Utilitarios;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JToolBar.Separator jSeparator0;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem jmAluno;
     private javax.swing.JMenuItem jmCursoInstituicao;
     private javax.swing.JMenuItem jmEmpresa;
     private javax.swing.JMenuItem jmFormTPPgto;
     private javax.swing.JMenuItem jmMarcaModelo;
+    private javax.swing.JMenuItem jmProduto;
     private javax.swing.JMenuItem jmRecarga;
     private javax.swing.JMenuItem jmUnidadeMedida;
     private javax.swing.JMenuItem jmUsuarios;
