@@ -12,11 +12,8 @@ import NewSisXerox.Entity.Formpgto;
 import NewSisXerox.Entity.Recarga;
 import NewSisXerox.Entity.Usuario;
 import NewSisXerox.Tabelas.tabRecarga;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -25,19 +22,18 @@ import java.util.Locale;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 /**
  *
  * @author Allan
  */
-public class JIFRecarga extends javax.swing.JInternalFrame {
+public final class JIFRecarga extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form JIFRecarga1
      */
     private Recarga recarga;
     private Aluno aluno;
-    private tabRecarga tabrecarga;
+    private final tabRecarga tabrecarga;
 
     public JIFRecarga() {
         initComponents();

@@ -104,7 +104,7 @@ public class Unidade implements Serializable {
 
     @Override
     public String toString() {
-        return "NewSisXerox.Entity.Unidade[ cdUnidade=" + cdUnidade + " ]";
+        return nmUnidade;
     }
     
 }
