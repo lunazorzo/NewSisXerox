@@ -6,7 +6,9 @@
 package NewSisXerox.Entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +18,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,6 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Modelo.findByCdModelo", query = "SELECT m FROM Modelo m WHERE m.cdModelo = :cdModelo"),
     @NamedQuery(name = "Modelo.findByNmModelo", query = "SELECT m FROM Modelo m WHERE m.nmModelo = :nmModelo")})
 public class Modelo implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdModelo")
+    private Collection<Produto> produtoCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -103,6 +110,15 @@ public class Modelo implements Serializable {
     @Override
     public String toString() {
         return nmModelo;
+    }
+
+    @XmlTransient
+    public Collection<Produto> getProdutoCollection() {
+        return produtoCollection;
+    }
+
+    public void setProdutoCollection(Collection<Produto> produtoCollection) {
+        this.produtoCollection = produtoCollection;
     }
     
 }

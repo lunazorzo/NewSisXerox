@@ -42,7 +42,7 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     public JFPrincipal() throws UnsupportedLookAndFeelException {
         //Tamanho da fonte das mensagens
-//        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 12));
+        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 12));
         try {
 //            Pega o padrao do windows
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");

@@ -7,10 +7,8 @@ package NewSisXerox.Entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,16 +18,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Allan
+ * @author Nobre Sistemas
  */
 @Entity
 @Table(name = "produto")
@@ -43,6 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Produto.findByVlCompra", query = "SELECT p FROM Produto p WHERE p.vlCompra = :vlCompra"),
     @NamedQuery(name = "Produto.findByVlVenda", query = "SELECT p FROM Produto p WHERE p.vlVenda = :vlVenda")})
 public class Produto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,11 +63,12 @@ public class Produto implements Serializable {
     @Basic(optional = false)
     @Column(name = "vl_venda")
     private BigDecimal vlVenda;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdProduto")
-    private Collection<Venda> vendaCollection;
     @JoinColumn(name = "cd_marca", referencedColumnName = "cd_marca")
     @ManyToOne(optional = false)
     private Marca cdMarca;
+    @JoinColumn(name = "cd_modelo", referencedColumnName = "cd_modelo")
+    @ManyToOne(optional = false)
+    private Modelo cdModelo;
     @JoinColumn(name = "cd_unidade", referencedColumnName = "cd_unidade")
     @ManyToOne(optional = false)
     private Unidade cdUnidade;
@@ -139,21 +137,20 @@ public class Produto implements Serializable {
         this.vlVenda = vlVenda;
     }
 
-    @XmlTransient
-    public Collection<Venda> getVendaCollection() {
-        return vendaCollection;
-    }
-
-    public void setVendaCollection(Collection<Venda> vendaCollection) {
-        this.vendaCollection = vendaCollection;
-    }
-
     public Marca getCdMarca() {
         return cdMarca;
     }
 
     public void setCdMarca(Marca cdMarca) {
         this.cdMarca = cdMarca;
+    }
+
+    public Modelo getCdModelo() {
+        return cdModelo;
+    }
+
+    public void setCdModelo(Modelo cdModelo) {
+        this.cdModelo = cdModelo;
     }
 
     public Unidade getCdUnidade() {
