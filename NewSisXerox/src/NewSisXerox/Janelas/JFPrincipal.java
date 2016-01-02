@@ -11,9 +11,10 @@ import java.net.URL;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import NewSisXerox.Classes.ClasseImagem;
-import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -21,9 +22,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.FontUIResource;
 
 /**
  *
@@ -42,11 +44,9 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFVenda venda;
     JIFProduto produto;
 
-    public JFPrincipal() throws UnsupportedLookAndFeelException {
+    public JFPrincipal() throws UnsupportedLookAndFeelException {        
         //Tamanho da fonte das mensagens
-        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 12));
-        //Deixa a fonte do texfield com o tamanho 12
-        UIManager.put("TextField.font", new Font("Tahoma", Font.PLAIN, 12));
+        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 12));          
         try {
 //            Pega o padrao do windows
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -592,4 +592,29 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmUsuarios;
     private javax.swing.JMenuItem jmVenda;
     // End of variables declaration//GEN-END:variables
+
+    private static class IconImpl implements Icon {
+
+        public IconImpl() {
+        }
+
+        private IconImpl(Icon figura) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int getIconWidth() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int getIconHeight() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
 }
