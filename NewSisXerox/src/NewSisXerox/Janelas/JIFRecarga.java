@@ -22,6 +22,7 @@ import java.util.Locale;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Allan
@@ -358,14 +359,14 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
 //            jcFgtoPagamento.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
 //        }
 //    }
-   
+
 
     private void jbGravarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarRecargaActionPerformed
 
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-64.png")));
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfAluno.getText(), 1, 50) == false) {
-            //http://www.guj.com.br/t/icone-em-joptionpane/54164/3          
-            JOptionPane.showMessageDialog(null, "Informe o aluno para efetuar a recarga!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            //http://www.guj.com.br/t/icone-em-joptionpane/54164/3               
+            JOptionPane.showMessageDialog(this, "Informe o aluno para efetuar a recarga!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfAluno.requestFocus();
             //jtfAluno.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 99, 71)));
             return;

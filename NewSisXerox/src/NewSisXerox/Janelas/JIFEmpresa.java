@@ -9,6 +9,8 @@ import NewSisXerox.Tabelas.tabEmpresa;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /*
@@ -73,7 +75,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
         jtfCEP.setText("");
         jtfCidade.setText("");
         jcEstado.setSelectedItem(null);
-        jtfTelefone1.setText("");
+        jtfTelefone.setText("");
         jtfEmail.setText("");
     }
 
@@ -91,7 +93,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
         CEP = new javax.swing.JLabel();
         Email = new javax.swing.JLabel();
         Telefone = new javax.swing.JLabel();
-        jtfTelefone1 = new javax.swing.JFormattedTextField();
+        jtfTelefone = new javax.swing.JFormattedTextField();
         jtfEmail = new UpperCaseField();
         jtfCEP = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -169,7 +171,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
         Telefone.setText("Telefone:");
 
         try {
-            jtfTelefone1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+            jtfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -211,7 +213,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Fantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
+                        .addGap(18, 18, 18)
                         .addComponent(jtfEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Telefone)
@@ -221,7 +223,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                                 .addComponent(jbGravar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jtfTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Endereco)
@@ -249,13 +251,11 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(Fantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Fantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
@@ -292,7 +292,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtfTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jbGravar))))
@@ -312,7 +312,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                 jtfCEP.setText(empresa.getCep());
                 jtfCidade.setText(empresa.getCidade());
                 jcEstado.setSelectedItem(empresa.getCdEstado());
-                jtfTelefone1.setText(empresa.getNumTelefone());
+                jtfTelefone.setText(empresa.getNumTelefone());
                 jtfEmail.setText(empresa.getEmail());
                 Busca.dispose();
             }
@@ -331,44 +331,45 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfEmpresaKeyPressed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfEmpresa.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a descrição da Fantasia!", "Erro", 0);
+             JOptionPane.showMessageDialog(this, "Informe o nome Fantasia da empresa!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfEmpresa.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfEndereco.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a descrição do Endereço!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Informe a descrição do Endereço!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfEndereco.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfBairro.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a descrição do Bairro!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Informe a descrição do Bairro!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfBairro.requestFocus();
             return;
         }
         if (Validador.vldCep(jtfCEP.getText()) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o CEP!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Informe o CEP!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfCEP.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfCidade.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a Cidade!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Informe a Cidade!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfCidade.requestFocus();
             return;
         }
         if (jcEstado.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione um Estado!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Selecione um Estado!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jcEstado.requestFocus();
             return;
         }
         if (Validador.isEmailValid(jtfEmail.getText()) == false) {
-            JOptionPane.showMessageDialog(this, "E-mail inválido!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "E-mail inválido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfEmail.requestFocus();
             return;
         }
-        if (Validador.vldFone(jtfTelefone1.getText()) == false) {
-            JOptionPane.showMessageDialog(this, "Telefone inválido!", "Erro", 0);
-            jtfTelefone1.requestFocus();
+        if (Validador.vldFone(jtfTelefone.getText()) == false) {
+            JOptionPane.showMessageDialog(this, "Telefone inválido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            jtfTelefone.requestFocus();
             return;
         }
         try {
@@ -381,7 +382,7 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
             empresa.setCep(jtfCEP.getText());
             empresa.setCidade(jtfCidade.getText());
             empresa.setCdEstado((Estado) jcEstado.getSelectedItem());//pega o que foi selecionado
-            empresa.setNumTelefone(jtfTelefone1.getText());
+            empresa.setNumTelefone(jtfTelefone.getText());
             empresa.setEmail(jtfEmail.getText());
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(empresa);
@@ -416,6 +417,6 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfEmpresa;
     private javax.swing.JTextField jtfEndereco;
-    private javax.swing.JFormattedTextField jtfTelefone1;
+    private javax.swing.JFormattedTextField jtfTelefone;
     // End of variables declaration//GEN-END:variables
 }

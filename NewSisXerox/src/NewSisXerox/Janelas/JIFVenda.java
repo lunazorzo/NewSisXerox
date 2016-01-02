@@ -5,6 +5,7 @@
  */
 package NewSisXerox.Janelas;
 
+import NewSisXerox.Classes.Validador;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Aluno;
 import NewSisXerox.Entity.Formpgto;
@@ -15,6 +16,8 @@ import NewSisXerox.Tabelas.tabProdutoVenda;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,7 +34,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private Produto produto;
     private final tabAlunoVenda tabalunovenda;
     private final tabProdutoVenda tabprodutovenda;
-    
+
     public JIFVenda() {
         initComponents();
         carregaComboFormaPgto();
@@ -44,12 +47,12 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         //Carrega data do dia
         jdData.setDate(new java.util.Date());
     }
-    
+
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
     }
-    
+
     public void carregaTabelaAluno() {
         try {
             List l = GenericDAO.getInstance().getList(Aluno.class,
@@ -62,7 +65,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Erro ao carregar os Alunos!" + e.getMessage());
         }
     }
-    
+
     public void carregaTabelaProduto() {
         try {
             List l = GenericDAO.getInstance().getList(Produto.class,
@@ -74,7 +77,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro ao carregar os Produtos!" + "\n" + e.getMessage());
         }
     }
-    
+
     public void carregaComboFormaPgto() {
         jcFgtoPagamento.removeAllItems();//removendo tds os itens da combo
         jcFgtoPagamento.addItem(null);
@@ -88,7 +91,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro ao carregar as Formas de Pagamento!" + "\n" + e.getMessage());
         }
     }
-    
+
     public void limparDados() {
         jtfAluno.setText("");
         jtfRA.setText("");
@@ -99,7 +102,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jcFgtoPagamento.setSelectedItem(null);
         jtfTLProduto.setText("");
         jtfDesconto.setText("");
-        jtfTotal.setText("");        
+        jtfTotal.setText("");
     }
 
     /**
@@ -313,6 +316,11 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jbFinalizarCompra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbFinalizarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/basket-full.png"))); // NOI18N
         jbFinalizarCompra.setText("Finalizar Venda");
+        jbFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFinalizarCompraActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
@@ -347,10 +355,20 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jbAdicionar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/basket-add.png"))); // NOI18N
         jbAdicionar.setText("Adicionar");
+        jbAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAdicionarActionPerformed(evt);
+            }
+        });
 
         jbtRemover.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbtRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/basket-remove.png"))); // NOI18N
         jbtRemover.setText("Remover");
+        jbtRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtRemoverActionPerformed(evt);
+            }
+        });
 
         jtfValor.setEditable(false);
         jtfValor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -529,6 +547,33 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar Produto!" + "\n" + t.getMessage());
         }
     }//GEN-LAST:event_jbSelecionarProdutoActionPerformed
+
+    private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+        if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
+            JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            jtfProduto.requestFocus();
+            return;
+        }
+    }//GEN-LAST:event_jbAdicionarActionPerformed
+
+    private void jbtRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRemoverActionPerformed
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+        if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
+            JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            jtfProduto.requestFocus();
+            return;
+        }
+    }//GEN-LAST:event_jbtRemoverActionPerformed
+
+    private void jbFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFinalizarCompraActionPerformed
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+        if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
+            JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            jtfProduto.requestFocus();
+            return;
+        }
+    }//GEN-LAST:event_jbFinalizarCompraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

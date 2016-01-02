@@ -13,6 +13,8 @@ import NewSisXerox.Entity.Instituicao;
 import NewSisXerox.Tabelas.tabInstituicao;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -151,8 +153,9 @@ public class JPInstituicao extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfInstituicao.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome Instituição!");
+            JOptionPane.showMessageDialog(this, "Informe o nome Instituição!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfInstituicao.requestFocus();
             return;
         }

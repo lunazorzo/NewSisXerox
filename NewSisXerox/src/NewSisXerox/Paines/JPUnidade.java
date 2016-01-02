@@ -13,6 +13,8 @@ import NewSisXerox.Entity.Unidade;
 import NewSisXerox.Tabelas.tabUnidade;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -153,8 +155,9 @@ public class JPUnidade extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfUnidade.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a descriçãod a Unidade de Medida!");
+            JOptionPane.showMessageDialog(this, "Informe a descriçãod a Unidade de Medida!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfUnidade.requestFocus();
             return;
         }

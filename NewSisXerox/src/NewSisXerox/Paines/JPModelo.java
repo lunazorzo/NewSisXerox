@@ -14,6 +14,8 @@ import NewSisXerox.Entity.Modelo;
 import NewSisXerox.Tabelas.tabModelo;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -185,13 +187,14 @@ public class JPModelo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfModelo.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do modelo!");
+            JOptionPane.showMessageDialog(this, "Informe o nome do modelo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfModelo.requestFocus();
             return;
         }
         if (jcModelo.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione uma Marca!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Selecione uma Marca!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jcModelo.requestFocus();
             return;
         }

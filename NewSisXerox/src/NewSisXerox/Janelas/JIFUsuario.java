@@ -13,6 +13,8 @@ import NewSisXerox.Tabelas.tabUsuario;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -183,13 +185,14 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfNome.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do usuário!");
+            JOptionPane.showMessageDialog(this, "Informe o nome do usuário!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfNome.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfSenha.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a senha do usuário!");
+            JOptionPane.showMessageDialog(this, "Informe a senha do usuário!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfSenha.requestFocus();
             return;
         }
@@ -232,7 +235,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
             Busca.show();
             Busca.setLocationRelativeTo(this);//seta a posição da tela 
     }//GEN-LAST:event_jtfNomeKeyPressed
-}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog Busca;

@@ -1,3 +1,4 @@
+usar para o commit lunazorzo <allanluna@gmail.com>
 --Ajuda Java
 //Mudando o background e a borda dos campos
 http://javafree.uol.com.br/topic-858028-RESOLVIDO-Mudanca-de-cor-ao-entrar-sair-de-JTextField.html
@@ -25,6 +26,8 @@ http://insubstantial.github.io/insubstantial/substance/release-info/3.3/release-
 	UIManager.put("TextField.selectionForeground", Color.BLUE);
 //Tamanho da fonte das mensagens
 	UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 12));
+//Tamanho da fonte na mensagem quanto utilizar botões
+        UIManager.put("OptionPane.buttonFont",new FontUIResource(new Font("Tahoma", Font.BOLD, 12)));
 //Deixa a fonte do texfield com o tamanho 12
 	UIManager.put("TextField.font", new Font("Tahoma", Font.PLAIN, 12));
 //Deixa a fonte do TextField com o tamanho 12 e em negrito

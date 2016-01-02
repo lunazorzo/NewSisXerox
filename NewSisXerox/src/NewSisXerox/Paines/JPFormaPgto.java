@@ -13,6 +13,8 @@ import NewSisXerox.Tabelas.tabFormaPgto;
 import javax.swing.JOptionPane;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -151,8 +153,9 @@ public class JPFormaPgto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfFormaPgto.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a Forma de Pagamento!");
+            JOptionPane.showMessageDialog(this, "Informe a Forma de Pagamento!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfFormaPgto.requestFocus();
             return;
         }

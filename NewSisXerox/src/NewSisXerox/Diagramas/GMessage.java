@@ -1,7 +1,8 @@
 package NewSisXerox.Diagramas;
 
-import gUtility.GImg;
+//import gUtility.GImg;
 //http://downloads.gphysics.net/cloud/software/eclipse/workspace/glibrary/gDialog/GMessage.java
+//http://downloads.gphysics.net/cloud/software/eclipse/workspace/glibrary/gGUIElement/GComboBoxImage.java
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
@@ -30,47 +31,47 @@ public class GMessage {
 	public static int CLOSED_CTRL	= JOptionPane.CLOSED_OPTION;
 		
 	public static void showMessage(int ntype, String stitle, String stext){
-		
-		int nctrl;
-		ImageIcon icon = null;
-		
-		if(ntype == WARNING){
-			icon = GImg.getImageIcon("icons/warning.png","Warning");
-			nctrl = JOptionPane.WARNING_MESSAGE;
-		} else if(ntype == ERROR){
-			icon = GImg.getImageIcon("icons/error.png","Error");
-			nctrl = JOptionPane.ERROR_MESSAGE;
-		} else if(ntype == JOCKER){
-			icon = GImg.getImageIcon("icons/joker_image.png","Jocker");		
-			nctrl = JOptionPane.OK_OPTION;
-		} else {
-			icon = GImg.getImageIcon("icons/ok.png","Ok");		
-			nctrl = JOptionPane.OK_OPTION;
-		}
-	
-		UIManager.put("OptionPane.buttonFont",new FontUIResource(new Font("Arial", Font.PLAIN, 12)));
-		UIManager.put("OptionPane.messageFont",new FontUIResource(new Font("Arial", Font.PLAIN, 12)));
-		
-		if(stext.length() > 180){
-			stext = stext.substring(0,180);
-		}		
-		JOptionPane.showMessageDialog(null,stext,stitle,nctrl,icon);
+//		
+//		int nctrl;
+//		ImageIcon icon = null;
+//		
+//		if(ntype == WARNING){
+//			icon = GImg.getImageIcon("icons/warning.png","Warning");
+//			nctrl = JOptionPane.WARNING_MESSAGE;
+//		} else if(ntype == ERROR){
+//			icon = GImg.getImageIcon("icons/error.png","Error");
+//			nctrl = JOptionPane.ERROR_MESSAGE;
+//		} else if(ntype == JOCKER){
+//			icon = GImg.getImageIcon("icons/joker_image.png","Jocker");		
+//			nctrl = JOptionPane.OK_OPTION;
+//		} else {
+//			icon = GImg.getImageIcon("icons/ok.png","Ok");		
+//			nctrl = JOptionPane.OK_OPTION;
+//		}
+//	
+//		UIManager.put("OptionPane.buttonFont",new FontUIResource(new Font("Arial", Font.PLAIN, 12)));
+//		UIManager.put("OptionPane.messageFont",new FontUIResource(new Font("Arial", Font.PLAIN, 12)));
+//		
+//		if(stext.length() > 180){
+//			stext = stext.substring(0,180);
+//		}		
+//		JOptionPane.showMessageDialog(null,stext,stitle,nctrl,icon);
 	}
 	
-	public static int askQuestionYesNo(String stitle, String stext){
-		
-		UIManager.put("OptionPane.buttonFont",new FontUIResource(new Font("Arial", Font.PLAIN, 12)));
-		UIManager.put("OptionPane.messageFont",new FontUIResource(new Font("Arial", Font.PLAIN, 12)));
-		
-		Object[] options = {"Yes","No"};
-		ImageIcon icon = GImg.getImageIcon("icons/question.png","Question");
-
-		if(stext.length() > 180){
-			stext = stext.substring(0,180);
-		}		
-		int n = JOptionPane.showOptionDialog(null,stext,stitle,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon,options,options[0]);
-		
-		return n;
-	}
+//	public static int askQuestionYesNo(String stitle, String stext){
+//		
+//		UIManager.put("OptionPane.buttonFont",new FontUIResource(new Font("Arial", Font.PLAIN, 12)));
+//		UIManager.put("OptionPane.messageFont",new FontUIResource(new Font("Arial", Font.PLAIN, 12)));
+//		
+//		Object[] options = {"Yes","No"};
+////		ImageIcon icon = GImg.getImageIcon("icons/question.png","Question");
+//
+//		if(stext.length() > 180){
+//			stext = stext.substring(0,180);
+//		}		
+////		int n = JOptionPane.showOptionDialog(null,stext,stitle,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon,options,options[0]);
+//		
+////		return n;
+//	}
 		
 }

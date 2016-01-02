@@ -15,6 +15,8 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -260,24 +262,24 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfRAKeyPressed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfRA.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a RA!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Informe a RA!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfRA.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfAluno.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do Aluno!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Informe o nome do Aluno!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfAluno.requestFocus();
             return;
         }
         if (jcCurso.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione um Curso!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Selecione um Curso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jcCurso.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfRG.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o RG!", "Erro", 0);
+            JOptionPane.showMessageDialog(this, "Informe o RG!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfRG.requestFocus();
             return;
         }
@@ -294,9 +296,9 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(aluno);
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Aluno: " + jtfAluno.getText() + "\n" 
-                                              + "RA: "+ jtfRA.getText() + "\n" 
-                                              + "Cadastrado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Aluno: " + jtfAluno.getText() + "\n"
+                    + "RA: " + jtfRA.getText() + "\n"
+                    + "Cadastrado com Sucesso!");
             limparDados();
         } catch (Exception e) {
             GenericDAO.getInstance().rollback();

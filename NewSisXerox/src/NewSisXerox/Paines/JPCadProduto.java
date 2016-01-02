@@ -340,34 +340,34 @@ public final class JPCadProduto extends javax.swing.JPanel {
     }//GEN-LAST:event_jbSelecionarActionPerformed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-64.png")));
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfDescricao.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(null, "Informe a descrição do Produto!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Informe a descrição do Produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfDescricao.requestFocus();
             return;
         }
         if (jcMarca.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jcMarca.requestFocus();
             return;
         }
         if (jcModelo.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione o Modelo!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione o Modelo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jcModelo.requestFocus();
             return;
         }
         if (jcUnidadeMedida.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione a Unidade de Medida !", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione a Unidade de Medida !", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jcUnidadeMedida.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfVlCompra.getText(), 2, 50) == false) {
-            JOptionPane.showMessageDialog(null, "Informe o Valor da Compra do Produto!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Informe o Valor da Compra do Produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfVlCompra.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfVlVenda.getText(), 2, 50) == false) {
-            JOptionPane.showMessageDialog(null, "Informe o Valor da Venda do Produto!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Informe o Valor da Venda do Produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfVlVenda.requestFocus();
             return;
         }

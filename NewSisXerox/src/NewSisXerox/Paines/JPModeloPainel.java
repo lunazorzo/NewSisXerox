@@ -7,6 +7,10 @@ package NewSisXerox.Paines;
 
 import java.awt.event.KeyEvent;
 import NewSisXerox.Classes.UpperCaseField;
+import NewSisXerox.Classes.Validador;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -92,6 +96,11 @@ public class JPModeloPainel extends javax.swing.JPanel {
 
         jbGravarModeloPaine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/Salvar - 16.png"))); // NOI18N
         jbGravarModeloPaine.setText("Gravar");
+        jbGravarModeloPaine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarModeloPaineActionPerformed(evt);
+            }
+        });
         add(jbGravarModeloPaine);
         jbGravarModeloPaine.setBounds(265, 45, 85, 25);
     }// </editor-fold>//GEN-END:initComponents
@@ -102,6 +111,15 @@ public class JPModeloPainel extends javax.swing.JPanel {
             Busca.setLocationRelativeTo(this);//seta a posição da tela 
         }
     }//GEN-LAST:event_jtfModeloPaineKeyPressed
+
+    private void jbGravarModeloPaineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarModeloPaineActionPerformed
+       Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+       if (Validador.vldStringMinMax(jtfModeloPaine.getText(), 3, 50) == false) {
+            JOptionPane.showMessageDialog(this, "Informe o nome do modelo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            jtfModeloPaine.requestFocus();
+            return;
+        }
+    }//GEN-LAST:event_jbGravarModeloPaineActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

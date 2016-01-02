@@ -26,6 +26,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.FontUIResource;
 
 /**
  *
@@ -44,15 +45,18 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFVenda venda;
     JIFProduto produto;
 
-    public JFPrincipal() throws UnsupportedLookAndFeelException {        
+    public JFPrincipal() throws UnsupportedLookAndFeelException {
         //Tamanho da fonte das mensagens
-        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 12));          
+        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 14));
+        //Tamanho da fonte na mensagem quanto utilizar botões
+        UIManager.put("OptionPane.buttonFont", new FontUIResource(new Font("Tahoma", Font.BOLD, 14)));
+        
+        
         try {
 //            Pega o padrao do windows
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {           
+            JOptionPane.showMessageDialog(this, "Erro ao iniciar a parte gráfica" + "\n" + ex.getMessage());
         }
         initComponents();
         URL url = this.getClass().getResource("/NewSisXerox/Imagens/Icone-64.png");
@@ -92,7 +96,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         jmRecarga = new javax.swing.JMenuItem();
         jmVenda = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Controle Xerox");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -128,8 +132,6 @@ public class JFPrincipal extends javax.swing.JFrame {
         jToolBar1.add(Hora);
         jToolBar1.add(jSeparator3);
 
-        Desktop.setLayer(jToolBar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
@@ -145,6 +147,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+        Desktop.setLayer(jToolBar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         Cadastros.setText("Cadastros");
 
@@ -422,11 +425,12 @@ public class JFPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmFormTPPgtoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Question-48.png")));
         Object[] botoes = {"Sim", "Não"};//tipo de formato dos botões
         //quando abrir a janela de sair é a msg que vai ser mostrada
         int resposta = JOptionPane.showOptionDialog(null, "Confirma Encerramento do Sistama?", "ATENÇÃO",
                 JOptionPane.YES_NO_OPTION,//Tipo usado para confirmar o questionamento
-                JOptionPane.QUESTION_MESSAGE, null, botoes, botoes[0]); //questionamento da msg
+                JOptionPane.QUESTION_MESSAGE, figura, botoes, botoes[0]); //questionamento da msg
         if (resposta == JOptionPane.YES_OPTION) {//valor de retorno de método de classe
             this.dispose();
         }
