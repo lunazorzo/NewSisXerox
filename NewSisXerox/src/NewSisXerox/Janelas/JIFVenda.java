@@ -239,28 +239,35 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Venda");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nome:");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("RA:");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Saldo:");
 
+        jtfAluno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtfAluno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfAlunoKeyPressed(evt);
             }
         });
 
+        jtfRA.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtfRA.setEnabled(false);
         jtfRA.setOpaque(false);
 
+        jtfSaldo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtfSaldo.setEnabled(false);
         jtfSaldo.setOpaque(false);
 
         jdData.setEnabled(false);
 
+        jlData.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlData.setText("Data Cadastro:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -303,10 +310,11 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
+        jbFinalizarCompra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbFinalizarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/basket-full.png"))); // NOI18N
         jbFinalizarCompra.setText("Finalizar Venda");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -321,25 +329,34 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Produto:");
 
+        jtfProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtfProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfProdutoKeyPressed(evt);
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Qtde.:");
 
+        jtfQuantidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jbAdicionar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/basket-add.png"))); // NOI18N
         jbAdicionar.setText("Adicionar");
 
+        jbtRemover.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbtRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/basket-remove.png"))); // NOI18N
         jbtRemover.setText("Remover");
 
         jtfValor.setEditable(false);
+        jtfValor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtfValor.setOpaque(false);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Valor:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -385,19 +402,28 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                 .addGap(62, 62, 62))
         );
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Total Produto:");
 
         jtfTLProduto.setEditable(false);
+        jtfTLProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtfTLProduto.setEnabled(false);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Desconto:");
 
+        jtfDesconto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Total:");
 
+        jtfTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtfTotal.setEnabled(false);
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Fgto Pag.:");
 
+        jcFgtoPagamento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jcFgtoPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

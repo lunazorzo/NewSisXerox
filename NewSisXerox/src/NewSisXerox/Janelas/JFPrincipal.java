@@ -11,6 +11,7 @@ import java.net.URL;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import NewSisXerox.Classes.ClasseImagem;
+import java.awt.Color;
 import java.awt.Font;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.FontUIResource;
 
 /**
  *
@@ -42,7 +44,9 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     public JFPrincipal() throws UnsupportedLookAndFeelException {
         //Tamanho da fonte das mensagens
-        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 12));
+        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 12));
+        //Deixa a fonte do texfield com o tamanho 12
+        UIManager.put("TextField.font", new Font("Tahoma", Font.PLAIN, 12));
         try {
 //            Pega o padrao do windows
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");

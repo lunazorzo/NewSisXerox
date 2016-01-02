@@ -19,5 +19,19 @@ http://insubstantial.github.io/insubstantial/substance/release-info/3.3/release-
 //            System.out.println("Substance Raven Graphite failed to initialize");
 //            e.printStackTrace();
 //        }
-//Deixa as mensagens com o tanho e a fonte setada
-UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 12));
+
+//Link contém todos os atributos http://thebadprogrammer.com/swing-uimanager-keys/ para serem alterados
+//Quando selecionar o teste o mesmo irá ficar azul
+	UIManager.put("TextField.selectionForeground", Color.BLUE);
+//Tamanho da fonte das mensagens
+	UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 12));
+//Deixa a fonte do texfield com o tamanho 12
+	UIManager.put("TextField.font", new Font("Tahoma", Font.PLAIN, 12));
+//Deixa a fonte do TextField com o tamanho 12 e em negrito
+	UIManager.put("TextField.font", new Font("Tahoma", Font.BOLD, 12));
+//Deixa a fonte do Label com o tamanho 12 e em negrito
+	UIManager.put("Label.font", new Font("Tahoma", Font.PLAIN, 12));
+//Deixa a fonte do Button com o tamanho 12 e em negrito
+	UIManager.put("Button.font", new Font("Tahoma", Font.BOLD, 12));
+
+https://community.oracle.com/thread/1361693?start=0&tstart=0
