@@ -3,17 +3,17 @@ package NewSisXerox.Tabelas;
 import NewSisXerox.Classes.ModeloTabela;
 import NewSisXerox.Entity.Aluno;
 
-public class tabAlunoVenda extends ModeloTabela {
+public class tabBuscaAlunoVenda extends ModeloTabela {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (dados != null && rowIndex < dados.size()) {
             Aluno e = (Aluno) dados.get(rowIndex);
             if (columnIndex == 0) {
-                return e.getRaAluno();
+                return e.getNmAluno();
             }
             if (columnIndex == 1) {
-                return e.getNmAluno();
+                return e.getRaAluno();
             }            
             if (columnIndex == 2) {
                 return e.getVlSaldo();
@@ -31,9 +31,9 @@ public class tabAlunoVenda extends ModeloTabela {
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return "RA";
-            case 1:
                 return "Aluno";
+            case 1:
+                return "RA";
             case 2:
                 return "Saldo";
             default:

@@ -12,7 +12,7 @@ import NewSisXerox.Entity.Produto;
  *
  * @author Nobre Sistemas
  */
-public class tabProdutoVenda extends ModeloTabela {
+public class tabBuscaProdutoVenda extends ModeloTabela {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -20,25 +20,26 @@ public class tabProdutoVenda extends ModeloTabela {
             Produto e = (Produto) dados.get(rowIndex);
             if (columnIndex == 0) {
                 return e.getNmProduto();
-            }            
+            }
+            if (columnIndex == 1) {
+                return e.getVlVenda();
+            }
         }
         return null;
     }
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 2;
     }
 
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return "Produto";
+                return "Descrição";
             case 1:
-                return "Quantidade";
-            case 2:
-                return "Valor";
+                return "Vl Venda";
             default:
                 return "";
         }

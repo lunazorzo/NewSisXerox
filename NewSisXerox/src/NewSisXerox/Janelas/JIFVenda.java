@@ -11,7 +11,9 @@ import NewSisXerox.Entity.Aluno;
 import NewSisXerox.Entity.Formpgto;
 import NewSisXerox.Entity.Produto;
 import NewSisXerox.Entity.Venda;
-import NewSisXerox.Tabelas.tabAlunoVenda;
+import NewSisXerox.Tabelas.tabBuscaAlunoVenda;
+import NewSisXerox.Tabelas.tabBuscaProdutoVenda;
+import NewSisXerox.Tabelas.tabProduto;
 import NewSisXerox.Tabelas.tabProdutoVenda;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -19,6 +21,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
 
 /**
  *
@@ -32,20 +35,24 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private Venda venda;
     private Aluno aluno;
     private Produto produto;
-    private final tabAlunoVenda tabalunovenda;
-    private final tabProdutoVenda tabprodutovenda;
+    private final tabBuscaAlunoVenda tabbuscaalunovenda;
+    private final tabBuscaProdutoVenda tabbuscaprodutovenda;
+    private final tabProdutoVenda tabproduto;
 
     public JIFVenda() {
         initComponents();
         carregaComboFormaPgto();
-        //Aluno
-        tabalunovenda = new tabAlunoVenda();
-        jtBuscaAluno.setModel(tabalunovenda);
-        //Produto
-        tabprodutovenda = new tabProdutoVenda();
-        jtBuscaProduto.setModel(tabprodutovenda);
+        //Busca Aluno
+        tabbuscaalunovenda = new tabBuscaAlunoVenda();
+        jtBuscaAluno.setModel(tabbuscaalunovenda);
+        //Busca Produto
+        tabbuscaprodutovenda = new tabBuscaProdutoVenda();
+        jtBuscaProduto.setModel(tabbuscaprodutovenda);
         //Carrega data do dia
         jdData.setDate(new java.util.Date());
+        //Tabela de Prudotos adicionados
+        tabproduto = new tabProdutoVenda();
+        jtProdutos.setModel(tabproduto);
     }
 
     public void setPosicao() {
@@ -58,7 +65,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             List l = GenericDAO.getInstance().getList(Aluno.class,
                     "FROM Aluno i order by i.nmAluno");  // consulta no banco
             System.err.println(l);
-            tabalunovenda.setDados(l);
+            tabbuscaalunovenda.setDados(l);
             jtBuscaAluno.updateUI();
             jtBuscaAluno.setAutoCreateRowSorter(true);//quando clicado no campo da tabela o mesmo será ordenado
         } catch (Exception e) {
@@ -71,7 +78,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             List l = GenericDAO.getInstance().getList(Produto.class,
                     "FROM Produto i order by i.nmProduto");  // consulta no banco
             System.err.println(l);
-            tabprodutovenda.setDados(l);
+            tabbuscaprodutovenda.setDados(l);
             jtBuscaProduto.updateUI();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar os Produtos!" + "\n" + e.getMessage());
@@ -105,6 +112,17 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jtfTotal.setText("");
     }
 
+    public void valueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) {
+            //selecina o dado da tabela e depois perde o foco algo assim
+            produto = (Produto) tabbuscaprodutovenda.getDados().get(jtProdutos.getSelectedRow());
+            if (produto != null) {
+                jtfProduto.setText(produto.getNmProduto());
+                jtfValor.setText(produto.getVlVenda().toString().replace(".", ","));
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -134,7 +152,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jbFinalizarCompra = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtProdutos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jtfProduto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -239,7 +257,6 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         );
 
         setClosable(true);
-        setIconifiable(true);
         setTitle("Venda");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -324,7 +341,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -335,7 +352,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtProdutos);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Produto:");
@@ -514,7 +531,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private void jbSelecionarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarAlunoActionPerformed
         try {
             //pegando a opção selecionada na grade
-            aluno = (Aluno) tabalunovenda.getDadoAt(jtBuscaAluno.getSelectedRow());
+            aluno = (Aluno) tabbuscaalunovenda.getDadoAt(jtBuscaAluno.getSelectedRow());
             if (aluno != null) {
                 jtfAluno.setText(aluno.getNmAluno());
                 jtfRA.setText(aluno.getRaAluno());
@@ -537,7 +554,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private void jbSelecionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarProdutoActionPerformed
         try {
             //pegando a opção selecionada na grade
-            produto = (Produto) tabprodutovenda.getDadoAt(jtBuscaProduto.getSelectedRow());
+            produto = (Produto) tabbuscaprodutovenda.getDadoAt(jtBuscaProduto.getSelectedRow());
             if (produto != null) {
                 jtfProduto.setText(produto.getNmProduto());
                 jtfValor.setText(produto.getVlVenda().toString().replace(".", ","));
@@ -553,24 +570,31 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
             JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfProduto.requestFocus();
-            return;
         }
+        jtfProduto.getText();
+        jtfValor.getText();
+        jtfQuantidade.getText();
+        jtProdutos.updateUI();
     }//GEN-LAST:event_jbAdicionarActionPerformed
 
     private void jbtRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRemoverActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
-        if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
-            jtfProduto.requestFocus();
-            return;
+        try {
+            if (produto != null) {
+                GenericDAO.getInstance().remove(produto);//removendo a marca selecionada                
+                JOptionPane.showMessageDialog(this, "Produto Removido!");//mostrando a msg de remoção
+                jtProdutos.updateUI();
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao remover Produto" + "\n" + ex.getMessage());
         }
     }//GEN-LAST:event_jbtRemoverActionPerformed
 
     private void jbFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFinalizarCompraActionPerformed
         Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
-        if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
-            jtfProduto.requestFocus();
+        if (Validador.vldStringMinMax(jtfAluno.getText(), 3, 50) == false) {
+            JOptionPane.showMessageDialog(this, "Informe o cadastro do aluno, para realizar a venda!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            jtfAluno.requestFocus();
             return;
         }
     }//GEN-LAST:event_jbFinalizarCompraActionPerformed
@@ -594,7 +618,6 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbAdicionar;
     private javax.swing.JButton jbFinalizarCompra;
     private javax.swing.JButton jbSelecionarAluno;
@@ -605,6 +628,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlData;
     private javax.swing.JTable jtBuscaAluno;
     private javax.swing.JTable jtBuscaProduto;
+    private javax.swing.JTable jtProdutos;
     private javax.swing.JTextField jtfAluno;
     private javax.swing.JTextField jtfDesconto;
     private javax.swing.JTextField jtfProduto;
