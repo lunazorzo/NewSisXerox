@@ -5,6 +5,7 @@
  */
 package NewSisXerox.Paines;
 
+import NewSisXerox.Classes.UpperCaseField;
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Marca;
@@ -14,9 +15,7 @@ import NewSisXerox.Entity.Unidade;
 import NewSisXerox.Tabelas.tabProduto;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.List;
-import java.util.Locale;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -31,13 +30,14 @@ public final class JPCadProduto extends javax.swing.JPanel {
      * Creates new form JPCadProduto
      */
     private Produto produto;
-    private tabProduto tabproduto;
+    private final tabProduto tabproduto;
 
     public JPCadProduto() {
         initComponents();
+        jtfDescricao.requestFocus();
         carregaComboMarca();
         carregaComboModelo();
-        carregaUnidadeMedida();
+        carregaUnidadeMedida();        
         jdData.setDate(new java.util.Date());//carrega a data atual
         tabproduto = new tabProduto();
         jtBusca.setModel(tabproduto);
@@ -50,7 +50,7 @@ public final class JPCadProduto extends javax.swing.JPanel {
             tabproduto.setDados(l);
             jtBusca.updateUI();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar Modelo!" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao carregar os Produtos!" + "\n" + e.getMessage());
         }
     }
 
@@ -109,7 +109,7 @@ public final class JPCadProduto extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jtfDescricao = new javax.swing.JTextField();
+        jtfDescricao = new UpperCaseField();
         jtfVlCompra = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtfVlVenda = new javax.swing.JTextField();
@@ -302,24 +302,7 @@ public final class JPCadProduto extends javax.swing.JPanel {
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private BigDecimal casasDecimais(int casas, BigDecimal valor) {
-        //http://www.guj.com.br/java/52052-o-que-faco-para-fomatar-um-bigdecimal-com-apenas-duas-casas-decimais-
-        String quantCasas = "%." + casas + "f", textoValor = "0";
-        try {
-            textoValor = String.format(Locale.getDefault(), quantCasas, valor);
-        } catch (java.lang.IllegalArgumentException e) {
-            // Quando os digitos com 2 casas decimais forem Zeros, exemplo: 0.000001233888.  
-            // Nao existe valor 0,00 , logo entra na java.lang.IllegalArgumentException.  
-            if (e.getMessage().equals("Digits < 0")) {
-                textoValor = "0";
-            }
-            System.out.println(e.getMessage());
-        }
-        return new BigDecimal(textoValor.replace(",", "."));
-    }
-
-    public void limparDados() {
+     public void limparDados() {
         jcMarca.setSelectedItem(null);
         jcModelo.setSelectedItem(null);
         jcUnidadeMedida.setSelectedItem(null);
@@ -345,13 +328,13 @@ public final class JPCadProduto extends javax.swing.JPanel {
                 jcMarca.setSelectedItem(produto.getCdMarca());
                 jcModelo.setSelectedItem(produto.getCdModelo());
                 jcUnidadeMedida.setSelectedItem(produto.getCdUnidade());
-                jtfVlCompra.setText(produto.getVlCompra().toString());
-                jtfVlVenda.setText(produto.getVlVenda().toString());
+                jtfVlCompra.setText(produto.getVlCompra().toString().replace(".", ","));
+                jtfVlVenda.setText(produto.getVlVenda().toString().replace(".", ","));
                 jdData.setDate(produto.getDtCadastro());
                 Busca.dispose();
             }
         } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar Usuário!" + "\n" + t.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar Produto!" + "\n" + t.getMessage());
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed
@@ -378,12 +361,12 @@ public final class JPCadProduto extends javax.swing.JPanel {
             jcUnidadeMedida.requestFocus();
             return;
         }
-        if (Validador.vldStringMinMax(jtfVlCompra.getText(), 3, 50) == false) {
+        if (Validador.vldStringMinMax(jtfVlCompra.getText(), 2, 50) == false) {
             JOptionPane.showMessageDialog(null, "Informe o Valor da Compra do Produto!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
             jtfVlCompra.requestFocus();
             return;
         }
-        if (Validador.vldStringMinMax(jtfVlVenda.getText(), 3, 50) == false) {
+        if (Validador.vldStringMinMax(jtfVlVenda.getText(), 2, 50) == false) {
             JOptionPane.showMessageDialog(null, "Informe o Valor da Venda do Produto!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
             jtfVlVenda.requestFocus();
             return;
@@ -396,19 +379,21 @@ public final class JPCadProduto extends javax.swing.JPanel {
             produto.setCdMarca((Marca) jcMarca.getSelectedItem());
             produto.setCdModelo((Modelo) jcModelo.getSelectedItem());
             produto.setCdUnidade((Unidade) jcUnidadeMedida.getSelectedItem());
-            BigDecimal bigResult = casasDecimais(2, casasDecimais(WIDTH, BigDecimal.ZERO).add());
-            jtfVlCompra.setText(String.valueOf(bigResult).replace(".", ","));
-            //produto.setVlCompra(BigDecimal.valueOf(bigResult).replace(".", ","));
-
+            BigDecimal valor1 = new BigDecimal(jtfVlCompra.getText().replaceAll(",", "."));
+            BigDecimal valor2 = new BigDecimal(jtfVlVenda.getText().replaceAll(",", "."));
+            produto.setVlCompra(valor1);
+            produto.setVlVenda(valor2);
+            produto.setDtCadastro(jdData.getDate());
             produto.setFgAtivo(Ativo.isSelected());
             GenericDAO.getInstance().persist(produto);
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().commit();
             JOptionPane.showMessageDialog(null, "Produto " + jtfDescricao.getText() + " cadastrado com Sucesso!");
             limparDados();
+            jtfDescricao.requestFocus();
         } catch (Exception e) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o Usuário!" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o Produto!" + "\n" + e.getMessage());
         }
     }//GEN-LAST:event_jbGravarActionPerformed
 

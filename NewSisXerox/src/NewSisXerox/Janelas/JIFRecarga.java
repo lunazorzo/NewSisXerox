@@ -39,6 +39,7 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
         initComponents();
         carregaComboUsuario();
         carregaComboFormaPgto();
+        jtfAluno.requestFocus();
         tabrecarga = new tabRecarga();
         jtBusca.setModel(tabrecarga);
         jdDTRecarga.setDate(new java.util.Date());//carrega a data atual

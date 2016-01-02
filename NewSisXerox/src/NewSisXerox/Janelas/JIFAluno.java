@@ -15,20 +15,19 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.TemporalType;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Allan
  */
-public class JIFAluno extends javax.swing.JInternalFrame {
+public final class JIFAluno extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form JIFAluno
      */
     private Aluno aluno;
-    private tabAluno tabaluno;
+    private final tabAluno tabaluno;
 
     public JIFAluno() {
         initComponents();
@@ -319,7 +318,7 @@ public class JIFAluno extends javax.swing.JInternalFrame {
                 Busca.dispose();
             }
         } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Empresa!" + "\n" + t.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Aluno!" + "\n" + t.getMessage());
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed
