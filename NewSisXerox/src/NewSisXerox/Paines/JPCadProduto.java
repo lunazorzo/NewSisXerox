@@ -396,9 +396,10 @@ public final class JPCadProduto extends javax.swing.JPanel {
             produto.setCdMarca((Marca) jcMarca.getSelectedItem());
             produto.setCdModelo((Modelo) jcModelo.getSelectedItem());
             produto.setCdUnidade((Unidade) jcUnidadeMedida.getSelectedItem());
-            BigDecimal bigResult = casasDecimais(2, valor1.add(valor2, MathContext.DECIMAL32));
-            produto.setVlCompra(BigDecimal.valueOf(bigResult).replace(".", ","));
-           
+            BigDecimal bigResult = casasDecimais(2, casasDecimais(WIDTH, BigDecimal.ZERO).add());
+            jtfVlCompra.setText(String.valueOf(bigResult).replace(".", ","));
+            //produto.setVlCompra(BigDecimal.valueOf(bigResult).replace(".", ","));
+
             produto.setFgAtivo(Ativo.isSelected());
             GenericDAO.getInstance().persist(produto);
             GenericDAO.getInstance().startTransaction();
