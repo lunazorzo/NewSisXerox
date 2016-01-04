@@ -13,7 +13,6 @@ import NewSisXerox.Entity.Produto;
 import NewSisXerox.Entity.Venda;
 import NewSisXerox.Tabelas.tabBuscaAlunoVenda;
 import NewSisXerox.Tabelas.tabBuscaProdutoVenda;
-import NewSisXerox.Tabelas.tabProduto;
 import NewSisXerox.Tabelas.tabProdutoVenda;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -22,6 +21,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,9 +35,8 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private Venda venda;
     private Aluno aluno;
     private Produto produto;
-    private final tabBuscaAlunoVenda tabbuscaalunovenda;
-    private final tabBuscaProdutoVenda tabbuscaprodutovenda;
-    private final tabProdutoVenda tabproduto;
+    private tabBuscaAlunoVenda tabbuscaalunovenda;
+    private tabBuscaProdutoVenda tabbuscaprodutovenda;
 
     public JIFVenda() {
         initComponents();
@@ -50,9 +49,6 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jtBuscaProduto.setModel(tabbuscaprodutovenda);
         //Carrega data do dia
         jdData.setDate(new java.util.Date());
-        //Tabela de Prudotos adicionados
-        tabproduto = new tabProdutoVenda();
-        jtProdutos.setModel(tabproduto);
     }
 
     public void setPosicao() {
@@ -343,13 +339,10 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
 
         jtProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Produto", "Valor", "Quantidade"
             }
         ));
         jScrollPane1.setViewportView(jtProdutos);
@@ -565,37 +558,70 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbSelecionarProdutoActionPerformed
 
+
     private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
         Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+        Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+        DefaultTableModel teste = (DefaultTableModel) jtProdutos.getModel();
         if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
             JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfProduto.requestFocus();
         }
-        jtfProduto.getText();
-        jtfValor.getText();
-        jtfQuantidade.getText();
-        jtProdutos.updateUI();
+        if (Validador.vldStringMinMax(jtfQuantidade.getText(), 1, 50) == false) {
+            JOptionPane.showMessageDialog(this, "Informe a quantidade do produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            jtfQuantidade.requestFocus();
+            return;
+        }
+        try {
+            //Adiciona os itens na grade
+
+            teste.addRow(new Object[]{jtfProduto.getText(), jtfValor.getText(), jtfQuantidade.getText()});
+            //Limpa os campos após adicionar na grade
+            jtfProduto.setText("");
+            jtfValor.setText("");
+            jtfQuantidade.setText("");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao adicionar o produto na grade!" + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+        }
+
     }//GEN-LAST:event_jbAdicionarActionPerformed
 
     private void jbtRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRemoverActionPerformed
+        Icon clear = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Clear-48.png")));
+        Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+        DefaultTableModel teste = (DefaultTableModel) jtProdutos.getModel();
         try {
-            if (produto != null) {
-                GenericDAO.getInstance().remove(produto);//removendo a marca selecionada                
-                JOptionPane.showMessageDialog(this, "Produto Removido!");//mostrando a msg de remoção
-                jtProdutos.updateUI();
-            }
+            teste.removeRow(jtProdutos.getSelectedRow());
+            JOptionPane.showMessageDialog(this, "Produto Removido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, clear);
+            jtProdutos.updateUI();
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao remover Produto" + "\n" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar o produto na grade!" + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbtRemoverActionPerformed
 
     private void jbFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFinalizarCompraActionPerformed
         Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+        Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
         if (Validador.vldStringMinMax(jtfAluno.getText(), 3, 50) == false) {
             JOptionPane.showMessageDialog(this, "Informe o cadastro do aluno, para realizar a venda!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfAluno.requestFocus();
             return;
+        }
+        if (jcFgtoPagamento.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Selecione a forma de pagamento!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            jcFgtoPagamento.requestFocus();
+            
+        }
+        if (jtProdutos.getVerifyInputWhenFocusTarget()) {
+            JOptionPane.showMessageDialog(this, "Selecione a forma de pagamento!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            jtProdutos.requestFocus();
+            return;
+        }
+        try {
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao finalizar Venda!" + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbFinalizarCompraActionPerformed
 
