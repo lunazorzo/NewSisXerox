@@ -38,3 +38,10 @@ http://insubstantial.github.io/insubstantial/substance/release-info/3.3/release-
 	UIManager.put("Button.font", new Font("Tahoma", Font.BOLD, 12));
 https://code.google.com/p/weed-cs/source/browse/trunk/Weed-Explorer/src/com/weed/components/LogonFrame.java?r=8
 https://community.oracle.com/thread/1361693?start=0&tstart=0
+
+BigDecimal
+http://www.guj.com.br/t/trabalhando-com-bigdecimal/53053
+BigDecimal soma          = value.add(otherValue);      // value + otherValue
+BigDecimal subtracao     = value.subtract(otherValue); // value - otherValue;
+BigDecimal multiplicacao = value.multiply(otherValue); // value * otherValue;
+BigDecimal divisao       = value.divide(otherValue);   // value / otherValue
