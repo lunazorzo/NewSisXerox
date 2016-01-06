@@ -372,20 +372,20 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
             return;
         }
         if (Validador.vldStringMinMax(jtfRecarga.getText(), 1, 50) == false) {
-            JOptionPane.showMessageDialog(null, "Informe o valor da recarga!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Informe o valor da recarga!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, figura);
             jtfRecarga.requestFocus();
 //            jtfRecarga.addFocusListener(new textFocusListener());//inicia a opção de alteração do foco do jtfrecarga
             return;
         }
         if (jcFgtoPagamento.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, figura);
             jcFgtoPagamento.requestFocus();
 //            jcFgtoPagamento.addFocusListener(new jcFocusListener());//inicia a opção de
 
             return;
         }
         if (jcUsuario.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione o usuário!", "Alerta", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione o usuário!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, figura);
             jcUsuario.requestFocus();
 //            jcUsuario.addFocusListener(new jcFocusListener());//inicia a opção de
             return;

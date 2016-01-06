@@ -13,10 +13,12 @@ import NewSisXerox.Entity.Produto;
 import NewSisXerox.Entity.Venda;
 import NewSisXerox.Tabelas.tabBuscaAlunoVenda;
 import NewSisXerox.Tabelas.tabBuscaProdutoVenda;
-import NewSisXerox.Tabelas.tabProdutoVenda;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -119,6 +121,22 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         }
     }
 
+    private BigDecimal casasDecimais(int casas, BigDecimal valor) {
+        //http://www.guj.com.br/java/52052-o-que-faco-para-fomatar-um-bigdecimal-com-apenas-duas-casas-decimais-
+        String quantCasas = "%." + casas + "f", textoValor = "0";
+        try {
+            textoValor = String.format(Locale.getDefault(), quantCasas, valor);
+        } catch (java.lang.IllegalArgumentException e) {
+            // Quando os digitos com 2 casas decimais forem Zeros, exemplo: 0.000001233888.  
+            // Nao existe valor 0,00 , logo entra na java.lang.IllegalArgumentException.  
+            if (e.getMessage().equals("Digits < 0")) {
+                textoValor = "0";
+            }
+            System.out.println(e.getMessage());
+        }
+        return new BigDecimal(textoValor.replace(",", "."));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,6 +175,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jbtRemover = new javax.swing.JButton();
         jtfValor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jtfResultado = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jtfTLProduto = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -342,7 +361,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Produto", "Valor", "Quantidade"
+                "Produto", "Valor", "Quantidade", "Valor * Quantidade"
             }
         ));
         jScrollPane1.setViewportView(jtProdutos);
@@ -387,6 +406,19 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Valor:");
 
+        jtfResultado.setEditable(false);
+        jtfResultado.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jtfResultado.setAlignmentX(0.0F);
+        jtfResultado.setAlignmentY(0.0F);
+        jtfResultado.setBorder(null);
+        jtfResultado.setEnabled(false);
+        jtfResultado.setFocusable(false);
+        jtfResultado.setMargin(null);
+        jtfResultado.setMaximumSize(new java.awt.Dimension(0, 0));
+        jtfResultado.setMinimumSize(new java.awt.Dimension(0, 0));
+        jtfResultado.setPreferredSize(new java.awt.Dimension(0, 0));
+        jtfResultado.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -411,7 +443,9 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                         .addComponent(jbAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtRemover)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,10 +455,11 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                     .addComponent(jtfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jtfQuantidade)
-                    .addComponent(jbAdicionar)
-                    .addComponent(jbtRemover)
+                    .addComponent(jbAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfValor)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jtfResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62))
@@ -562,7 +597,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
         Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
-        DefaultTableModel teste = (DefaultTableModel) jtProdutos.getModel();
+        DefaultTableModel addGrid = (DefaultTableModel) jtProdutos.getModel();
         if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
             JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
             jtfProduto.requestFocus();
@@ -573,13 +608,18 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             return;
         }
         try {
+            //http://www.devmedia.com.br/java-bigdecimal-trabalhando-com-mais-precisao/30286
+            BigDecimal bigResult = casasDecimais(2, new BigDecimal(jtfValor.getText().replace(",", ".")).multiply(new BigDecimal(jtfQuantidade.getText().replace(",", "."))));
+            jtfResultado.setText(String.valueOf(bigResult).replace(".", ","));
+            
+            
             //Adiciona os itens na grade
-
-            teste.addRow(new Object[]{jtfProduto.getText(), jtfValor.getText(), jtfQuantidade.getText()});
+            addGrid.addRow(new Object[]{jtfProduto.getText(), jtfValor.getText(), jtfQuantidade.getText(), jtfResultado.getText()});
             //Limpa os campos após adicionar na grade
             jtfProduto.setText("");
             jtfValor.setText("");
             jtfQuantidade.setText("");
+            jtfResultado.setText("");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao adicionar o produto na grade!" + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
@@ -609,17 +649,11 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             return;
         }
         if (jcFgtoPagamento.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione a forma de pagamento!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, figura);
             jcFgtoPagamento.requestFocus();
-            
-        }
-        if (jtProdutos.getVerifyInputWhenFocusTarget()) {
-            JOptionPane.showMessageDialog(this, "Selecione a forma de pagamento!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
-            jtProdutos.requestFocus();
-            return;
         }
         try {
-
+            limparDados();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao finalizar Venda!" + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
@@ -660,6 +694,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfProduto;
     private javax.swing.JTextField jtfQuantidade;
     private javax.swing.JTextField jtfRA;
+    private javax.swing.JTextField jtfResultado;
     private javax.swing.JTextField jtfSaldo;
     private javax.swing.JTextField jtfTLProduto;
     private javax.swing.JTextField jtfTotal;
