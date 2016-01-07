@@ -136,6 +136,17 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         }
         return new BigDecimal(textoValor.replace(",", "."));
     }
+//http://www.guj.com.br/t/somar-coluna-jtable-resolvido/13905/30
+//Pega os valor
+    private String CalculaTotal() {
+        Double Orcamento = 0.0;
+        for (int i = 0; i < jtProdutos.getRowCount(); i++) {
+            Orcamento += Double.parseDouble(jtProdutos.getValueAt(i, 3).toString().replace(",", "."));
+        }
+        System.out.println(Orcamento);
+        return Orcamento.toString();
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -611,8 +622,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             //http://www.devmedia.com.br/java-bigdecimal-trabalhando-com-mais-precisao/30286
             BigDecimal bigResult = casasDecimais(2, new BigDecimal(jtfValor.getText().replace(",", ".")).multiply(new BigDecimal(jtfQuantidade.getText().replace(",", "."))));
             jtfResultado.setText(String.valueOf(bigResult).replace(".", ","));
-            
-            
+
             //Adiciona os itens na grade
             addGrid.addRow(new Object[]{jtfProduto.getText(), jtfValor.getText(), jtfQuantidade.getText(), jtfResultado.getText()});
             //Limpa os campos após adicionar na grade
@@ -653,6 +663,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             jcFgtoPagamento.requestFocus();
         }
         try {
+            CalculaTotal();
             limparDados();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao finalizar Venda!" + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);

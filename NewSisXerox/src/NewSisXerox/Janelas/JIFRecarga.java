@@ -396,9 +396,7 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
                 //Somando os valores http://www.guj.com.br/java/125547-somar-2-jtextfield-e-mostra-em-um-3-jtextfield
                 recarga.setCdAluno(aluno);
                 recarga.setDtRecarga(jdDTRecarga.getDate());
-                BigDecimal valor1 = new BigDecimal(jtfSaldoAtual.getText().replaceAll(",", "."));
-                BigDecimal valor2 = new BigDecimal(jtfRecarga.getText().replaceAll(",", "."));
-                BigDecimal bigResult = casasDecimais(2, valor1.add(valor2, MathContext.DECIMAL32));
+                BigDecimal bigResult = casasDecimais(2, new BigDecimal(jtfSaldoAtual.getText().replace(",", ".")).add(new BigDecimal(jtfRecarga.getText().replace(",", "."))));
                 jtfSaldoFinal.setText(String.valueOf(bigResult).replace(".", ","));
                 recarga.setVlRecarga(bigResult);
                 recarga.setCdFormpgto((Formpgto) jcFgtoPagamento.getSelectedItem());
