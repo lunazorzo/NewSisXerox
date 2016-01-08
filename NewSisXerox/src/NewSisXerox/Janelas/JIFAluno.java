@@ -30,6 +30,10 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
      */
     private Aluno aluno;
     private final tabAluno tabaluno;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon clear = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Clear-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JIFAluno() {
         initComponents();
@@ -262,24 +266,24 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfRAKeyPressed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+        
         if (Validador.vldStringMinMax(jtfRA.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a RA!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe a RA!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfRA.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfAluno.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do Aluno!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o nome do Aluno!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfAluno.requestFocus();
             return;
         }
         if (jcCurso.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione um Curso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Selecione um Curso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jcCurso.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfRG.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o RG!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o RG!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfRG.requestFocus();
             return;
         }

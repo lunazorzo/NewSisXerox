@@ -16,7 +16,6 @@ import NewSisXerox.Tabelas.tabBuscaProdutoVenda;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.Icon;
@@ -39,6 +38,11 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private Produto produto;
     private tabBuscaAlunoVenda tabbuscaalunovenda;
     private tabBuscaProdutoVenda tabbuscaprodutovenda;
+    private DefaultTableModel tabela;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon clear = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Clear-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JIFVenda() {
         initComponents();
@@ -108,6 +112,11 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jtfTLProduto.setText("");
         jtfDesconto.setText("");
         jtfTotal.setText("");
+        jtfDesconto.setText("0");
+        //http://www.guj.com.br/t/como-limpar-jtable-resolvido/234385
+        //resposta do dhyan
+        tabela = (DefaultTableModel) jtProdutos.getModel();
+        tabela.setNumRows(0);
     }
 
     public void valueChanged(ListSelectionEvent e) {
@@ -135,17 +144,6 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             System.out.println(e.getMessage());
         }
         return new BigDecimal(textoValor.replace(",", "."));
-    }
-//http://www.guj.com.br/t/somar-coluna-jtable-resolvido/13905/30
-//Pega os valor
-    private String CalculaTotal() {
-        Double Orcamento = 0.0;
-        for (int i = 0; i < jtProdutos.getRowCount(); i++) {
-            Orcamento += Double.parseDouble(jtProdutos.getValueAt(i, 3).toString().replace(",", "."));
-        }
-        System.out.println(Orcamento);
-        return Orcamento.toString();
-
     }
 
     /**
@@ -487,6 +485,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jLabel8.setText("Desconto:");
 
         jtfDesconto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtfDesconto.setText("0");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Total:");
@@ -570,7 +569,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private void jbSelecionarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarAlunoActionPerformed
         try {
             //pegando a opção selecionada na grade
-            aluno = (Aluno) tabbuscaalunovenda.getDadoAt(jtBuscaAluno.getSelectedRow());
+            //aluno = (Aluno) tabbuscaalunovenda.getDadoAt(jtBuscaAluno.getSelectedRow());
             if (aluno != null) {
                 jtfAluno.setText(aluno.getNmAluno());
                 jtfRA.setText(aluno.getRaAluno());
@@ -578,7 +577,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                 BuscaAluno.dispose();
             }
         } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar o Aluno!" + "\n" + t.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar o Aluno!" + "\n" + t.getClass().getSimpleName() + "\n" + t.getMessage());
         }
     }//GEN-LAST:event_jbSelecionarAlunoActionPerformed
 
@@ -599,22 +598,20 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                 jtfValor.setText(produto.getVlVenda().toString().replace(".", ","));
                 BuscaProduto.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar Produto!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar Produto!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage());
         }
     }//GEN-LAST:event_jbSelecionarProdutoActionPerformed
 
 
     private void jbAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
-        Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
         DefaultTableModel addGrid = (DefaultTableModel) jtProdutos.getModel();
         if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfProduto.requestFocus();
         }
         if (Validador.vldStringMinMax(jtfQuantidade.getText(), 1, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a quantidade do produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe a quantidade do produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfQuantidade.requestFocus();
             return;
         }
@@ -622,7 +619,6 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             //http://www.devmedia.com.br/java-bigdecimal-trabalhando-com-mais-precisao/30286
             BigDecimal bigResult = casasDecimais(2, new BigDecimal(jtfValor.getText().replace(",", ".")).multiply(new BigDecimal(jtfQuantidade.getText().replace(",", "."))));
             jtfResultado.setText(String.valueOf(bigResult).replace(".", ","));
-
             //Adiciona os itens na grade
             addGrid.addRow(new Object[]{jtfProduto.getText(), jtfValor.getText(), jtfQuantidade.getText(), jtfResultado.getText()});
             //Limpa os campos após adicionar na grade
@@ -631,14 +627,22 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             jtfQuantidade.setText("");
             jtfResultado.setText("");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao adicionar o produto na grade!" + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+            JOptionPane.showMessageDialog(this, "Erro ao adicionar o produto na grade!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
-
+        //Realiza a soma te todos os itens da grade
+        ////http://www.guj.com.br/t/somar-coluna-jtable-resolvido/13905/30
+        Double soma = 0.0;
+        try {
+            for (int i = 0; i < jtProdutos.getRowCount(); i++) {
+                soma += Double.parseDouble(jtProdutos.getValueAt(i, 3).toString().replace(",", "."));
+                jtfTLProduto.setText(String.valueOf(soma).replace(".", ","));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao calcular Total Produtos: " + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+        }
     }//GEN-LAST:event_jbAdicionarActionPerformed
 
     private void jbtRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRemoverActionPerformed
-        Icon clear = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Clear-48.png")));
-        Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
         DefaultTableModel teste = (DefaultTableModel) jtProdutos.getModel();
         try {
             teste.removeRow(jtProdutos.getSelectedRow());
@@ -646,27 +650,27 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             jtProdutos.updateUI();
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao adicionar o produto na grade!" + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar o produto na grade!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbtRemoverActionPerformed
 
     private void jbFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFinalizarCompraActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
-        Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
         if (Validador.vldStringMinMax(jtfAluno.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o cadastro do aluno, para realizar a venda!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o cadastro do aluno, para realizar a venda!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfAluno.requestFocus();
             return;
         }
         if (jcFgtoPagamento.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, alerta);
             jcFgtoPagamento.requestFocus();
         }
         try {
-            CalculaTotal();
+            BigDecimal bigResult = casasDecimais(2, new BigDecimal(jtfTLProduto.getText().replace(",", ".")).add(new BigDecimal(jtfDesconto.getText().replace(",", "."))));
+            jtfTotal.setText(String.valueOf(bigResult).replace(".", ","));
+            JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
             limparDados();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao finalizar Venda!" + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+            JOptionPane.showMessageDialog(null, "Erro ao finalizar Venda!" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbFinalizarCompraActionPerformed
 

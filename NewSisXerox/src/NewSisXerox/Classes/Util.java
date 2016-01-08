@@ -4,8 +4,11 @@
  */
 package NewSisXerox.Classes;
 
+import static com.sun.javafx.tk.Toolkit.getToolkit;
 import java.awt.Graphics;
 import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 
 /**
