@@ -27,6 +27,9 @@ public class JPUnidade extends javax.swing.JPanel {
      */
     private Unidade unidade;
     private tabUnidade tabunidade;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JPUnidade() {
         initComponents();
@@ -49,8 +52,8 @@ public class JPUnidade extends javax.swing.JPanel {
                     "FROM Unidade nmUnidade");  // consulta no banco
             tabunidade.setDados(l);
             jtBusca.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela Unidade de Medida!" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela Unidade de Medida!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -155,15 +158,12 @@ public class JPUnidade extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfUnidade.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a descriçãod a Unidade de Medida!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe a descriçãod a Unidade de Medida!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfUnidade.requestFocus();
             return;
         }
-
         try {
-
             if (unidade == null) {
                 unidade = new Unidade();
             }
@@ -172,11 +172,11 @@ public class JPUnidade extends javax.swing.JPanel {
             GenericDAO.getInstance().persist(unidade);
             GenericDAO.getInstance().flush();
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Unidade de Medida " + jtfUnidade.getText() + " gravada com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Unidade de Medida " + jtfUnidade.getText() + " gravada com Sucesso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, sucesso);
             limparDados();
         } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Unidade de Medida já existente!" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Unidade de Medida já existente!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
         jtfUnidade.requestFocus();
@@ -198,8 +198,8 @@ public class JPUnidade extends javax.swing.JPanel {
                 jtfUnidade.setText(unidade.getNmUnidade());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Instituição!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Instituição!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed

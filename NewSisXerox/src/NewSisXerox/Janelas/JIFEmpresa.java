@@ -29,6 +29,9 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
      */
     private Empresa empresa;
     private tabEmpresa tabempresa;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JIFEmpresa() {
         initComponents();
@@ -52,8 +55,8 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
             for (Estado a : lstEstado) {
                 jcEstado.addItem(a);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar Estado!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar Estado!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -63,8 +66,8 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                     "SELECT i FROM Empresa i order by i.nmEmpresa");  // consulta no banco
             tabempresa.setDados(l);
             jtBusca.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar a grade Empresa!" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar a grade Empresa!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -316,8 +319,8 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
                 jtfEmail.setText(empresa.getEmail());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Empresa!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Empresa!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed
@@ -331,44 +334,43 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfEmpresaKeyPressed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfEmpresa.getText(), 3, 50) == false) {
-             JOptionPane.showMessageDialog(this, "Informe o nome Fantasia da empresa!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o nome Fantasia da empresa!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfEmpresa.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfEndereco.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a descrição do Endereço!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe a descrição do Endereço!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfEndereco.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfBairro.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a descrição do Bairro!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe a descrição do Bairro!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfBairro.requestFocus();
             return;
         }
         if (Validador.vldCep(jtfCEP.getText()) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o CEP!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o CEP!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfCEP.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfCidade.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a Cidade!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe a Cidade!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfCidade.requestFocus();
             return;
         }
         if (jcEstado.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione um Estado!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Selecione um Estado!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jcEstado.requestFocus();
             return;
         }
         if (Validador.isEmailValid(jtfEmail.getText()) == false) {
-            JOptionPane.showMessageDialog(this, "E-mail inválido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "E-mail inválido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfEmail.requestFocus();
             return;
         }
         if (Validador.vldFone(jtfTelefone.getText()) == false) {
-            JOptionPane.showMessageDialog(this, "Telefone inválido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Telefone inválido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfTelefone.requestFocus();
             return;
         }
@@ -387,11 +389,11 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(empresa);
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Empresa " + jtfEmpresa.getText() + " gravada com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Empresa " + jtfEmpresa.getText() + " gravada com Sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
             limparDados();
-        } catch (Exception e) {
+        } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao Gravar Empresa!" + "/n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao Gravar Empresa!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbGravarActionPerformed
 

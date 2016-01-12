@@ -28,6 +28,9 @@ public class JPModelo extends javax.swing.JPanel {
      */
     private Modelo modelo;
     private tabModelo tabmodelo;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JPModelo() {
         initComponents();
@@ -55,8 +58,8 @@ public class JPModelo extends javax.swing.JPanel {
             for (Marca a : lstMarca) {
                 jcModelo.addItem(a);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar as Marcas!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar as Marcas!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -66,8 +69,8 @@ public class JPModelo extends javax.swing.JPanel {
                     "FROM Modelo nmModelo");  // consulta no banco
             tabmodelo.setDados(l);
             jtModelo.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar Modelo!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar Modelo!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -187,14 +190,14 @@ public class JPModelo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+
         if (Validador.vldStringMinMax(jtfModelo.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do modelo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o nome do modelo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfModelo.requestFocus();
             return;
         }
         if (jcModelo.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione uma Marca!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Selecione uma Marca!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jcModelo.requestFocus();
             return;
         }
@@ -207,12 +210,12 @@ public class JPModelo extends javax.swing.JPanel {
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(modelo);
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Modelo " + jtfModelo.getText() + " gravado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Modelo " + jtfModelo.getText() + " gravado com Sucesso!", "ATENÇÃO", JOptionPane.ERROR_MESSAGE, sucesso);
             limparDados();
 
         } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Instituição já existente!" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Instituição já existente!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
         jtfModelo.requestFocus();
@@ -227,8 +230,8 @@ public class JPModelo extends javax.swing.JPanel {
                 jcModelo.setSelectedItem(modelo.getCdMarca());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Curso/Instituição!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Curso/Instituição!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarCursoActionPerformed

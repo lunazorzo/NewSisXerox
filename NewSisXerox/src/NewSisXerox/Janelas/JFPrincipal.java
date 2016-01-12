@@ -44,18 +44,20 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFFormaTipoPagto pgto;
     JIFVenda venda;
     JIFProduto produto;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JFPrincipal() throws UnsupportedLookAndFeelException {
         //Tamanho da fonte das mensagens
         UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 14));
         //Tamanho da fonte na mensagem quanto utilizar botões
         UIManager.put("OptionPane.buttonFont", new FontUIResource(new Font("Tahoma", Font.BOLD, 14)));
-        
-        
+
         try {
 //            Pega o padrao do windows
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {           
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao iniciar a parte gráfica" + "\n" + ex.getMessage());
         }
         initComponents();
@@ -272,7 +274,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(empresa);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir tela de Configurações" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir tela de Configurações" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jmEmpresaActionPerformed
 
@@ -295,7 +297,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(instituicao);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir tela da Instituição" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir tela da Instituição" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jmCursoInstituicaoActionPerformed
 
@@ -318,7 +320,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(unidade);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Unidade Medida" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Unidade Medida" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jmUnidadeMedidaActionPerformed
 
@@ -341,7 +343,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(marca);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Marca/Modelo" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela Marca/Modelo" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
 
     }//GEN-LAST:event_jmMarcaModeloActionPerformed
@@ -365,7 +367,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(usuario);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Usuários" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Usuários" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
 //        JIFUsuario a = null;
 //        try {
@@ -397,7 +399,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(aluno);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Usuários" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Usuários" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jmAlunoActionPerformed
 
@@ -420,7 +422,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(pgto);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela da Forma / Tipo Pagamento" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela da Forma / Tipo Pagamento" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jmFormTPPgtoActionPerformed
 
@@ -462,7 +464,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(recarga);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Recarga" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Recarga" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jmRecargaActionPerformed
 
@@ -485,7 +487,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(venda);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Venda" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Venda" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jmVendaActionPerformed
 
@@ -508,7 +510,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 Desktop.moveToFront(produto);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Venda" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Venda" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jmProdutoActionPerformed
     public String MostraData() {

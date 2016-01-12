@@ -7,6 +7,7 @@ package NewSisXerox.Paines;
 
 import NewSisXerox.Classes.UpperCaseField;
 import NewSisXerox.Classes.Validador;
+import NewSisXerox.Classes.JtextFieldSomenteNumeros;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Marca;
 import NewSisXerox.Entity.Modelo;
@@ -31,13 +32,16 @@ public final class JPCadProduto extends javax.swing.JPanel {
      */
     private Produto produto;
     private final tabProduto tabproduto;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JPCadProduto() {
         initComponents();
         jtfDescricao.requestFocus();
         carregaComboMarca();
         carregaComboModelo();
-        carregaUnidadeMedida();        
+        carregaUnidadeMedida();
         jdData.setDate(new java.util.Date());//carrega a data atual
         tabproduto = new tabProduto();
         jtBusca.setModel(tabproduto);
@@ -49,8 +53,8 @@ public final class JPCadProduto extends javax.swing.JPanel {
                     "FROM Produto nmProduto");  // consulta no banco
             tabproduto.setDados(l);
             jtBusca.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar os Produtos!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar os Produtos!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -63,8 +67,8 @@ public final class JPCadProduto extends javax.swing.JPanel {
             for (Marca a : lstMarca) {
                 jcMarca.addItem(a);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar as Marcas!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar as Marcas!" + "\n"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -77,8 +81,8 @@ public final class JPCadProduto extends javax.swing.JPanel {
             for (Modelo a : lst) {
                 jcModelo.addItem(a);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar os Modelos!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar os Modelos!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -91,8 +95,8 @@ public final class JPCadProduto extends javax.swing.JPanel {
             for (Unidade a : lst) {
                 jcUnidadeMedida.addItem(a);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar as Unidades de Medida!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar as Unidades de Medida!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -110,9 +114,9 @@ public final class JPCadProduto extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jtfDescricao = new UpperCaseField();
-        jtfVlCompra = new javax.swing.JTextField();
+        jtfVlCompra = new JtextFieldSomenteNumeros();
         jLabel6 = new javax.swing.JLabel();
-        jtfVlVenda = new javax.swing.JTextField();
+        jtfVlVenda = new JtextFieldSomenteNumeros();
         Ativo = new javax.swing.JCheckBox();
         jbGravar = new javax.swing.JButton();
         jlData = new javax.swing.JLabel();
@@ -333,41 +337,40 @@ public final class JPCadProduto extends javax.swing.JPanel {
                 jdData.setDate(produto.getDtCadastro());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar Produto!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar Produto!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfDescricao.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(null, "Informe a descrição do Produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Informe a descrição do Produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfDescricao.requestFocus();
             return;
         }
         if (jcMarca.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jcMarca.requestFocus();
             return;
         }
         if (jcModelo.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione o Modelo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione o Modelo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jcModelo.requestFocus();
             return;
         }
         if (jcUnidadeMedida.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione a Unidade de Medida !", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione a Unidade de Medida !", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jcUnidadeMedida.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfVlCompra.getText(), 2, 50) == false) {
-            JOptionPane.showMessageDialog(null, "Informe o Valor da Compra do Produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Informe o Valor da Compra do Produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfVlCompra.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfVlVenda.getText(), 2, 50) == false) {
-            JOptionPane.showMessageDialog(null, "Informe o Valor da Venda do Produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Informe o Valor da Venda do Produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfVlVenda.requestFocus();
             return;
         }
@@ -388,12 +391,14 @@ public final class JPCadProduto extends javax.swing.JPanel {
             GenericDAO.getInstance().persist(produto);
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Produto " + jtfDescricao.getText() + " cadastrado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Produto " + jtfDescricao.getText() 
+                    + " cadastrado com Sucesso!", 
+                        "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
             limparDados();
             jtfDescricao.requestFocus();
-        } catch (Exception e) {
+        } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o Produto!" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o Produto!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbGravarActionPerformed
 

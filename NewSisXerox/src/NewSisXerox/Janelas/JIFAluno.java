@@ -6,6 +6,7 @@
 package NewSisXerox.Janelas;
 
 import NewSisXerox.Classes.Validador;
+import NewSisXerox.Classes.JtextFieldSomenteLetras;
 import NewSisXerox.Classes.UpperCaseField;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Aluno;
@@ -55,8 +56,8 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
             tabaluno.setDados(l);
             jtBusca.updateUI();
             jtBusca.setAutoCreateRowSorter(true);//quando clicado no campo da tabela o mesmo será ordenado
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Alunos!" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Alunos!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro );
         }
     }
 
@@ -69,8 +70,8 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
             for (Curso a : lstCurso) {
                 jcCurso.addItem(a);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar Curso!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar Curso!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -92,10 +93,10 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
         jlCurso = new javax.swing.JLabel();
         jlRG = new javax.swing.JLabel();
         jlSaldo = new javax.swing.JLabel();
-        jtfRG = new UpperCaseField();
+        jtfRG = new UpperCaseField(); new JtextFieldSomenteLetras(12);
         jcCurso = new javax.swing.JComboBox();
-        jtfAluno = new UpperCaseField();
-        jtfRA = new UpperCaseField();
+        jtfAluno = new UpperCaseField(); new JtextFieldSomenteLetras(200);
+        jtfRA = new UpperCaseField(); new JtextFieldSomenteLetras(20);
         jbGravar = new javax.swing.JButton();
         jtfSaldo = new javax.swing.JTextField();
         jdData = new com.toedter.calendar.JDateChooser();
@@ -302,11 +303,11 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
             GenericDAO.getInstance().commit();
             JOptionPane.showMessageDialog(null, "Aluno: " + jtfAluno.getText() + "\n"
                     + "RA: " + jtfRA.getText() + "\n"
-                    + "Cadastrado com Sucesso!");
+                    + "Cadastrado com Sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
             limparDados();
-        } catch (Exception e) {
+        } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o Aluno!" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o Aluno!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbGravarActionPerformed
 
@@ -323,8 +324,8 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
                 jdData.setDate(aluno.getDtCadastro());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Aluno!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Aluno!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed

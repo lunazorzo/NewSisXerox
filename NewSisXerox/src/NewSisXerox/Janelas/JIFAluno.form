@@ -202,7 +202,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfRG">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField(); new JtextFieldSomenteLetras(12);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jcCurso">
@@ -219,7 +219,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfAluno">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField(); new JtextFieldSomenteLetras(200);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfRA">
@@ -227,7 +227,7 @@
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfRAKeyPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField(); new JtextFieldSomenteLetras(20);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jbGravar">

@@ -15,12 +15,16 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import NewSisXerox.Classes.UpperCaseField;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.plaf.FontUIResource;
 
 /**
  *
@@ -31,8 +35,16 @@ public class JFLogin extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JFLogin() {
+        //Tamanho da fonte das mensagens
+        UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 14));
+        //Tamanho da fonte na mensagem quanto utilizar botões
+        UIManager.put("OptionPane.buttonFont", new FontUIResource(new Font("Tahoma", Font.BOLD, 14)));
+        
         try {
 //            Pega o padrao do windows
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -166,7 +178,7 @@ public class JFLogin extends javax.swing.JFrame {
                 p.show(); //abre a tela principal
                 this.dispose(); //fecha a tela de login
             } else {
-                JOptionPane.showMessageDialog(null, "Usuário e senha inválidos!");
+                JOptionPane.showMessageDialog(null, "Usuário e senha inválidos!", "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
 
             }
 
@@ -175,12 +187,12 @@ public class JFLogin extends javax.swing.JFrame {
     }
     private void jbAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAcessarActionPerformed
         if (Validador.vldStringMinMax(jtfUsuario.getText(), 3, 15) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o usuário!");
+            JOptionPane.showMessageDialog(this, "Informe o usuário!", "ATENÇÃO", JOptionPane.ERROR_MESSAGE, alerta);
             jtfUsuario.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jpSenha.getText(), 3, 15) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a senha!");
+            JOptionPane.showMessageDialog(this, "Informe a senha!", "ATENÇÃO", JOptionPane.ERROR_MESSAGE, alerta);
             jpSenha.requestFocus();
             return;
         }

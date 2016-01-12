@@ -27,6 +27,9 @@ public class JPFormaPgto extends javax.swing.JPanel {
      */
     private Formpgto formpgto;
     private tabFormaPgto tabformapgto;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JPFormaPgto() {
         initComponents();
@@ -49,8 +52,8 @@ public class JPFormaPgto extends javax.swing.JPanel {
                     "FROM Formpgto nmFormpgto");  // consulta no banco
             tabformapgto.setDados(l);
             jtBuscar.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar busca!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar busca!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -153,9 +156,8 @@ public class JPFormaPgto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfFormaPgto.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a Forma de Pagamento!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe a Forma de Pagamento!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfFormaPgto.requestFocus();
             return;
         }
@@ -167,12 +169,13 @@ public class JPFormaPgto extends javax.swing.JPanel {
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(formpgto);
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Forma de Pagamento " + jtfFormaPgto.getText() + " gravada com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Forma de Pagamento " + jtfFormaPgto.getText() + " gravada com Sucesso!",
+                    "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
             limparDados();
 
         } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Forma de Pagamento já existente!" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Forma de Pagamento já existente!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
         jtfFormaPgto.requestFocus();
@@ -186,8 +189,8 @@ public class JPFormaPgto extends javax.swing.JPanel {
                 jtfFormaPgto.setText(formpgto.getNmFormpgto());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Forma de Pagamento!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Forma de Pagamento!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed

@@ -27,7 +27,10 @@ public class JPCurso extends javax.swing.JPanel {
      * Creates new form JPInstituica
      */
     private Curso curso;
-    private tabCurso tabCurso;
+    private final tabCurso tabCurso;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JPCurso() {
         initComponents();
@@ -50,8 +53,8 @@ public class JPCurso extends javax.swing.JPanel {
             for (Instituicao a : lstInstituicao) {
                 jcInstituicao.addItem(a);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar Instituição!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar Instituição!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -61,8 +64,8 @@ public class JPCurso extends javax.swing.JPanel {
                     "FROM Curso nmCurso");  // consulta no banco
             tabCurso.setDados(l);
             jtBusca.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar tabela de Cursos!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar tabela de Cursos!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -179,14 +182,13 @@ public class JPCurso extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfCurso.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do Curso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o nome do Curso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfCurso.requestFocus();
             return;
         }
         if (jcInstituicao.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione uma Instituição!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Selecione uma Instituição!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jcInstituicao.requestFocus();
             return;
         }
@@ -199,12 +201,13 @@ public class JPCurso extends javax.swing.JPanel {
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(curso);
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Curso " + jtfCurso.getText() + " gravada com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Curso " + jtfCurso.getText() + " gravada com Sucesso!",
+                    "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
             limparDados();
 
         } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Curso já existente!" + "\n" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Curso já existente!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
         jtfCurso.requestFocus();
@@ -219,8 +222,8 @@ public class JPCurso extends javax.swing.JPanel {
                 jcInstituicao.setSelectedItem(curso.getCdInstituicao());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Curso/Instituição!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Curso/Instituição!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed

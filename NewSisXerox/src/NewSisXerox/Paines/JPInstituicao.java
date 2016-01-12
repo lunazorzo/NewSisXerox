@@ -27,6 +27,9 @@ public class JPInstituicao extends javax.swing.JPanel {
      */
     private Instituicao ins;
     private tabInstituicao tabInstituicao;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JPInstituicao() {
         initComponents();
@@ -49,8 +52,8 @@ public class JPInstituicao extends javax.swing.JPanel {
                     "FROM Instituicao nmInstituicao");  // consulta no banco
             tabInstituicao.setDados(l);
             jtBusca.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela Instituição!" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela Instituição!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -153,9 +156,8 @@ public class JPInstituicao extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfInstituicao.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome Instituição!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o nome Instituição!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfInstituicao.requestFocus();
             return;
         }
@@ -167,12 +169,13 @@ public class JPInstituicao extends javax.swing.JPanel {
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(ins);
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Instituição " + jtfInstituicao.getText() + " gravada com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Instituição " + jtfInstituicao.getText() + " gravada com Sucesso!",
+                    "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
             limparDados();
 
         } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Instituição já existente!" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Instituição já existente!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
         jtfInstituicao.requestFocus();
@@ -194,8 +197,8 @@ public class JPInstituicao extends javax.swing.JPanel {
                 jtfInstituicao.setText(ins.getNmInstituicao());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Instituição!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Instituição!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed

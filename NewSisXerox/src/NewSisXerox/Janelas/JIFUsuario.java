@@ -28,6 +28,9 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
      */
     private Usuario usuario;
     private tabUsuario tabusuario;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JIFUsuario() {
         initComponents();
@@ -56,8 +59,8 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
                     "FROM Usuario usuario");  // consulta no banco
             tabusuario.setDados(l);
             jtBusca.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Usuários!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Usuários!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -185,14 +188,14 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+
         if (Validador.vldStringMinMax(jtfNome.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do usuário!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o nome do usuário!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfNome.requestFocus();
             return;
         }
         if (Validador.vldStringMinMax(jtfSenha.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe a senha do usuário!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe a senha do usuário!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfSenha.requestFocus();
             return;
         }
@@ -206,11 +209,11 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
             GenericDAO.getInstance().persist(usuario);
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Usuário " + jtfNome.getText() + " cadastrado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Usuário " + jtfNome.getText() + " cadastrado com Sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
             limparDados();
-        } catch (Exception e) {
+        } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o Usuário!" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o Usuário!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbGravarActionPerformed
 
@@ -223,8 +226,8 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
                 jtfSenha.setText(usuario.getSenha());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar Usuário!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar Usuário!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed

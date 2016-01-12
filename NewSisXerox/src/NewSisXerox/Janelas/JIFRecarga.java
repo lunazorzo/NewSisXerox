@@ -5,6 +5,7 @@
  */
 package NewSisXerox.Janelas;
 
+import NewSisXerox.Classes.JtextFieldSomenteNumeros;
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Aluno;
@@ -16,7 +17,6 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.Icon;
@@ -35,6 +35,9 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
     private Recarga recarga;
     private Aluno aluno;
     private final tabRecarga tabrecarga;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JIFRecarga() {
         initComponents();
@@ -67,8 +70,8 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
                     "FROM Aluno i order by i.raAluno");  // consulta no banco           
             tabrecarga.setDados(l);
             jtBusca.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Alunos!" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Alunos!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -81,8 +84,8 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
             for (Usuario a : lstist) {
                 jcUsuario.addItem(a);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar Usuários!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar Usuários!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -95,8 +98,8 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
             for (Formpgto a : lstist) {
                 jcFgtoPagamento.addItem(a);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar as Formas de Pagamento!" + "\n" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar as Formas de Pagamento!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -131,7 +134,7 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
         jlDTRecarga = new javax.swing.JLabel();
         jdDTRecarga = new com.toedter.calendar.JDateChooser();
         jlRecarga = new javax.swing.JLabel();
-        jtfRecarga = new javax.swing.JTextField();
+        jtfRecarga = new JtextFieldSomenteNumeros();
         jlSaldoFinal = new javax.swing.JLabel();
         jtfSaldoFinal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -363,29 +366,28 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
 
     private void jbGravarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarRecargaActionPerformed
 
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfAluno.getText(), 1, 50) == false) {
             //http://www.guj.com.br/t/icone-em-joptionpane/54164/3               
-            JOptionPane.showMessageDialog(this, "Informe o aluno para efetuar a recarga!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o aluno para efetuar a recarga!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfAluno.requestFocus();
             //jtfAluno.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 99, 71)));
             return;
         }
         if (Validador.vldStringMinMax(jtfRecarga.getText(), 1, 50) == false) {
-            JOptionPane.showMessageDialog(null, "Informe o valor da recarga!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Informe o valor da recarga!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, alerta);
             jtfRecarga.requestFocus();
 //            jtfRecarga.addFocusListener(new textFocusListener());//inicia a opção de alteração do foco do jtfrecarga
             return;
         }
         if (jcFgtoPagamento.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, alerta);
             jcFgtoPagamento.requestFocus();
 //            jcFgtoPagamento.addFocusListener(new jcFocusListener());//inicia a opção de
 
             return;
         }
         if (jcUsuario.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Selecione o usuário!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, figura);
+            JOptionPane.showMessageDialog(null, "Selecione o usuário!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, alerta);
             jcUsuario.requestFocus();
 //            jcUsuario.addFocusListener(new jcFocusListener());//inicia a opção de
             return;
@@ -404,13 +406,16 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
                 GenericDAO.getInstance().startTransaction();
                 GenericDAO.getInstance().persist(recarga);
                 GenericDAO.getInstance().commit();
-                JOptionPane.showMessageDialog(null, "A recarga de " + jtfSaldoFinal.getText() + " para o aluno(a) " + jtfAluno.getText() + ", foi realizada com Sucesso!");
+                JOptionPane.showMessageDialog(null, "A recarga de " + jtfSaldoFinal.getText()
+                        + " para o aluno(a) " + jtfAluno.getText() 
+                        + ", foi realizada com Sucesso!", 
+                        "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);                 
                 limparDados();
                 jtfAluno.requestFocus();
             }
-        } catch (NumberFormatException | HeadlessException e) {
+        } catch (NumberFormatException | HeadlessException ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao efetuar a Regarga!" + "\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao efetuar a Regarga!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbGravarRecargaActionPerformed
 
@@ -423,8 +428,8 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
                 jtfSaldoAtual.setText(aluno.getVlSaldo().toString());
                 Busca.dispose();
             }
-        } catch (Exception t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar o Aluno!" + "\n" + t.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar o Aluno!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed
 

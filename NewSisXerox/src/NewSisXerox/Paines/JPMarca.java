@@ -27,6 +27,9 @@ public class JPMarca extends javax.swing.JPanel {
      */
     private Marca marca;
     private final tabMarca tabmarca;
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
 
     public JPMarca() {
         initComponents();
@@ -49,8 +52,8 @@ public class JPMarca extends javax.swing.JPanel {
                     "FROM Marca nmMarca");  // consulta no banco
             tabmarca.setDados(l);
             jtBusca.updateUI();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela das Marcas!" + e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela das Marcas!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -155,9 +158,8 @@ public class JPMarca extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
         if (Validador.vldStringMinMax(jtfMarca.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome da Marca!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+            JOptionPane.showMessageDialog(this, "Informe o nome da Marca!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfMarca.requestFocus();
             return;
         }
@@ -169,12 +171,12 @@ public class JPMarca extends javax.swing.JPanel {
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(marca);
             GenericDAO.getInstance().commit();
-            JOptionPane.showMessageDialog(null, "Marca " + jtfMarca.getText() + " gravada com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Marca " + jtfMarca.getText() + " gravada com Sucesso!", "ATENÇÃO", JOptionPane.ERROR_MESSAGE, sucesso);
             limparDados();
 
         } catch (Exception ex) {
             GenericDAO.getInstance().rollback();
-            JOptionPane.showMessageDialog(null, "Unidade de Medida já existente!" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Unidade de Medida já existente!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
         jtfMarca.requestFocus();
@@ -196,8 +198,8 @@ public class JPMarca extends javax.swing.JPanel {
                 jtfMarca.setText(marca.getNmMarca());
                 Busca.dispose();
             }
-        } catch (Throwable t) {
-            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Marca!" + "\n" + t.getMessage());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar a Marca!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
             limparDados();
         }
     }//GEN-LAST:event_jbSelecionarActionPerformed

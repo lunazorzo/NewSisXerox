@@ -6,6 +6,7 @@
 package NewSisXerox.Janelas;
 
 import NewSisXerox.Classes.Validador;
+import NewSisXerox.Classes.JtextFieldSomenteNumeros;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Aluno;
 import NewSisXerox.Entity.Formpgto;
@@ -190,7 +191,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jtfProduto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jtfQuantidade = new javax.swing.JTextField();
+        jtfQuantidade = new JtextFieldSomenteNumeros();
         jbAdicionar = new javax.swing.JButton();
         jbtRemover = new javax.swing.JButton();
         jtfValor = new javax.swing.JTextField();

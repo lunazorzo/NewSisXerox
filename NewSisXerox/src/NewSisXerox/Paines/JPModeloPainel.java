@@ -21,6 +21,10 @@ public class JPModeloPainel extends javax.swing.JPanel {
     /**
      * Creates new form JPCurso
      */
+    Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
+    Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
+    Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
+
     public JPModeloPainel() {
         initComponents();
     }
@@ -113,9 +117,8 @@ public class JPModeloPainel extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfModeloPaineKeyPressed
 
     private void jbGravarModeloPaineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarModeloPaineActionPerformed
-       Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
-       if (Validador.vldStringMinMax(jtfModeloPaine.getText(), 3, 50) == false) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do modelo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, figura);
+        if (Validador.vldStringMinMax(jtfModeloPaine.getText(), 3, 50) == false) {
+            JOptionPane.showMessageDialog(this, "Informe o nome do modelo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfModeloPaine.requestFocus();
             return;
         }
