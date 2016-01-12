@@ -119,6 +119,17 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         tabela.setNumRows(0);
     }
 
+    public void limparDadosGrade() {
+        jtfProduto.setText("");
+        jtfValor.setText("");
+        jtfQuantidade.setText("");
+        jcFgtoPagamento.setSelectedItem(null);
+        jtfTLProduto.setText("");
+        jtfDesconto.setText("");
+        jtfTotal.setText("");
+        jtfDesconto.setText("0");
+    }
+
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
             //selecina o dado da tabela e depois perde o foco algo assim
@@ -569,7 +580,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private void jbSelecionarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarAlunoActionPerformed
         try {
             //pegando a opção selecionada na grade
-            //aluno = (Aluno) tabbuscaalunovenda.getDadoAt(jtBuscaAluno.getSelectedRow());
+            aluno = (Aluno) tabbuscaalunovenda.getDadoAt(jtBuscaAluno.getSelectedRow());
             if (aluno != null) {
                 jtfAluno.setText(aluno.getNmAluno());
                 jtfRA.setText(aluno.getRaAluno());
@@ -609,6 +620,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         if (Validador.vldStringMinMax(jtfProduto.getText(), 3, 50) == false) {
             JOptionPane.showMessageDialog(this, "Informe o nome o Produto, realizado a busca do mesmo!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfProduto.requestFocus();
+            return;
         }
         if (Validador.vldStringMinMax(jtfQuantidade.getText(), 1, 50) == false) {
             JOptionPane.showMessageDialog(this, "Informe a quantidade do produto!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
@@ -617,6 +629,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         }
         try {
             //http://www.devmedia.com.br/java-bigdecimal-trabalhando-com-mais-precisao/30286
+            //Pega o valor do produto e multiplica pela quantidade
             BigDecimal bigResult = casasDecimais(2, new BigDecimal(jtfValor.getText().replace(",", ".")).multiply(new BigDecimal(jtfQuantidade.getText().replace(",", "."))));
             jtfResultado.setText(String.valueOf(bigResult).replace(".", ","));
             //Adiciona os itens na grade
@@ -648,10 +661,22 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             teste.removeRow(jtProdutos.getSelectedRow());
             JOptionPane.showMessageDialog(this, "Produto Removido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, clear);
             jtProdutos.updateUI();
-
+            //Somanda os valores novamente da grade
+            Double soma = 0.0;
+            try {
+                for (int i = 0; i < jtProdutos.getRowCount(); i++) {
+                    soma += Double.parseDouble(jtProdutos.getValueAt(i, 3).toString().replace(",", "."));
+                    jtfTLProduto.setText(String.valueOf(soma).replace(".", ","));
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao calcular Total Produtos: " + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+                jtfQuantidade.requestFocus();
+            }
+            //limparDadosGrade();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao adicionar o produto na grade!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+            JOptionPane.showMessageDialog(null, "Erro ao Remover o produto na grade!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
+
     }//GEN-LAST:event_jbtRemoverActionPerformed
 
     private void jbFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFinalizarCompraActionPerformed
@@ -663,12 +688,35 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         if (jcFgtoPagamento.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Selecione a Forma de Pagamento !", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, alerta);
             jcFgtoPagamento.requestFocus();
+            return;
         }
+        //Pega o valor dos produtos e diminui com o desconto 
+
         try {
-            BigDecimal bigResult = casasDecimais(2, new BigDecimal(jtfTLProduto.getText().replace(",", ".")).add(new BigDecimal(jtfDesconto.getText().replace(",", "."))));
-            jtfTotal.setText(String.valueOf(bigResult).replace(".", ","));
-            JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
-            limparDados();
+            BigDecimal bigResult2 = casasDecimais(2, new BigDecimal(jtfTLProduto.getText().replace(",", ".")).subtract(new BigDecimal(jtfDesconto.getText().replace(",", "."))));
+            jtfTotal.setText(String.valueOf(bigResult2).replace(".", ","));
+
+            BigDecimal a = new BigDecimal(jtfTotal.getText().replace(",", "."));
+            BigDecimal b = new BigDecimal(jtfSaldo.getText().replace(",", "."));
+//            int i = b.compareTo(a);
+//            System.out.println(i);
+
+            if (b.compareTo(BigDecimal.ZERO) <= 0) {
+                JOptionPane.showMessageDialog(null, "#Impossível realizar a venda, verifique o saldo!"
+                        + "\n Saldo Disponível: " + jtfSaldo.getText().replace(",", ".")
+                        + "\n Total de Produtos: " + jtfTotal.getText().replace(",", "."),
+                        "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, erro);
+
+            } else if (b.compareTo(a) == 1) {
+                JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
+                limparDados();
+            } else {
+                JOptionPane.showMessageDialog(null, "Impossível realizar a venda, verifique o saldo!"
+                        + "\n Saldo Disponível: " + jtfSaldo.getText().replace(",", ".")
+                        + "\n Total de Produtos: " + jtfTotal.getText().replace(",", "."),
+                        "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, erro);
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao finalizar Venda!" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
