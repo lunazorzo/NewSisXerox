@@ -5,9 +5,8 @@
  */
 package NewSisXerox.Janelas;
 
-import NewSisXerox.Classes.Validador;
-import NewSisXerox.Classes.JtextFieldSomenteLetras;
 import NewSisXerox.Classes.UpperCaseField;
+import NewSisXerox.Classes.Validador;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Aluno;
 import NewSisXerox.Entity.Curso;
@@ -38,7 +37,7 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
 
     public JIFAluno() {
         initComponents();
-        carregaCombo();
+        carregaCombo();        
         tabaluno = new tabAluno();
         jtBusca.setModel(tabaluno);
         jdData.setDate(new java.util.Date());
@@ -57,7 +56,7 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
             jtBusca.updateUI();
             jtBusca.setAutoCreateRowSorter(true);//quando clicado no campo da tabela o mesmo será ordenado
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Alunos!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro );
+            JOptionPane.showMessageDialog(this, "Erro ao carregar a tabela de Alunos!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }
 
@@ -93,10 +92,10 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
         jlCurso = new javax.swing.JLabel();
         jlRG = new javax.swing.JLabel();
         jlSaldo = new javax.swing.JLabel();
-        jtfRG = new UpperCaseField(); new JtextFieldSomenteLetras(12);
+        jtfRG = new UpperCaseField();
         jcCurso = new javax.swing.JComboBox();
-        jtfAluno = new UpperCaseField(); new JtextFieldSomenteLetras(200);
-        jtfRA = new UpperCaseField(); new JtextFieldSomenteLetras(20);
+        jtfAluno = new UpperCaseField();
+        jtfRA = new UpperCaseField();
         jbGravar = new javax.swing.JButton();
         jtfSaldo = new javax.swing.JTextField();
         jdData = new com.toedter.calendar.JDateChooser();
@@ -174,6 +173,7 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
             }
         });
 
+        jtfSaldo.setText("0");
         jtfSaldo.setEnabled(false);
         jtfSaldo.setPreferredSize(new java.awt.Dimension(59, 20));
 
@@ -227,9 +227,9 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
                             .addComponent(jlRA)
                             .addComponent(jtfRA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlAluno)
-                            .addComponent(jtfAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlCurso)
@@ -246,7 +246,7 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
                     .addComponent(jdData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbGravar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -267,7 +267,7 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfRAKeyPressed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarActionPerformed
-        
+
         if (Validador.vldStringMinMax(jtfRA.getText(), 3, 50) == false) {
             JOptionPane.showMessageDialog(this, "Informe a RA!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
             jtfRA.requestFocus();
@@ -296,7 +296,8 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
             aluno.setNmAluno(jtfAluno.getText());
             aluno.setCdCurso((Curso) jcCurso.getSelectedItem());//pega o que foi selecionado
             aluno.setRgAluno(jtfRG.getText());
-            aluno.setVlSaldo(BigDecimal.ZERO);
+            BigDecimal bigResult = (new BigDecimal(jtfSaldo.getText().replace(",", ".")));
+            aluno.setVlSaldo(bigResult);
             aluno.setDtCadastro(jdData.getDate());
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(aluno);
@@ -322,6 +323,7 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
                 jcCurso.setSelectedItem(aluno.getCdCurso());
                 jtfSaldo.setText(aluno.getVlSaldo().toString());
                 jdData.setDate(aluno.getDtCadastro());
+                jtBusca.clearSelection();
                 Busca.dispose();
             }
         } catch (Throwable ex) {

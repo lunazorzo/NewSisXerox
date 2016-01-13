@@ -272,7 +272,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfEmail">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField();"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jtfCEP">
@@ -312,12 +312,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfBairro">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField();"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfEndereco">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField();"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfEmpresa">
@@ -325,7 +325,7 @@
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfEmpresaKeyPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField();"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="Bairro1">
@@ -338,7 +338,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfCidade">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UpperCaseField();"/>
       </AuxValues>
     </Component>
   </SubComponents>

@@ -7,6 +7,7 @@ package NewSisXerox.Paines;
 
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.Classes.UpperCaseField;
+import NewSisXerox.Classes.JtextFieldSomenteLetras;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Formpgto;
 import NewSisXerox.Tabelas.tabFormaPgto;
@@ -34,7 +35,7 @@ public class JPFormaPgto extends javax.swing.JPanel {
     public JPFormaPgto() {
         initComponents();
         tabformapgto = new tabFormaPgto();
-        jtBuscar.setModel(tabformapgto);
+        jtBusca.setModel(tabformapgto);
     }
 
     /**
@@ -51,7 +52,7 @@ public class JPFormaPgto extends javax.swing.JPanel {
             List l = GenericDAO.getInstance().getList(Formpgto.class,
                     "FROM Formpgto nmFormpgto");  // consulta no banco
             tabformapgto.setDados(l);
-            jtBuscar.updateUI();
+            jtBusca.updateUI();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar busca!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
@@ -63,7 +64,7 @@ public class JPFormaPgto extends javax.swing.JPanel {
 
         Busca = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtBuscar = new javax.swing.JTable();
+        jtBusca = new javax.swing.JTable();
         jbSelecionar = new javax.swing.JButton();
         jlFormaPgto = new javax.swing.JLabel();
         jtfFormaPgto = new UpperCaseField();
@@ -72,7 +73,7 @@ public class JPFormaPgto extends javax.swing.JPanel {
         Busca.setTitle("Busca");
         Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
-        jtBuscar.setModel(new javax.swing.table.DefaultTableModel(
+        jtBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -83,7 +84,7 @@ public class JPFormaPgto extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtBuscar);
+        jScrollPane1.setViewportView(jtBusca);
 
         jbSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbSelecionar.setText("Selecionar");
@@ -184,10 +185,11 @@ public class JPFormaPgto extends javax.swing.JPanel {
     private void jbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarActionPerformed
         try {
             //pegando a opção selecionada na grade
-            formpgto = (Formpgto) tabformapgto.getDadoAt(jtBuscar.getSelectedRow());
+            formpgto = (Formpgto) tabformapgto.getDadoAt(jtBusca.getSelectedRow());
             if (formpgto != null) {
                 jtfFormaPgto.setText(formpgto.getNmFormpgto());
                 Busca.dispose();
+                jtBusca.clearSelection();
             }
         } catch (Throwable ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar a Forma de Pagamento!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
@@ -210,7 +212,7 @@ public class JPFormaPgto extends javax.swing.JPanel {
     private javax.swing.JButton jbGravar;
     private javax.swing.JButton jbSelecionar;
     private javax.swing.JLabel jlFormaPgto;
-    private javax.swing.JTable jtBuscar;
+    private javax.swing.JTable jtBusca;
     private javax.swing.JTextField jtfFormaPgto;
     // End of variables declaration//GEN-END:variables
 }

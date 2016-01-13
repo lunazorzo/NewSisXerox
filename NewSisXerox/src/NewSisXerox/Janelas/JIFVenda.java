@@ -200,7 +200,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jtfTLProduto = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jtfDesconto = new javax.swing.JTextField();
+        jtfDesconto = new JtextFieldSomenteNumeros();
         jLabel9 = new javax.swing.JLabel();
         jtfTotal = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -587,6 +587,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                 jtfRA.setText(aluno.getRaAluno());
                 jtfSaldo.setText(aluno.getVlSaldo().toString().replace(".", ","));
                 BuscaAluno.dispose();
+                jtBuscaAluno.clearSelection();
             }
         } catch (Throwable t) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar o Aluno!" + "\n" + t.getClass().getSimpleName() + "\n" + t.getMessage());
@@ -609,6 +610,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                 jtfProduto.setText(produto.getNmProduto());
                 jtfValor.setText(produto.getVlVenda().toString().replace(".", ","));
                 BuscaProduto.dispose();
+                jtBuscaProduto.clearSelection();
             }
         } catch (Throwable ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar Produto!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage());

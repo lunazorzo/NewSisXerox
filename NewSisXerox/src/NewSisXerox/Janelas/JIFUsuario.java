@@ -225,6 +225,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
                 jtfNome.setText(usuario.getUsuario());
                 jtfSenha.setText(usuario.getSenha());
                 Busca.dispose();
+                jtBusca.clearSelection();
             }
         } catch (Throwable ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar Usuário!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);

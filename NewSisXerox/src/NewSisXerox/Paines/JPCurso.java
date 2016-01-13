@@ -7,6 +7,7 @@ package NewSisXerox.Paines;
 
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.Classes.UpperCaseField;
+import NewSisXerox.Classes.JtextFieldSomenteLetras;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Curso;
 import javax.swing.JOptionPane;
@@ -221,6 +222,7 @@ public class JPCurso extends javax.swing.JPanel {
                 jtfCurso.setText(curso.getNmCurso());
                 jcInstituicao.setSelectedItem(curso.getCdInstituicao());
                 Busca.dispose();
+                jtBusca.clearSelection();
             }
         } catch (Throwable ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar a Curso/Instituição!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);

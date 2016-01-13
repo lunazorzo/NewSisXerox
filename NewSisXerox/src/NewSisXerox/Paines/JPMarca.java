@@ -7,6 +7,7 @@ package NewSisXerox.Paines;
 
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.Classes.UpperCaseField;
+import NewSisXerox.Classes.JtextFieldSomenteLetras;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Marca;
 import javax.swing.JOptionPane;
@@ -197,6 +198,7 @@ public class JPMarca extends javax.swing.JPanel {
             if (marca != null) {
                 jtfMarca.setText(marca.getNmMarca());
                 Busca.dispose();
+                jtBusca.clearSelection();
             }
         } catch (Throwable ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar a Marca!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);

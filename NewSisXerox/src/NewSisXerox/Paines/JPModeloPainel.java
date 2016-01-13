@@ -7,6 +7,7 @@ package NewSisXerox.Paines;
 
 import java.awt.event.KeyEvent;
 import NewSisXerox.Classes.UpperCaseField;
+import NewSisXerox.Classes.JtextFieldSomenteLetras;
 import NewSisXerox.Classes.Validador;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

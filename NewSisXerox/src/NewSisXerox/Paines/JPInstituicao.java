@@ -7,6 +7,7 @@ package NewSisXerox.Paines;
 
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.Classes.UpperCaseField;
+import NewSisXerox.Classes.JtextFieldSomenteLetras;
 import NewSisXerox.DAO.GenericDAO;
 import javax.swing.JOptionPane;
 import NewSisXerox.Entity.Instituicao;
@@ -196,6 +197,7 @@ public class JPInstituicao extends javax.swing.JPanel {
             if (ins != null) {
                 jtfInstituicao.setText(ins.getNmInstituicao());
                 Busca.dispose();
+                jtBusca.clearSelection();
             }
         } catch (Throwable ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar a Instituição!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);

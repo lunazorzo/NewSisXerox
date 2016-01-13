@@ -15,13 +15,15 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import NewSisXerox.Classes.UpperCaseField;
+import NewSisXerox.DAO.GenericDAO;
+import NewSisXerox.Entity.Usuario;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.plaf.FontUIResource;
@@ -38,13 +40,19 @@ public class JFLogin extends javax.swing.JFrame {
     Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
     Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
     Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
+    Usuario usuario;
+    
+    private static GenericDAO instance = null;
+    private EntityManager em;
+    private EntityTransaction tx;
 
     public JFLogin() {
-        //Tamanho da fonte das mensagens
+//Tamanho da fonte das mensagens
         UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.BOLD, 14));
         //Tamanho da fonte na mensagem quanto utilizar botões
         UIManager.put("OptionPane.buttonFont", new FontUIResource(new Font("Tahoma", Font.BOLD, 14)));
-        
+         UIManager.put("InternalFrame.paletteTitleFont", new FontUIResource(new Font("Tahoma", Font.BOLD, 14)));
+
         try {
 //            Pega o padrao do windows
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -55,6 +63,8 @@ public class JFLogin extends javax.swing.JFrame {
         URL url = this.getClass().getResource("/NewSisXerox/Imagens/Icone-64.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(imagemTitulo);
+        //conexãobanco
+
     }
 
     @SuppressWarnings("unchecked")
@@ -70,20 +80,23 @@ public class JFLogin extends javax.swing.JFrame {
         jbCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login");
+        setTitle("LOGIN");
         setResizable(false);
 
         jlIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/Password-64.png"))); // NOI18N
 
+        jlUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jlUsuario.setText("Usuário:");
 
         jtfUsuario.setText("ADMIN");
 
+        jtfSenha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jtfSenha.setText("Senha:");
 
         jpSenha.setText("123");
         jpSenha.setToolTipText("");
 
+        jbAcessar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jbAcessar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbAcessar.setText("Acessar");
         jbAcessar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +105,7 @@ public class JFLogin extends javax.swing.JFrame {
             }
         });
 
+        jbCancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/Cancelar - 16.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,33 +170,43 @@ public class JFLogin extends javax.swing.JFrame {
 
     public void logar() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 
-        String url = "jdbc:postgresql://localhost:5432/newxerox";
-        String usuario = "postgres";
-        String senha = "xtz7qr87";
-        Class.forName("org.postgresql.Driver");
-        Connection con;
-        con = DriverManager.getConnection(url, usuario, senha);
-        System.out.println("Conexão realizada com sucesso.");
-        String SQL = "SELECT *FROM Usuario WHERE usuario = ? and senha = ?";
-        try {
-
-            pst = con.prepareStatement(SQL);
-            pst.setString(1, jtfUsuario.getText());
-            pst.setString(2, jpSenha.getText());
-            rs = pst.executeQuery();
-            System.err.println(SQL);
-            //if (jtfUsuario.getText().equals("ADMIN") && jpSenha.getText().equals("123")) {
-            if (rs.next()) {
-                System.err.println(rs);
-                JFPrincipal p = new JFPrincipal(); //instancia da tela principal
-                p.show(); //abre a tela principal
-                this.dispose(); //fecha a tela de login
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuário e senha inválidos!", "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
-
-            }
-
-        } catch (SQLException | HeadlessException e) {
+//        String url = "jdbc:postgresql://localhost:5432/newxerox";
+//        String usuario = "postgres";
+//        String senha = "xtz7qr87";
+//        Class.forName("org.postgresql.Driver");
+//        Connection con;
+//        con = DriverManager.getConnection(url, usuario, senha);
+//        System.out.println("Conexão realizada com sucesso.");
+//        String SQL = "SELECT *FROM Usuario WHERE usuario = ? and senha = ?";
+//        try {
+//
+//            pst = con.prepareStatement(SQL);
+//            pst.setString(1, jtfUsuario.getText());
+//            pst.setString(2, jpSenha.getText());
+//            rs = pst.executeQuery();
+//            System.err.println(SQL);
+//            //if (jtfUsuario.getText().equals("ADMIN") && jpSenha.getText().equals("123")) {
+//            if (rs.next()) {
+//                System.err.println(rs);
+//                JFPrincipal p = new JFPrincipal(); //instancia da tela principal
+//                p.show(); //abre a tela principal
+//                this.dispose(); //fecha a tela de login
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Usuário e senha inválidos!", "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+//            }
+//        } catch (SQLException | HeadlessException e) {
+//        }
+ 
+        usuario = (Usuario) GenericDAO.getInstance().getObject(
+                " select s from Usuario s "
+                + "  where upper(s.usuario) like upper('" + jtfUsuario.getText() + "') "
+                + "    and s.senha = '" + (jpSenha.getText()) + "' ");
+        if (usuario == null) {
+            JOptionPane.showMessageDialog(this, "Usuario não Encontrado!", "ATENÇÃO", JOptionPane.ERROR_MESSAGE, alerta);
+        } else {
+            JFPrincipal p = new JFPrincipal(); //instancia da tela principal
+            p.show(); //abre a tela principal
+            this.dispose(); //fecha a tela de login
         }
     }
     private void jbAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAcessarActionPerformed

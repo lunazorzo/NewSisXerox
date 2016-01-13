@@ -7,6 +7,7 @@ package NewSisXerox.Paines;
 
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.Classes.UpperCaseField;
+import NewSisXerox.Classes.JtextFieldSomenteLetras;
 import NewSisXerox.DAO.GenericDAO;
 import javax.swing.JOptionPane;
 import NewSisXerox.Entity.Marca;
@@ -36,7 +37,7 @@ public class JPModelo extends javax.swing.JPanel {
         initComponents();
         carregaCombo();
         tabmodelo = new tabModelo();
-        jtModelo.setModel(tabmodelo);
+        jtBusca.setModel(tabmodelo);
     }
 
     /**
@@ -68,7 +69,7 @@ public class JPModelo extends javax.swing.JPanel {
             List l = GenericDAO.getInstance().getList(Modelo.class,
                     "FROM Modelo nmModelo");  // consulta no banco
             tabmodelo.setDados(l);
-            jtModelo.updateUI();
+            jtBusca.updateUI();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar Modelo!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
@@ -80,7 +81,7 @@ public class JPModelo extends javax.swing.JPanel {
 
         Busca = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtModelo = new javax.swing.JTable();
+        jtBusca = new javax.swing.JTable();
         jbSelecionarCurso = new javax.swing.JButton();
         jlmodelo = new javax.swing.JLabel();
         jtfModelo = new UpperCaseField();
@@ -91,7 +92,7 @@ public class JPModelo extends javax.swing.JPanel {
         Busca.setTitle("Busca");
         Busca.setMinimumSize(new java.awt.Dimension(500, 335));
 
-        jtModelo.setModel(new javax.swing.table.DefaultTableModel(
+        jtBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -102,7 +103,7 @@ public class JPModelo extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtModelo);
+        jScrollPane1.setViewportView(jtBusca);
 
         jbSelecionarCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NewSisXerox/Imagens/selecionar - 16.png"))); // NOI18N
         jbSelecionarCurso.setText("Selecionar");
@@ -224,11 +225,12 @@ public class JPModelo extends javax.swing.JPanel {
     private void jbSelecionarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarCursoActionPerformed
         try {
             //pegando a opção selecionada na grade
-            modelo = (Modelo) tabmodelo.getDadoAt(jtModelo.getSelectedRow());
+            modelo = (Modelo) tabmodelo.getDadoAt(jtBusca.getSelectedRow());
             if (modelo != null) {
                 jtfModelo.setText(modelo.getNmModelo());
                 jcModelo.setSelectedItem(modelo.getCdMarca());
                 Busca.dispose();
+                jtBusca.clearSelection();
             }
         } catch (Throwable ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar a Curso/Instituição!" + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
@@ -253,7 +255,7 @@ public class JPModelo extends javax.swing.JPanel {
     private javax.swing.JButton jbSelecionarCurso;
     private javax.swing.JComboBox jcModelo;
     private javax.swing.JLabel jlmodelo;
-    private javax.swing.JTable jtModelo;
+    private javax.swing.JTable jtBusca;
     private javax.swing.JTextField jtfModelo;
     // End of variables declaration//GEN-END:variables
 }

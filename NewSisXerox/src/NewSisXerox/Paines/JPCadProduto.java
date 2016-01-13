@@ -8,6 +8,7 @@ package NewSisXerox.Paines;
 import NewSisXerox.Classes.UpperCaseField;
 import NewSisXerox.Classes.Validador;
 import NewSisXerox.Classes.JtextFieldSomenteNumeros;
+import NewSisXerox.Classes.JtextFieldSomenteLetras;
 import NewSisXerox.DAO.GenericDAO;
 import NewSisXerox.Entity.Marca;
 import NewSisXerox.Entity.Modelo;
@@ -336,6 +337,7 @@ public final class JPCadProduto extends javax.swing.JPanel {
                 jtfVlVenda.setText(produto.getVlVenda().toString().replace(".", ","));
                 jdData.setDate(produto.getDtCadastro());
                 Busca.dispose();
+                jtBusca.clearSelection();
             }
         } catch (Throwable ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar Produto!"  + "\n" + ex.getClass().getSimpleName() + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
