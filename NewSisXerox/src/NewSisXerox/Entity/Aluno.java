@@ -59,7 +59,7 @@ public class Aluno implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dtCadastro;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
+    //@Basic(optional = false)
     @Column(name = "vl_saldo")
     private BigDecimal vlSaldo;
     @Basic(optional = false)

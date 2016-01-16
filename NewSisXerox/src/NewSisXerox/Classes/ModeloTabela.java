@@ -16,13 +16,18 @@ public abstract class ModeloTabela implements TableModel {
     public ModeloTabela() {
     }
 
+    @Override
     public void removeTableModelListener(TableModelListener l) {
     }
 
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return false;
+        //True habilita a edição das linhas e colunas da tabela
+        //False desabilita a edição das linhas e colunas da tabela
     }
 
+    @Override
     public int getRowCount() {
         if (dados != null) {
             return dados.size();
@@ -32,6 +37,7 @@ public abstract class ModeloTabela implements TableModel {
 
     public void ModeloDefaul(DefaultListModel d){}
 
+    @Override
     public void addTableModelListener(TableModelListener l) {
     }
 

@@ -13,7 +13,6 @@ import NewSisXerox.Entity.Curso;
 import NewSisXerox.Tabelas.tabAluno;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -173,7 +172,6 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
             }
         });
 
-        jtfSaldo.setText("0");
         jtfSaldo.setEnabled(false);
         jtfSaldo.setPreferredSize(new java.awt.Dimension(59, 20));
 
@@ -296,8 +294,8 @@ public final class JIFAluno extends javax.swing.JInternalFrame {
             aluno.setNmAluno(jtfAluno.getText());
             aluno.setCdCurso((Curso) jcCurso.getSelectedItem());//pega o que foi selecionado
             aluno.setRgAluno(jtfRG.getText());
-            BigDecimal bigResult = (new BigDecimal(jtfSaldo.getText().replace(",", ".")));
-            aluno.setVlSaldo(bigResult);
+            //BigDecimal bigResult = (new BigDecimal(jtfSaldo.getText().replace(",", ".")));
+            //aluno.setVlSaldo(bigResult);
             aluno.setDtCadastro(jdData.getDate());
             GenericDAO.getInstance().startTransaction();
             GenericDAO.getInstance().persist(aluno);

@@ -37,8 +37,8 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
     private Venda venda;
     private Aluno aluno;
     private Produto produto;
-    private tabBuscaAlunoVenda tabbuscaalunovenda;
-    private tabBuscaProdutoVenda tabbuscaprodutovenda;
+    private final tabBuscaAlunoVenda tabbuscaalunovenda;
+    private final tabBuscaProdutoVenda tabbuscaprodutovenda;
     private DefaultTableModel tabela;
     Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
     Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
@@ -384,7 +384,15 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
             new String [] {
                 "Produto", "Valor", "Quantidade", "Valor * Quantidade"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jtProdutos);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -490,19 +498,20 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         jLabel7.setText("Total Produto:");
 
         jtfTLProduto.setEditable(false);
-        jtfTLProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jtfTLProduto.setEnabled(false);
+        jtfTLProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtfTLProduto.setForeground(java.awt.Color.blue);
+        jtfTLProduto.setOpaque(false);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Desconto:");
 
-        jtfDesconto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtfDesconto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfDesconto.setText("0");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Total:");
 
-        jtfTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtfTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfTotal.setEnabled(false);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -660,6 +669,11 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
 
     private void jbtRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRemoverActionPerformed
         DefaultTableModel teste = (DefaultTableModel) jtProdutos.getModel();
+        if (jtProdutos.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleciona uma linha para ser removida!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, alerta);
+            jtfProduto.requestFocus();
+            return;
+        }
         try {
             teste.removeRow(jtProdutos.getSelectedRow());
             JOptionPane.showMessageDialog(this, "Produto Removido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE, clear);
@@ -696,14 +710,21 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         //Pega o valor dos produtos e diminui com o desconto 
 
         try {
+            //Realiza o calculo se houver desconto
             BigDecimal bigResult2 = casasDecimais(2, new BigDecimal(jtfTLProduto.getText().replace(",", ".")).subtract(new BigDecimal(jtfDesconto.getText().replace(",", "."))));
             jtfTotal.setText(String.valueOf(bigResult2).replace(".", ","));
 
             BigDecimal a = new BigDecimal(jtfTotal.getText().replace(",", "."));
             BigDecimal b = new BigDecimal(jtfSaldo.getText().replace(",", "."));
+            //pega o valor do desconto para gravar
+            BigDecimal c = new BigDecimal(jtfDesconto.getText().replace(",", "."));
+            BigDecimal d = new BigDecimal(jtfTLProduto.getText().replace(",", "."));
 //            int i = b.compareTo(a);
-//            System.out.println(i);
-
+            System.out.println(a);
+            System.out.println(b);
+            System.out.println(c);
+            System.out.println(d);
+            System.out.println(venda);
             if (b.compareTo(BigDecimal.ZERO) <= 0) {
                 JOptionPane.showMessageDialog(null, "#Impossível realizar a venda, verifique o saldo!"
                         + "\n Saldo Disponível: " + jtfSaldo.getText().replace(",", ".")
@@ -711,8 +732,40 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                         "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, erro);
 
             } else if (b.compareTo(a) == 1) {
-                JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
-                limparDados();
+                try {
+                    //para pegar o valor da tabela
+
+                    if (venda == null) {
+                        venda = new Venda();
+                    }
+                    for (int i = 0; i < jtProdutos.getRowCount(); i++) {
+                        int produtoTab = (Integer) jtProdutos.getValueAt(i, 0);
+                        int valorTab = (Integer) jtProdutos.getValueAt(i, 1);
+                        int quantidadeTab = (Integer) jtProdutos.getValueAt(i, 2);
+                        int valorquantidadeTab = (Integer) jtProdutos.getValueAt(i, 3);
+                        BigDecimal x = new BigDecimal(quantidadeTab);
+                        System.out.println(x);
+                        //Está certo
+                        venda.setCdAluno(aluno);
+                        venda.setDtVenda(jdData.getDate());
+
+                        venda.setQtVenda(x);
+                        venda.setCdFormpgto((Formpgto) jcFgtoPagamento.getSelectedItem());
+                        venda.setVlTotal(d);
+                        venda.setVlDesconto(c);
+                        venda.setVlVenda(a);
+                        JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
+                        limparDados();
+
+                        //
+                        venda.setCdProduto(produto);
+                        System.out.println("Mesa: " + produtoTab + "\n" + "Pedido:" + valorTab + "\n" + "Quantidade: " + quantidadeTab + "\n" + "Valor Unidade: " + valorquantidadeTab);
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Erro ao Gravar a Venda!" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Impossível realizar a venda, verifique o saldo!"
                         + "\n Saldo Disponível: " + jtfSaldo.getText().replace(",", ".")

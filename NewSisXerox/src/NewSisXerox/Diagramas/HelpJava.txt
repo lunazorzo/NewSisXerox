@@ -45,3 +45,5 @@ BigDecimal soma          = value.add(otherValue);      // value + otherValue
 BigDecimal subtracao     = value.subtract(otherValue); // value - otherValue;
 BigDecimal multiplicacao = value.multiply(otherValue); // value * otherValue;
 BigDecimal divisao       = value.divide(otherValue);   // value / otherValue
+
+http://www.guj.com.br/t/uppercase-em-jtextfield-resolvido/74841/21
