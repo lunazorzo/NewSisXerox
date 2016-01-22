@@ -38,7 +38,7 @@ INSERT INTO "usuario" ("usuario","senha","fg_ativo") VALUES ('ADMIN','123', '1')
 
 --FormaPgto
 INSERT INTO "formpgto" ("nm_formpgto") VALUES ('DINHEIRO');
-
+INSERT INTO "formpgto" ("nm_formpgto") VALUES ('CRÉDITO');
 --marca
 INSERT INTO "marca" ("nm_marca") VALUES ('GERAL');
 
@@ -47,3 +47,11 @@ INSERT INTO "modelo" ("nm_modelo", "cd_marca") VALUES ('GERAL',1);
 
 --Unidade
 INSERT INTO "unidade" ("nm_unidade") VALUES ('Unidade');
+
+--Aluno
+INSERT INTO aluno( nm_aluno, dt_cadastro, vl_saldo, rg_aluno, ra_aluno, cd_curso)  VALUES ('Aluno Teste', '2016-01-01', 50.00, 1234, 123, 1);
+
+--Produto
+INSERT INTO produto(nm_produto, dt_cadastro, fg_ativo, vl_compra, vl_venda, cd_marca, cd_unidade, cd_modelo) VALUES ('Caneta', '2016-01-01', true, 0.10, 1.20, 1, 1, 1);
+INSERT INTO produto(nm_produto, dt_cadastro, fg_ativo, vl_compra, vl_venda, cd_marca, cd_unidade, cd_modelo) VALUES ('Xerox', '2016-01-01', true, 0.10, 0.20, 1, 1, 1);
+
