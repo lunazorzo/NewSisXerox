@@ -7,8 +7,10 @@ package NewSisXerox.Entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,10 +20,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +43,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Produto.findByVlCompra", query = "SELECT p FROM Produto p WHERE p.vlCompra = :vlCompra"),
     @NamedQuery(name = "Produto.findByVlVenda", query = "SELECT p FROM Produto p WHERE p.vlVenda = :vlVenda")})
 public class Produto implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdProduto")
+    private Collection<Venda> vendaCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -184,6 +190,15 @@ public class Produto implements Serializable {
     @Override
     public String toString() {
         return "NewSisXerox.Entity.Produto[ cdProduto=" + cdProduto + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Venda> getVendaCollection() {
+        return vendaCollection;
+    }
+
+    public void setVendaCollection(Collection<Venda> vendaCollection) {
+        this.vendaCollection = vendaCollection;
     }
     
 }

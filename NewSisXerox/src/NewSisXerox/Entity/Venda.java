@@ -7,10 +7,8 @@ package NewSisXerox.Entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,12 +18,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -42,8 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Venda.findByQtVenda", query = "SELECT v FROM Venda v WHERE v.qtVenda = :qtVenda"),
     @NamedQuery(name = "Venda.findByVlVenda", query = "SELECT v FROM Venda v WHERE v.vlVenda = :vlVenda"),
     @NamedQuery(name = "Venda.findByVlDesconto", query = "SELECT v FROM Venda v WHERE v.vlDesconto = :vlDesconto"),
-    @NamedQuery(name = "Venda.findByVlTotal", query = "SELECT v FROM Venda v WHERE v.vlTotal = :vlTotal"),
-    @NamedQuery(name = "Venda.findByDtVenda1", query = "SELECT v FROM Venda v WHERE v.dtVenda1 = :dtVenda1")})
+    @NamedQuery(name = "Venda.findByVlTotal", query = "SELECT v FROM Venda v WHERE v.vlTotal = :vlTotal")})
 public class Venda implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,10 +66,6 @@ public class Venda implements Serializable {
     @Basic(optional = false)
     @Column(name = "vl_total")
     private BigDecimal vlTotal;
-    @Basic(optional = false)
-    @Column(name = "dt_venda_1")
-    @Temporal(TemporalType.DATE)
-    private Date dtVenda1;
     @JoinColumn(name = "cd_aluno", referencedColumnName = "cd_aluno")
     @ManyToOne(optional = false)
     private Aluno cdAluno;
@@ -87,8 +78,6 @@ public class Venda implements Serializable {
     @JoinColumn(name = "cd_produto", referencedColumnName = "cd_produto")
     @ManyToOne(optional = false)
     private Produto cdProduto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cdVenda")
-    private Collection<Contas> contasCollection;
 
     public Venda() {
     }
@@ -97,7 +86,7 @@ public class Venda implements Serializable {
         this.cdVenda = cdVenda;
     }
 
-    public Venda(Integer cdVenda, Date dtVenda, boolean stEstorno, BigDecimal qtVenda, BigDecimal vlVenda, BigDecimal vlDesconto, BigDecimal vlTotal, Date dtVenda1) {
+    public Venda(Integer cdVenda, Date dtVenda, boolean stEstorno, BigDecimal qtVenda, BigDecimal vlVenda, BigDecimal vlDesconto, BigDecimal vlTotal) {
         this.cdVenda = cdVenda;
         this.dtVenda = dtVenda;
         this.stEstorno = stEstorno;
@@ -105,7 +94,6 @@ public class Venda implements Serializable {
         this.vlVenda = vlVenda;
         this.vlDesconto = vlDesconto;
         this.vlTotal = vlTotal;
-        this.dtVenda1 = dtVenda1;
     }
 
     public Integer getCdVenda() {
@@ -164,14 +152,6 @@ public class Venda implements Serializable {
         this.vlTotal = vlTotal;
     }
 
-    public Date getDtVenda1() {
-        return dtVenda1;
-    }
-
-    public void setDtVenda1(Date dtVenda1) {
-        this.dtVenda1 = dtVenda1;
-    }
-
     public Aluno getCdAluno() {
         return cdAluno;
     }
@@ -202,15 +182,6 @@ public class Venda implements Serializable {
 
     public void setCdProduto(Produto cdProduto) {
         this.cdProduto = cdProduto;
-    }
-
-    @XmlTransient
-    public Collection<Contas> getContasCollection() {
-        return contasCollection;
-    }
-
-    public void setContasCollection(Collection<Contas> contasCollection) {
-        this.contasCollection = contasCollection;
     }
 
     @Override

@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Condpgto.findByStParcelado", query = "SELECT c FROM Condpgto c WHERE c.stParcelado = :stParcelado")})
 public class Condpgto implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -152,7 +153,7 @@ public class Condpgto implements Serializable {
 
     @Override
     public String toString() {
-        return "NewSisXerox.Entity.Condpgto[ cdCondpgto=" + cdCondpgto + " ]";
+        return nmCondpgto;
     }
     
 }

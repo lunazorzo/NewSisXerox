@@ -94,9 +94,9 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
         try {
             List<Formpgto> lstist = GenericDAO.getInstance().getList(Formpgto.class,
                     "FROM Formpgto c order by c.nmFormpgto");
-            for (Formpgto a : lstist) {
+            lstist.stream().forEach((a) -> {
                 jcFgtoPagamento.addItem(a);
-            }
+            });
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar as Formas de Pagamento!" + "\n" + e.getMessage());
         }
@@ -749,16 +749,16 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
                         venda.setCdAluno(aluno);
                         venda.setDtVenda(jdData.getDate());
 
-                        venda.setQtVenda(x);
                         venda.setCdFormpgto((Formpgto) jcFgtoPagamento.getSelectedItem());
                         venda.setVlTotal(d);
                         venda.setVlDesconto(c);
-                        venda.setVlVenda(a);
+                        GenericDAO.getInstance().persist(venda);
+                        GenericDAO.getInstance().startTransaction();
+                        GenericDAO.getInstance().commit();
                         JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
                         limparDados();
 
                         //
-                        venda.setCdProduto(produto);
                         System.out.println("Mesa: " + produtoTab + "\n" + "Pedido:" + valorTab + "\n" + "Quantidade: " + quantidadeTab + "\n" + "Valor Unidade: " + valorquantidadeTab);
                     }
 
