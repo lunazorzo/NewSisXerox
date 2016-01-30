@@ -737,33 +737,35 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
 
                     if (venda == null) {
                         venda = new Venda();
-                    }
-                    for (int i = 0; i < jtProdutos.getRowCount(); i++) {
-                        int produtoTab = (Integer) jtProdutos.getValueAt(i, 0);
-                        int valorTab = (Integer) jtProdutos.getValueAt(i, 1);
-                        int quantidadeTab = (Integer) jtProdutos.getValueAt(i, 2);
-                        int valorquantidadeTab = (Integer) jtProdutos.getValueAt(i, 3);
-                        BigDecimal x = new BigDecimal(quantidadeTab);
-                        System.out.println(x);
-                        //Está certo
-                        venda.setCdAluno(aluno);
-                        venda.setDtVenda(jdData.getDate());
 
-                        venda.setCdFormpgto((Formpgto) jcFgtoPagamento.getSelectedItem());
-                        venda.setVlTotal(d);
-                        venda.setVlDesconto(c);
-                        GenericDAO.getInstance().persist(venda);
-                        GenericDAO.getInstance().startTransaction();
-                        GenericDAO.getInstance().commit();
-                        JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
-                        limparDados();
+                        for (int i = 0; i < jtProdutos.getRowCount(); i++) {
+                            int produtoTab = (Integer) jtProdutos.getValueAt(i, 0);
+                            int valorTab = (Integer) jtProdutos.getValueAt(i, 1);
+                            int quantidadeTab = (Integer) jtProdutos.getValueAt(i, 2);
+                            int valorquantidadeTab = (Integer) jtProdutos.getValueAt(i, 3);
+                            BigDecimal x = new BigDecimal(quantidadeTab);
+                            System.out.println(x);
+                            //Está certo
+                            venda.setCdAluno(aluno);
+                            venda.setDtVenda(jdData.getDate());
 
-                        //
-                        System.out.println("Mesa: " + produtoTab + "\n" + "Pedido:" + valorTab + "\n" + "Quantidade: " + quantidadeTab + "\n" + "Valor Unidade: " + valorquantidadeTab);
+                            venda.setCdFormpgto((Formpgto) jcFgtoPagamento.getSelectedItem());
+                            venda.setVlTotal(d);
+                            venda.setVlDesconto(c);
+                            GenericDAO.getInstance().persist(venda);
+                            GenericDAO.getInstance().startTransaction();
+                            GenericDAO.getInstance().commit();
+                            JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!", "ATENÇÃO", JOptionPane.PLAIN_MESSAGE, sucesso);
+                            limparDados();
+
+                            //
+                            System.out.println("Mesa: " + produtoTab + "\n" + "Pedido:" + valorTab + "\n" + "Quantidade: " + quantidadeTab + "\n" + "Valor Unidade: " + valorquantidadeTab);
+                        }
                     }
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao Gravar a Venda!" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+                    jtfTotal.setText("");
                 }
 
             } else {
@@ -775,6 +777,7 @@ public final class JIFVenda extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao finalizar Venda!" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+            jtfTotal.setText("");
         }
     }//GEN-LAST:event_jbFinalizarCompraActionPerformed
 

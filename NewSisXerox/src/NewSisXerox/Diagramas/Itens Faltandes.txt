@@ -1,3 +1,5 @@
 Não deixar gravar duplicado.
 JIFUsuário: verificar como trazer do banco a senha criptografada e a opção de ativo como Ativo/Desativado e Não True/False
 JIFAluno, JIFRecarga, JPCadProduto: a grade de consulta traz o valor com . 1.00 verificar como trazer com , 1,00
+JIFVenda realizar o insert no banco e o update no valor de saldo na tabela cadaluno
+JIFRecarga gravar a informação do saldo na tabela de cadaluno

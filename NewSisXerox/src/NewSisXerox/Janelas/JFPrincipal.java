@@ -100,6 +100,9 @@ public class JFPrincipal extends javax.swing.JFrame {
         Utilitarios = new javax.swing.JMenu();
         jmRecarga = new javax.swing.JMenuItem();
         jmVenda = new javax.swing.JMenuItem();
+        Relatorios = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Controle Xerox");
@@ -241,6 +244,16 @@ public class JFPrincipal extends javax.swing.JFrame {
         Utilitarios.add(jmVenda);
 
         jMenuBar1.add(Utilitarios);
+
+        Relatorios.setText("Relatórios");
+
+        jMenuItem1.setText("Recarga");
+        Relatorios.add(jMenuItem1);
+
+        jMenuItem3.setText("Venda");
+        Relatorios.add(jMenuItem3);
+
+        jMenuBar1.add(Relatorios);
 
         setJMenuBar(jMenuBar1);
 
@@ -606,9 +619,12 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane Desktop;
     private javax.swing.JLabel Dia;
     private javax.swing.JLabel Hora;
+    private javax.swing.JMenu Relatorios;
     private javax.swing.JLabel Usuário;
     private javax.swing.JMenu Utilitarios;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;

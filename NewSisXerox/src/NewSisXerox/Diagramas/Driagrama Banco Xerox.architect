@@ -330,7 +330,7 @@
     <column id="COL87" populated="true" UUID="793ebfc4-bdf1-4b89-a0e9-626bb959babf" autoIncrement="false" autoIncrementSequenceName="venda_vl_total_seq" defaultValue="" name="vl_total" nullable="0" physicalName="vl_total" precision="15" referenceCount="1" scale="2" sourceDataTypeName="UserDefinedSQLType" type="2" userDefinedTypeUUID="115245ce-612c-4d6a-b559-6dd903dd959a" >
      <remarks></remarks>
     </column>
-    <column id="COL88" populated="true" UUID="79b29536-0b4b-42ee-bcb7-123c033dd644" autoIncrement="false" autoIncrementSequenceName="produto_cd_produto_seq" defaultValue="" name="cd_produto" nullable="0" physicalName="cd_produto" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL88" populated="true" UUID="79b29536-0b4b-42ee-bcb7-123c033dd644" autoIncrement="false" autoIncrementSequenceName="produto_cd_produto_seq_1" defaultValue="" name="cd_produto" nullable="0" physicalName="cd_produto" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL89" populated="true" UUID="fb698217-0b64-4b07-ab45-147c5c77dd4e" autoIncrement="false" autoIncrementSequenceName="condpgto_cd_condpgto_seq_1" defaultValue="" name="cd_condpgto" nullable="0" physicalName="cd_condpgto" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
@@ -350,7 +350,7 @@
   <table id="TAB92" populated="true" UUID="98a92533-6c8a-4f07-ac5e-4fca0d772f86" name="condpgto" objectType="TABLE" physicalName="condpgto" >
    <remarks>Condição de pagamento</remarks>
    <folder id="FOLTAB921" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL93" populated="true" UUID="2eaef834-4502-4bb1-9e9b-57879c1e798d" autoIncrement="true" autoIncrementSequenceName="condpgto_cd_condpgto_seq_1" defaultValue="" name="cd_condpgto" nullable="0" physicalName="cd_condpgto" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL93" populated="true" UUID="2eaef834-4502-4bb1-9e9b-57879c1e798d" autoIncrement="true" autoIncrementSequenceName="condpgto_cd_condpgto_seq_1_1" defaultValue="" name="cd_condpgto" nullable="0" physicalName="cd_condpgto" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL94" populated="true" UUID="1f93ee92-d9db-41ed-9ac9-381fcdccf09f" autoIncrement="false" autoIncrementSequenceName="condpgto_nm_condpgto_seq" defaultValue="" name="nm_condpgto" nullable="0" physicalName="nm_condpgto" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -439,7 +439,7 @@
     <column id="COL118" populated="true" UUID="f98eab50-5be7-4e69-b4d2-ae3314278a8c" autoIncrement="false" autoIncrementSequenceName="contas_dt_emissao_seq" defaultValue="" name="dt_emissao" nullable="0" physicalName="dt_emissao" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="91" userDefinedTypeUUID="ee349be3-6af2-46e1-b305-975f5354b009" >
      <remarks></remarks>
     </column>
-    <column id="COL119" populated="true" UUID="403e6384-3856-4987-abef-43d108c6ed79" autoIncrement="false" autoIncrementSequenceName="venda_cd_venda_seq" defaultValue="" name="cd_venda" nullable="0" physicalName="cd_venda" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL119" populated="true" UUID="403e6384-3856-4987-abef-43d108c6ed79" autoIncrement="false" autoIncrementSequenceName="venda_cd_venda_seq_1" defaultValue="" name="cd_venda" nullable="0" physicalName="cd_venda" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
@@ -530,7 +530,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.414213562373095" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
