@@ -44,6 +44,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFFormaTipoPagto pgto;
     JIFVenda venda;
     JIFProduto produto;
+    JIFRelTeste relRecarga;
     Icon alerta = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Warning-48.png")));
     Icon erro = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Error-48.png")));
     Icon sucesso = new ImageIcon(getToolkit().createImage(getClass().getResource("/NewSisXerox/Imagens/Default-48.png")));
@@ -73,7 +74,6 @@ public class JFPrincipal extends javax.swing.JFrame {
      *
      * @param usu
      */
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,7 +101,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         jmRecarga = new javax.swing.JMenuItem();
         jmVenda = new javax.swing.JMenuItem();
         Relatorios = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmRelRegarga = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -247,8 +247,13 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         Relatorios.setText("Relatórios");
 
-        jMenuItem1.setText("Recarga");
-        Relatorios.add(jMenuItem1);
+        jmRelRegarga.setText("Recarga");
+        jmRelRegarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRelRegargaActionPerformed(evt);
+            }
+        });
+        Relatorios.add(jmRelRegarga);
 
         jMenuItem3.setText("Venda");
         Relatorios.add(jMenuItem3);
@@ -529,6 +534,29 @@ public class JFPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Não foi possível abrir janela de Produto" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jmProdutoActionPerformed
+
+    private void jmRelRegargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRelRegargaActionPerformed
+        try {
+            if (evt.getSource() == jmRelRegarga) {
+                if (relRecarga == null) {
+                    relRecarga = new JIFRelTeste();
+                    Desktop.add(relRecarga);
+                    relRecarga.setVisible(true);
+                    relRecarga.setPosicao();//Seta centralizado
+                }
+                Desktop.moveToFront(relRecarga);
+            }
+            if (relRecarga.isClosed()) {
+                relRecarga = new JIFRelTeste();
+                Desktop.add(relRecarga);
+                relRecarga.setVisible(true);
+                relRecarga.setPosicao();//Seta centralizado
+                Desktop.moveToFront(relRecarga);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível abrir janela do relatório de Recarga" + "\n" + e.getClass().getSimpleName() + "\n" + e.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
+        }
+    }//GEN-LAST:event_jmRelRegargaActionPerformed
     public String MostraData() {
         Date data = new Date();
         SimpleDateFormat dformatador = new SimpleDateFormat("dd/MM/yyyy");
@@ -623,7 +651,6 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel Usuário;
     private javax.swing.JMenu Utilitarios;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
@@ -637,6 +664,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmMarcaModelo;
     private javax.swing.JMenuItem jmProduto;
     private javax.swing.JMenuItem jmRecarga;
+    private javax.swing.JMenuItem jmRelRegarga;
     private javax.swing.JMenuItem jmUnidadeMedida;
     private javax.swing.JMenuItem jmUsuarios;
     private javax.swing.JMenuItem jmVenda;
