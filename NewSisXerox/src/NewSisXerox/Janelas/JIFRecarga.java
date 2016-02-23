@@ -341,28 +341,6 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//class textFocusListener implements FocusListener {
-//
-//        public void focusGained(FocusEvent e) {
-//            jtfRecarga.setBackground(Color.red);
-//        }
-//
-//        public void focusLost(FocusEvent e) {
-//            jtfRecarga.setBackground(Color.white);
-//        }
-//    }
-//
-//    class jcFocusListener implements FocusListener {
-//        @Override
-//        public void focusGained(FocusEvent e) {  
-//            jcFgtoPagamento.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 99, 71)));
-//        }
-//        @Override
-//        public void focusLost(FocusEvent e) {             
-//            jcFgtoPagamento.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
-//        }
-//    }
-
 
     private void jbGravarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarRecargaActionPerformed
 
@@ -400,7 +378,11 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
                 recarga.setDtRecarga(jdDTRecarga.getDate());
                 BigDecimal bigResult = casasDecimais(2, new BigDecimal(jtfSaldoAtual.getText().replace(",", ".")).add(new BigDecimal(jtfRecarga.getText().replace(",", "."))));
                 jtfSaldoFinal.setText(String.valueOf(bigResult).replace(".", ","));
-                recarga.setVlRecarga(bigResult);
+               
+                
+                recarga.setVlSaldoAnterior(jtfSaldoAtual.getText().replace(",", "."));
+                recarga.setVlRecarga(jtfRecarga.getText().replace(",", "."));
+                recarga.setVlSaldoAtual(bigResult);
                 recarga.setCdFormpgto((Formpgto) jcFgtoPagamento.getSelectedItem());
                 recarga.setCdUsuario((Usuario) jcUsuario.getSelectedItem());
                 GenericDAO.getInstance().startTransaction();

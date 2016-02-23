@@ -36,6 +36,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Recarga.findByDtRecarga", query = "SELECT r FROM Recarga r WHERE r.dtRecarga = :dtRecarga"),
     @NamedQuery(name = "Recarga.findByVlRecarga", query = "SELECT r FROM Recarga r WHERE r.vlRecarga = :vlRecarga")})
 public class Recarga implements Serializable {
+
+    @Basic(optional = false)
+    @Column(name = "vl_recarga")
+    private String vlRecarga;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @Column(name = "vl_saldo_atual")
+    private BigDecimal vlSaldoAtual;
+    @Basic(optional = false)
+    @Column(name = "vl_saldo_anterior")
+    private String vlSaldoAnterior;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,10 +57,6 @@ public class Recarga implements Serializable {
     @Column(name = "dt_recarga")
     @Temporal(TemporalType.DATE)
     private Date dtRecarga;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @Column(name = "vl_recarga")
-    private BigDecimal vlRecarga;
     @JoinColumn(name = "cd_aluno", referencedColumnName = "cd_aluno")
     @ManyToOne(optional = false)
     private Aluno cdAluno;
@@ -70,7 +77,6 @@ public class Recarga implements Serializable {
     public Recarga(Integer cdRecarga, Date dtRecarga, BigDecimal vlRecarga) {
         this.cdRecarga = cdRecarga;
         this.dtRecarga = dtRecarga;
-        this.vlRecarga = vlRecarga;
     }
 
     public Integer getCdRecarga() {
@@ -87,15 +93,7 @@ public class Recarga implements Serializable {
 
     public void setDtRecarga(Date dtRecarga) {
         this.dtRecarga = dtRecarga;
-    }
-
-    public BigDecimal getVlRecarga() {
-        return vlRecarga;
-    }
-
-    public void setVlRecarga(BigDecimal vlRecarga) {
-        this.vlRecarga = vlRecarga;
-    }
+    }    
 
     public Aluno getCdAluno() {
         return cdAluno;
@@ -119,6 +117,14 @@ public class Recarga implements Serializable {
 
     public void setCdUsuario(Usuario cdUsuario) {
         this.cdUsuario = cdUsuario;
+    }
+   
+    public String getVlSaldoAnterior() {
+        return vlSaldoAnterior;
+    }
+
+    public void setVlSaldoAnterior(String vlSaldoAnterior) {
+        this.vlSaldoAnterior = vlSaldoAnterior;
     }
 
     @Override
@@ -145,5 +151,21 @@ public class Recarga implements Serializable {
     public String toString() {
         return "NewSisXerox.Entity.Recarga[ cdRecarga=" + cdRecarga + " ]";
     }
-    
+
+    public String getVlRecarga() {
+        return vlRecarga;
+    }
+
+    public void setVlRecarga(String vlRecarga) {
+        this.vlRecarga = vlRecarga;
+    }
+
+    public BigDecimal getVlSaldoAtual() {
+        return vlSaldoAtual;
+    }
+
+    public void setVlSaldoAtual(BigDecimal vlSaldoAtual) {
+        this.vlSaldoAtual = vlSaldoAtual;
+    }
+
 }
