@@ -3,3 +3,4 @@ JIFUsuário: verificar como trazer do banco a senha criptografada e a opção de
 JIFAluno, JIFRecarga, JPCadProduto: a grade de consulta traz o valor com . 1.00 verificar como trazer com , 1,00
 JIFVenda realizar o insert no banco e o update no valor de saldo na tabela cadaluno
 JIFRecarga gravar a informação do saldo na tabela de cadaluno
+Criar dois campos na tabela RECARGA, um para armazenar o valor atual do saldo, e outro para armazenar a soma total da recarga, para que assim seja corrigido o processo de gravar a informação do campo da tabela vl_recarga sendo esse campo especifico para armazenar o valor que o aluno está realizando a recarga dessa forma tendo a possibilidade de visualizar quanto entrou no caixa no dia X.

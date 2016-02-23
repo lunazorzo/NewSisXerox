@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relRecarga" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4327fb56-ba2c-4954-9cad-f435dc0efaf8">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     aluno."nm_aluno" AS aluno_nm_aluno,
+     aluno."vl_saldo" AS aluno_vl_saldo,
+     formpgto."nm_formpgto" AS formpgto_nm_formpgto,
+     recarga."dt_recarga" AS recarga_dt_recarga,
+     recarga."vl_recarga" AS recarga_vl_recarga,
+     usuario."usuario" AS usuario_usuario,
+     curso."nm_curso" AS curso_nm_curso
+FROM
+     "public"."aluno" aluno INNER JOIN "public"."recarga" recarga ON aluno."cd_aluno" = recarga."cd_aluno"
+     INNER JOIN "public"."formpgto" formpgto ON recarga."cd_formpgto" = formpgto."cd_formpgto"
+     INNER JOIN "public"."usuario" usuario ON recarga."cd_usuario" = usuario."cd_usuario"
+     INNER JOIN "public"."curso" curso ON aluno."cd_curso" = curso."cd_curso"]]>
+	</queryString>
+	<field name="aluno_nm_aluno" class="java.lang.String"/>
+	<field name="aluno_vl_saldo" class="java.math.BigDecimal"/>
+	<field name="formpgto_nm_formpgto" class="java.lang.String"/>
+	<field name="recarga_dt_recarga" class="java.sql.Date"/>
+	<field name="recarga_vl_recarga" class="java.math.BigDecimal"/>
+	<field name="usuario_usuario" class="java.lang.String"/>
+	<field name="curso_nm_curso" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="270" y="0" width="263" height="62" uuid="2091729e-d5a8-4025-b751-c7622c0c7052"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee Title]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1" uuid="ae66d0bb-ac75-4b64-84bc-e814a7773c9a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="114" height="15" forecolor="#736343" uuid="9bc36ad1-c706-4174-9afd-9f04a5432c19"/>
+				<text><![CDATA[aluno_nm_aluno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="114" y="0" width="114" height="15" forecolor="#736343" uuid="7ec5ab17-46dc-4b9a-b862-417584510589"/>
+				<text><![CDATA[aluno_vl_saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="228" y="0" width="114" height="15" forecolor="#736343" uuid="779ade22-290f-42a8-8409-f6c92cd4617f"/>
+				<text><![CDATA[formpgto_nm_formpgto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="342" y="0" width="114" height="15" forecolor="#736343" uuid="5285a83f-bee3-49aa-aeff-d53fd97372af"/>
+				<text><![CDATA[recarga_dt_recarga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="456" y="0" width="114" height="15" forecolor="#736343" uuid="758c9734-2250-44d6-8a6d-43cf3824b01a"/>
+				<text><![CDATA[recarga_vl_recarga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="570" y="0" width="114" height="15" forecolor="#736343" uuid="fd442ed6-2e54-4937-8d3f-4e44c1ccd024"/>
+				<text><![CDATA[usuario_usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="684" y="0" width="114" height="15" forecolor="#736343" uuid="d2769c33-a524-4396-8c37-e403015a3bba"/>
+				<text><![CDATA[curso_nm_curso]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15" uuid="ff661c69-0acd-4f49-b9cd-5ba4ea131102"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="0" y="0" width="114" height="15" uuid="64d21a1e-32f6-4f01-a67f-43289119843a"/>
+					<textFieldExpression><![CDATA[$F{aluno_nm_aluno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="114" y="0" width="114" height="15" uuid="41a02fdb-1179-4b77-a1c9-fe0e66c9b280"/>
+					<textFieldExpression><![CDATA[$F{aluno_vl_saldo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="228" y="0" width="114" height="15" uuid="806a652d-a400-4d78-a147-041826e9dfa9"/>
+					<textFieldExpression><![CDATA[$F{formpgto_nm_formpgto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="342" y="0" width="114" height="15" uuid="6a720663-7bc8-4906-a799-afc6c41c841e"/>
+					<textFieldExpression><![CDATA[$F{recarga_dt_recarga}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="456" y="0" width="114" height="15" uuid="113fbe50-4c79-43b2-97ef-77b21535988d"/>
+					<textFieldExpression><![CDATA[$F{recarga_vl_recarga}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="570" y="0" width="114" height="15" uuid="9c56d66a-5813-47e3-a6bb-3c6f205cd212"/>
+					<textFieldExpression><![CDATA[$F{usuario_usuario}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="684" y="0" width="114" height="15" uuid="9fd022c2-ab14-46d1-985d-ad8646a66400"/>
+					<textFieldExpression><![CDATA[$F{curso_nm_curso}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="3c4d0021-edf3-4d81-93fc-85e56209e5f3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="341d8591-c750-4225-b355-518df5600487"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343" uuid="f10c28b4-d766-41b2-8c62-c7b5cf5ebba5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343" uuid="448b8c1d-5ef2-47e5-b2dd-812495f18f49"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="6f2e5a57-945f-4a34-832c-246daad5fa0c"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
