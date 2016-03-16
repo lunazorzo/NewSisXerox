@@ -377,8 +377,7 @@ public final class JIFRecarga extends javax.swing.JInternalFrame {
                 recarga.setCdAluno(aluno);
                 recarga.setDtRecarga(jdDTRecarga.getDate());
                 BigDecimal bigResult = casasDecimais(2, new BigDecimal(jtfSaldoAtual.getText().replace(",", ".")).add(new BigDecimal(jtfRecarga.getText().replace(",", "."))));
-                jtfSaldoFinal.setText(String.valueOf(bigResult).replace(".", ","));
-               
+                jtfSaldoFinal.setText(String.valueOf(bigResult).replace(".", ","));               
                 
                 recarga.setVlSaldoAnterior(jtfSaldoAtual.getText().replace(",", "."));
                 recarga.setVlRecarga(jtfRecarga.getText().replace(",", "."));

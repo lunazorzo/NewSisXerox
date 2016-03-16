@@ -4,11 +4,8 @@
  */
 package NewSisXerox.Classes;
 
-import static com.sun.javafx.tk.Toolkit.getToolkit;
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 
 /**
@@ -19,7 +16,7 @@ public class Util {
 
     public String formatarURL(String url) {
         url = url.replaceAll("jar:", "");
-        url = url.replaceAll("/Loja_Pai_JPA.jar!/", "");
+        url = url.replaceAll("/NewSisXerox.jar!/", "");
         url = url.substring(6, url.length());
         url = url.replaceAll("%20", " ");
         return url;

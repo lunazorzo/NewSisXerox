@@ -47,7 +47,7 @@ FROM
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font pdfFontName="Times-Roman"/>
 				</textElement>
-				<text><![CDATA[Coffee Title]]></text>
+				<text><![CDATA[Recarga]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -64,35 +64,35 @@ FROM
 			</line>
 			<staticText>
 				<reportElement style="Column header" x="0" y="0" width="100" height="15" forecolor="#736343" uuid="44557dde-bff1-451c-863f-b33c1973c26d"/>
-				<text><![CDATA[nome_aluno]]></text>
+				<text><![CDATA[Aluno]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="100" y="0" width="100" height="15" forecolor="#736343" uuid="7e5250aa-59f3-4baf-9df6-e8bf2548c5a4"/>
-				<text><![CDATA[saldo_anterior_recarga]]></text>
+				<text><![CDATA[Saldo Anterior]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="200" y="0" width="100" height="15" forecolor="#736343" uuid="7cb47849-aa50-461b-9440-4bbb6877c924"/>
-				<text><![CDATA[valor_recarga]]></text>
+				<text><![CDATA[valor Recarga]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="300" y="0" width="100" height="15" forecolor="#736343" uuid="f8cb418d-38c8-4691-9198-2e02c3c48645"/>
-				<text><![CDATA[saldo_posterior_recarga]]></text>
+				<text><![CDATA[Saldo Atual]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="400" y="0" width="100" height="15" forecolor="#736343" uuid="c4a5d5eb-85b2-41d2-ae18-2022592c188c"/>
-				<text><![CDATA[forma_de_pagamento]]></text>
+				<text><![CDATA[Forma de Pagto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="500" y="0" width="100" height="15" forecolor="#736343" uuid="e5373f5d-7abc-4844-8b6c-62e21086f015"/>
-				<text><![CDATA[data_recarga]]></text>
+				<text><![CDATA[Data Recarga]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="600" y="0" width="100" height="15" forecolor="#736343" uuid="425e022a-e86a-4366-8260-8b42bbca153f"/>
-				<text><![CDATA[usuário_recarga]]></text>
+				<text><![CDATA[Usário]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="700" y="0" width="100" height="15" forecolor="#736343" uuid="f0326648-bdcc-4b48-a053-bc33456c710f"/>
-				<text><![CDATA[curso]]></text>
+				<text><![CDATA[Curso]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -102,34 +102,42 @@ FROM
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15" uuid="e8e1e67a-c9c3-4820-ae37-3c4c7d2b3e22"/>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="0" y="0" width="100" height="15" uuid="312d1e66-184d-4684-98ce-e134120e3fcf"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{nome_aluno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="100" y="0" width="100" height="15" uuid="810a68b9-83f4-41dd-a7d9-428382414ac4"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{saldo_anterior_recarga}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="200" y="0" width="100" height="15" uuid="d43465eb-eaad-48ab-be18-5efaae663e34"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{valor_recarga}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="300" y="0" width="100" height="15" uuid="a12d3f48-275c-4baf-a81b-d1dfb8f79dc3"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{saldo_posterior_recarga}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="400" y="0" width="100" height="15" uuid="f5e7a662-159e-4bd5-a85e-794280f15c61"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{forma_de_pagamento}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
 					<reportElement style="Detail" x="500" y="0" width="100" height="15" uuid="2706c85a-9182-4737-a2e8-919c7c4d1f10"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{data_recarga}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="600" y="0" width="100" height="15" uuid="0ccf805c-0537-437d-88b1-8703be14cf04"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{usuário_recarga}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" x="700" y="0" width="100" height="15" uuid="0ab805f2-4c9f-4e9a-b18c-a4f17073d1cc"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
 				</textField>
 			</frame>

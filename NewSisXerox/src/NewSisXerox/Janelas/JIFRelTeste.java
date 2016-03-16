@@ -5,8 +5,8 @@
  */
 package NewSisXerox.Janelas;
 
+import NewSisXerox.Classes.Conexao;
 import NewSisXerox.Classes.Util;
-import NewSisXerox.DAO.GenericDAO;
 import java.awt.Dimension;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -51,6 +51,8 @@ public class JIFRelTeste extends javax.swing.JInternalFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jdinicio = new com.toedter.calendar.JDateChooser();
+        jdFinal = new com.toedter.calendar.JDateChooser();
 
         jButton1.setText("Recarga");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,10 +69,18 @@ public class JIFRelTeste extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jdinicio, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(jdFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,19 +89,47 @@ public class JIFRelTeste extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jdFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdinicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//        try {
+//            String s = getClass().getResource("/relatorios/Chamados.jasper").toString();
+//            s = new Util().formatarURL(s);
+//
+//            HashMap parametros = new HashMap();
+//            parametros.put("DataInicial", jdinicio.getDate());
+//            parametros.put("DataFinal", jdFinal.getDate());
+//
+//            Conexao c = new Conexao();
+//            InputStream is = JRLoader.getFileInputStream(s);
+//            JasperPrint jp = JasperFillManager.fillReport(is, parametros, c.getCon());
+//
+//            JasperViewer jv = new JasperViewer(jp, false);
+//            jv.setDefaultCloseOperation(jv.DISPOSE_ON_CLOSE);
+//
+////        limparDados();
+//            jv.setVisible(true);
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", 0);
+//        }
+
         try {
-            String s = getClass().getResource("/NewSisXerox.Relatorios/RelRecarga.jrxml").toString();
+            String s = getClass().getResource("/teste/relProduto2.jasper").toString();
+            System.out.println(s);
             s = new Util().formatarURL(s);
 
             HashMap parametros = new HashMap();
+            Conexao c = new Conexao();
             InputStream is = JRLoader.getFileInputStream(s);
+            System.out.println(s);
             JasperPrint jp = JasperFillManager.fillReport(is, parametros);
 
             JasperViewer jv = new JasperViewer(jp, false);
@@ -100,8 +138,8 @@ public class JIFRelTeste extends javax.swing.JInternalFrame {
             jv.setVisible(true);
         } catch (Exception ex) {
             //     JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro ao abrir relatório de Regarca.", 0);
-            JOptionPane.showMessageDialog(null, "Erro ao abrir relatório de Regarca!" 
-                    + "\n" + ex.getClass().getSimpleName() 
+            JOptionPane.showMessageDialog(null, "Erro ao abrir relatório de Regarca!"
+                    + "\n" + ex.getClass().getSimpleName()
                     + "\n" + ex.getMessage(), "ATENÇÃO", JOptionPane.ERROR_MESSAGE, erro);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -110,5 +148,7 @@ public class JIFRelTeste extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private com.toedter.calendar.JDateChooser jdFinal;
+    private com.toedter.calendar.JDateChooser jdinicio;
     // End of variables declaration//GEN-END:variables
 }
